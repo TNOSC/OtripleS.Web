@@ -40,4 +40,38 @@ internal static class ScriptGenerationService
 
         .SaveToFile(path: buildScriptPath);
     }
+
+    public static void GenerateProvisionScript()
+    {
+        string buildScriptPath = "../../../../../.github/workflows/provision.yml";
+
+        string directoryPath = Path.GetDirectoryName(path: buildScriptPath) ?? throw new InvalidOperationException(message: "path does not exist.");
+
+        if (!Directory.Exists(path: directoryPath))
+        {
+            Directory.CreateDirectory(path: directoryPath);
+        }
+
+        GitHubPipelineBuilder.CreateNewPipeline()
+            .SetName(name: "OtripleS Client Web Provision")
+                .OnPush(branches: "main")
+                .OnPullRequest(branches: "main")
+                    .AddJob(jobIdentifier: "build", configureJob: job => job
+                    .WithName(name: "Provision")
+                    .AddEnvironmentVariable("AZURE_CLIENT_ID", "${{ secrets.AZURE_CLIENT_ID }}")
+                    .AddEnvironmentVariable("AZURE_TENANT_ID", "${{ secrets.AZURE_TENANT_ID }}")
+                    .AddEnvironmentVariable("AZURE_CLIENT_SECRET", "${{ secrets.AZURE_CLIENT_SECRET }}")
+                    .AddEnvironmentVariable("AzureAdminName", "${{ secrets.AzureAdminName }}")
+                    .AddEnvironmentVariable("AzureAdminAccess", "${{ secrets.AzureAdminAccess }}")
+                    .RunsOn(machine: BuildMachines.UbuntuLatest)
+                        .AddCheckoutStep(name: "Check out")
+                        .AddSetupDotNetStep(version: "9.0.303")
+                        .AddRestoreStep()
+                        .AddBuildStep()
+                        .AddGenericStep(
+                            name: "Provision",
+                            runCommand: "dotnet run --project ./devops/Tnosc.OtripleS.Client.Web.Provision/Tnosc.OtripleS.Client.Web.Provision.csproj"))
+
+        .SaveToFile(path: buildScriptPath);
+    }
 }

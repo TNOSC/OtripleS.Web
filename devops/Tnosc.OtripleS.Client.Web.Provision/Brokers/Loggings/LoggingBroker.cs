@@ -4,8 +4,12 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 
-using Tnosc.OtripleS.Server.Build.Services;
+namespace Tnosc.OtripleS.Server.Provision.Brokers.Loggings;
 
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+internal sealed class LoggingBroker : ILoggingBroker
+{
+    public void LogActivity(string message) =>
+        Console.WriteLine(value: message);
+}

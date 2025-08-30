@@ -4,8 +4,15 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Threading.Tasks;
+using Azure.ResourceManager.AppService;
+using Azure.ResourceManager.Resources;
 
-using Tnosc.OtripleS.Server.Build.Services;
+namespace Tnosc.OtripleS.Server.Provision.Brokers.Clouds;
 
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+internal partial interface ICloudBroker
+{
+    ValueTask<AppServicePlanResource> CreatePlanAsync(
+        string planName,
+        ResourceGroupResource resourceGroup);
+}

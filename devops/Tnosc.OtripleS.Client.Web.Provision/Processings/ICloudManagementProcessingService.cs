@@ -4,8 +4,11 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Threading.Tasks;
 
-using Tnosc.OtripleS.Server.Build.Services;
+namespace Tnosc.OtripleS.Server.Provision.Processings;
 
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+internal interface ICloudManagementProcessingService
+{
+    ValueTask ProcessAsync();
+}
