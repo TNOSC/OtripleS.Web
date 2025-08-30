@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36025.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web", "src\Tnosc.OtripleS.Client.Web\Tnosc.OtripleS.Client.Web.csproj", "{5FC03409-8B4B-4800-B0BF-0318530D98A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web.Client", "src\Tnosc.OtripleS.Client.Web.Client\Tnosc.OtripleS.Client.Web.Client.csproj", "{CEF6D070-ED17-49CD-B346-FA7BC983EAC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{A643F393-4525-468E-8962-6EE5DE2EE63D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{242EACA0-EB2A-4E31-8054-4094551EC4AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{7B2A6079-27A7-4267-9798-C40AAD3CAFA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationCore", "ApplicationCore", "{7F4B9256-E3CE-49D1-AC73-898977D010B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2C551949-F643-488F-BAAC-5728B0E3183F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web.Domain", "src\Tnosc.OtripleS.Client.Web.Domain\Tnosc.OtripleS.Client.Web.Domain.csproj", "{ECD6E024-02DE-42BA-9B39-5D416FD588BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web.Application", "src\Tnosc.OtripleS.Client.Web.Application\Tnosc.OtripleS.Client.Web.Application.csproj", "{8D45254E-D802-43CD-8EBF-107BF1AC2AF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web.Infrastructure", "src\Tnosc.OtripleS.Client.Web.Infrastructure\Tnosc.OtripleS.Client.Web.Infrastructure.csproj", "{3004E122-C31D-4E63-89F2-68E5F07F3843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web.Tests.Unit", "tests\Tnosc.OtripleS.Client.Web.Tests.Unit\Tnosc.OtripleS.Client.Web.Tests.Unit.csproj", "{6C1A16EA-9798-408E-85FD-C982A4DA0488}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web.Build", "devops\Tnosc.OtripleS.Client.Web.Build\Tnosc.OtripleS.Client.Web.Build.csproj", "{4E44D869-06B8-4258-B6DC-B2C5052E28DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web.Provision", "devops\Tnosc.OtripleS.Client.Web.Provision\Tnosc.OtripleS.Client.Web.Provision.csproj", "{521911DC-656D-41E5-94BF-3FEE3C4F897F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.Lib.Client.Web", "lib\Tnosc.Lib.Client.Web\Tnosc.Lib.Client.Web.csproj", "{72EDDCF4-C7F0-4219-A81A-A53948CA03EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FC03409-8B4B-4800-B0BF-0318530D98A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC03409-8B4B-4800-B0BF-0318530D98A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC03409-8B4B-4800-B0BF-0318530D98A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC03409-8B4B-4800-B0BF-0318530D98A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEF6D070-ED17-49CD-B346-FA7BC983EAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF6D070-ED17-49CD-B346-FA7BC983EAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF6D070-ED17-49CD-B346-FA7BC983EAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF6D070-ED17-49CD-B346-FA7BC983EAC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECD6E024-02DE-42BA-9B39-5D416FD588BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD6E024-02DE-42BA-9B39-5D416FD588BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD6E024-02DE-42BA-9B39-5D416FD588BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD6E024-02DE-42BA-9B39-5D416FD588BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D45254E-D802-43CD-8EBF-107BF1AC2AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D45254E-D802-43CD-8EBF-107BF1AC2AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D45254E-D802-43CD-8EBF-107BF1AC2AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D45254E-D802-43CD-8EBF-107BF1AC2AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3004E122-C31D-4E63-89F2-68E5F07F3843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3004E122-C31D-4E63-89F2-68E5F07F3843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3004E122-C31D-4E63-89F2-68E5F07F3843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3004E122-C31D-4E63-89F2-68E5F07F3843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C1A16EA-9798-408E-85FD-C982A4DA0488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C1A16EA-9798-408E-85FD-C982A4DA0488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C1A16EA-9798-408E-85FD-C982A4DA0488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C1A16EA-9798-408E-85FD-C982A4DA0488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E44D869-06B8-4258-B6DC-B2C5052E28DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E44D869-06B8-4258-B6DC-B2C5052E28DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E44D869-06B8-4258-B6DC-B2C5052E28DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E44D869-06B8-4258-B6DC-B2C5052E28DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521911DC-656D-41E5-94BF-3FEE3C4F897F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521911DC-656D-41E5-94BF-3FEE3C4F897F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521911DC-656D-41E5-94BF-3FEE3C4F897F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521911DC-656D-41E5-94BF-3FEE3C4F897F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72EDDCF4-C7F0-4219-A81A-A53948CA03EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72EDDCF4-C7F0-4219-A81A-A53948CA03EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72EDDCF4-C7F0-4219-A81A-A53948CA03EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72EDDCF4-C7F0-4219-A81A-A53948CA03EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5FC03409-8B4B-4800-B0BF-0318530D98A2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{CEF6D070-ED17-49CD-B346-FA7BC983EAC5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7F4B9256-E3CE-49D1-AC73-898977D010B2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2C551949-F643-488F-BAAC-5728B0E3183F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{ECD6E024-02DE-42BA-9B39-5D416FD588BB} = {7F4B9256-E3CE-49D1-AC73-898977D010B2}
+		{8D45254E-D802-43CD-8EBF-107BF1AC2AF9} = {7F4B9256-E3CE-49D1-AC73-898977D010B2}
+		{3004E122-C31D-4E63-89F2-68E5F07F3843} = {2C551949-F643-488F-BAAC-5728B0E3183F}
+		{6C1A16EA-9798-408E-85FD-C982A4DA0488} = {242EACA0-EB2A-4E31-8054-4094551EC4AC}
+		{4E44D869-06B8-4258-B6DC-B2C5052E28DB} = {7B2A6079-27A7-4267-9798-C40AAD3CAFA8}
+		{521911DC-656D-41E5-94BF-3FEE3C4F897F} = {7B2A6079-27A7-4267-9798-C40AAD3CAFA8}
+		{72EDDCF4-C7F0-4219-A81A-A53948CA03EC} = {A643F393-4525-468E-8962-6EE5DE2EE63D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC0FF636-154D-4355-9366-5687A8DC7C4C}
+	EndGlobalSection
+EndGlobal
