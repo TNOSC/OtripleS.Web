@@ -4,8 +4,11 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using Tnosc.OtripleS.Server.Provision.Models.Configurations;
 
-using Tnosc.OtripleS.Server.Build.Services;
+namespace Tnosc.OtripleS.Server.Provision.Brokers.Configurations;
 
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+internal interface IConfigurationBroker
+{
+    CloudManagementConfiguration GetConfigurations();
+}

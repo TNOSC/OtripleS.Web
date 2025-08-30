@@ -4,8 +4,17 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Threading.Tasks;
+using Azure.ResourceManager.AppService;
+using Azure.ResourceManager.Resources;
 
-using Tnosc.OtripleS.Server.Build.Services;
 
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+namespace Tnosc.OtripleS.Server.Provision.Brokers.Clouds;
+
+internal partial interface ICloudBroker
+{
+    ValueTask<WebSiteResource> CreateWebAppAsync(
+        string webAppName,
+        AppServicePlanResource plan,
+        ResourceGroupResource resourceGroup);
+}

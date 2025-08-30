@@ -4,8 +4,9 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+namespace Tnosc.OtripleS.Server.Provision.Brokers.Loggings;
 
-using Tnosc.OtripleS.Server.Build.Services;
-
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+internal interface ILoggingBroker
+{
+    void LogActivity(string message);
+}

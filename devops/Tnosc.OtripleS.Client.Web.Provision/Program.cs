@@ -4,8 +4,9 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using Tnosc.OtripleS.Server.Provision.Processings;
 
-using Tnosc.OtripleS.Server.Build.Services;
+ICloudManagementProcessingService cloudManagementProcessingService =
+    new CloudManagementProcessingService();
 
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+await cloudManagementProcessingService.ProcessAsync();

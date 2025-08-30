@@ -4,8 +4,8 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+namespace Tnosc.OtripleS.Server.Provision.Brokers.Clouds;
 
-using Tnosc.OtripleS.Server.Build.Services;
-
-ScriptGenerationService.GenerateBuildScript();
-ScriptGenerationService.GenerateProvisionScript();
+internal partial interface ICloudBroker
+{
+}
