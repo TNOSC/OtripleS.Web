@@ -9,6 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\lib\Tnosc.Lib.Client.Web\Tnosc.Lib.Client.Web.csproj" />
     <ProjectReference Include="..\Tnosc.OtripleS.Client.Web.Client\Tnosc.OtripleS.Client.Web.Client.csproj" />
-    <ProjectReference Include="..\Tnosc.OtripleS.Client.Web.Infrastructure\Tnosc.OtripleS.Client.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\Tnosc.OtripleS.Client.Infrastructure\Tnosc.OtripleS.Client.Infrastructure.csproj" />
   </ItemGroup>
 </Project>
