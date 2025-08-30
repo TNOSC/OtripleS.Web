@@ -1,5 +1,9 @@
 # OtripleS.Client.Web
 
+![.NET](https://img.shields.io/badge/.NET-9.0-blueviolet?logo=dotnet)
+![Build](https://img.shields.io/github/actions/workflow/status/TNOSC/OtripleS.Web/dotnet.yml?branch=main&label=build&logo=github)
+![License](https://img.shields.io/github/license/TNOSC/OtripleS.Api?color=green)
+
 This repository is a **rewrite of the [Otriples.Portal](https://github.com/hassanhabib/Otriples.Portal) project** using the **latest version of .NET**.  
 The main goal is not only to modernize the project but also to take the opportunity to **apply and master software architecture standards** with a strong focus on the **web part**.
 
