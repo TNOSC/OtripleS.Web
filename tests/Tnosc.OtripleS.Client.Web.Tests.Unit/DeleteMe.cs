@@ -11,5 +11,5 @@ namespace Tnosc.OtripleS.Client.Web.Tests.Unit;
 public class DeleteMe
 {
     [Fact]
-    public void Test() => Assert.True(true);
+    public void ShouldBeTrue() => Assert.True(true);
 }
