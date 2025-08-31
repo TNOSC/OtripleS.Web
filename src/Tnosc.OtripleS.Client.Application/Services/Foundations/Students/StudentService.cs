@@ -15,17 +15,21 @@ public partial class StudentService : IStudentService
 {
 #pragma warning disable S4487 // Unread "private" fields should be removed
     private readonly IApiBroker _apiBroker;
-    private readonly ILoggingBroker _loggerBroker;
+    private readonly ILoggingBroker _loggingBroker;
 #pragma warning restore S4487 // Unread "private" fields should be removed
 
     public StudentService(
         IApiBroker apiBroker,
-        ILoggingBroker loggerBroker)
+        ILoggingBroker loggingBroker)
     {
         _apiBroker = apiBroker;
-        _loggerBroker = loggerBroker;
+        _loggingBroker = loggingBroker;
     }
 
     public async ValueTask<Student> RegisterStudentAsync(Student student) =>
-        await _apiBroker.PostStudentAsync(student: student);
+    await TryCatch(async () =>
+    {
+        ValidateStudentOnRegister(student);
+        return await _apiBroker.PostStudentAsync(student: student);
+    });
 }

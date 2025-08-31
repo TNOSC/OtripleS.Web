@@ -27,7 +27,7 @@ public partial class StudentServiceTests
 
         _studentService = new StudentService(
             apiBroker: _apiBrokerMock,
-            loggerBroker: _loggingBrokerMock);
+            loggingBroker: _loggingBrokerMock);
     }
 
     private static Student CreateRandomStudent() =>
