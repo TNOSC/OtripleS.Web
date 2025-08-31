@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.OtripleS.Client.Web.Tests.Unit.StudentFormComponentTests")]
 [assembly: SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "<Pending>", Scope = "member", Target = "~F:Tnosc.OtripleS.Client.Web.Tests.Unit.StudentFormComponentTests.renderedStudentFormComponent")]
+[assembly: SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations.StudentServiceTests")]
