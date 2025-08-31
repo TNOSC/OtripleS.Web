@@ -4,19 +4,10 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Microsoft.AspNetCore.Components;
+namespace Tnosc.OtripleS.Client.Domain.Students;
 
-namespace Tnosc.Lib.Client.Web.Bases;
-
-public partial class TextBoxBase
+public enum Gender
 {
-    [Parameter]
-    public string Value { get; set; } = string.Empty;
-
-    [Parameter]
-    public string PlaceHolder   { get; set; } = string.Empty;
-
-    public void SetValue(string value) => Value = value;
-
-    public void SetPlaceHolder(string value) => PlaceHolder = value;
+    Female,
+    Male
 }
