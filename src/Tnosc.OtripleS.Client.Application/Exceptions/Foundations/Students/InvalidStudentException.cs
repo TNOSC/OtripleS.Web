@@ -13,4 +13,10 @@ public sealed class InvalidStudentException : Xeption
     public InvalidStudentException(string message)
        : base(message: message)
     { }
+
+    public InvalidStudentException(string message, Xeption innerException)
+        : base(message: message,
+                innerException,
+                innerException.Data)
+    { }
 }

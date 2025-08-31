@@ -30,6 +30,8 @@ public partial class StudentServiceTests
             loggingBroker: _loggingBrokerMock);
     }
 
+    private static string GetRandomString() => new MnemonicString().GetValue();
+
     private static Student CreateRandomStudent() =>
          CreateStudentFiller().Create();
 
