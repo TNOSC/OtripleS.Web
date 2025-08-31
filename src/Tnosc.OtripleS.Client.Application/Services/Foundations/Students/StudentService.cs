@@ -26,6 +26,6 @@ public partial class StudentService : IStudentService
         _loggerBroker = loggerBroker;
     }
 
-    public ValueTask<Student> RegisterStudentAsync(Student student) =>
-        throw new System.NotImplementedException();
+    public async ValueTask<Student> RegisterStudentAsync(Student student) =>
+        await _apiBroker.PostStudentAsync(student: student);
 }
