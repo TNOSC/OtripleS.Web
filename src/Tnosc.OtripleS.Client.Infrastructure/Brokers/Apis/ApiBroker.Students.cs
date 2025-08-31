@@ -4,19 +4,15 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
+using Tnosc.OtripleS.Client.Domain.Students;
 
-namespace Tnosc.Lib.Client.Web.Bases;
+namespace Tnosc.OtripleS.Client.Infrastructure.Brokers.Apis;
 
-public partial class TextBoxBase
+internal partial class ApiBroker
 {
-    [Parameter]
-    public string Value { get; set; } = string.Empty;
+    private const string StudentsRelativeUrl = "api/students";
 
-    [Parameter]
-    public string PlaceHolder   { get; set; } = string.Empty;
-
-    public void SetValue(string value) => Value = value;
-
-    public void SetPlaceHolder(string value) => PlaceHolder = value;
+    public async ValueTask<Student> PostStudentAsync(Student student) =>
+        await PostAsync(StudentsRelativeUrl, student);
 }
