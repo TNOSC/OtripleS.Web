@@ -30,5 +30,14 @@ internal partial class ApiBroker
             
             throw invalidStudentException;
         }
+        catch (HttpResponseConflictException httpResponseConfilictException)
+        {
+            var alreadyExistsStudentException =
+                new AlreadyExistsStudentException(
+                    message: "Student with the same id already exists.",
+                    innerException: httpResponseConfilictException);
+
+            throw alreadyExistsStudentException;
+        }
     }
 }

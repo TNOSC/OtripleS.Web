@@ -34,6 +34,10 @@ public partial class StudentService
         {
             throw CreateAndLogDependencyValidationException(invalidStudentDependencyException);
         }
+        catch (AlreadyExistsStudentException alreadyExistsStudentException)
+        {
+            throw CreateAndLogDependencyValidationException(alreadyExistsStudentException);
+        }
     }
 
     private StudentDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
