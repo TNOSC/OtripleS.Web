@@ -144,4 +144,42 @@ public partial class StudentServiceTests
             .Received(requiredNumberOfCalls: 1)
             .PostStudentAsync(student: someStudent);
     }
+
+    [Theory]
+    [MemberData(nameof(DependencyApiException))]
+    public async Task ShouldThrowDependencyExceptionOnRegisterIfCriticalErrorOccursAndLogItAsync(
+       Exception httpResponseCriticalException)
+    {
+        // given
+        Student someStudent = CreateRandomStudent();
+
+        var failedStudentDependencyException =
+            new FailedStudentDependencyException(
+                message: "Failed student dependency error occurred, please contact support.",
+                innerException: httpResponseCriticalException);
+
+        var expectedDependencyValidationException =
+            new StudentDependencyException(
+                message: "Student dependency error occurred, please contact support.",
+                innerException: failedStudentDependencyException);
+
+        _apiBrokerMock.PostStudentAsync(Arg.Any<Student>())
+            .ThrowsAsync(failedStudentDependencyException);
+
+        // when
+        ValueTask<Student> registerStudentTask =
+            _studentService.RegisterStudentAsync(student: someStudent);
+
+        // then
+        await Assert.ThrowsAsync<StudentDependencyException>(() =>
+            registerStudentTask.AsTask());
+
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Exception>(actualException =>
+                actualException.SameExceptionAs(expectedDependencyValidationException)));
+
+        await _apiBrokerMock
+            .Received(requiredNumberOfCalls: 1)
+            .PostStudentAsync(student: someStudent);
+    }
 }

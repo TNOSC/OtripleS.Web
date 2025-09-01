@@ -59,6 +59,28 @@ public partial class StudentServiceTests
             };
     }
 
+    public static TheoryData DependencyApiException()
+    {
+        string exceptionMessage = GetRandomString();
+        var responseMessage = new HttpResponseMessage();
+
+        var httpResponseException =
+            new HttpResponseException(
+                httpResponseMessage: responseMessage,
+                message: exceptionMessage);
+
+        var httpResponseInternalServerErrorException =
+            new HttpResponseInternalServerErrorException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+        return new TheoryData<Exception>
+            {
+                httpResponseException,
+                httpResponseInternalServerErrorException
+            };
+    }
+
     private static string GetRandomString() => new MnemonicString().GetValue();
 
     private static Student CreateRandomStudent() =>
