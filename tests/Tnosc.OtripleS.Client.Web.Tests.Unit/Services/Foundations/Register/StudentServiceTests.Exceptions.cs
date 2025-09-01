@@ -43,7 +43,7 @@ public partial class StudentServiceTests
                 innerException: invalidStudentDependencyException);
 
         _apiBrokerMock.PostStudentAsync(Arg.Any<Student>())
-                .ThrowsAsync(invalidStudentDependencyException);
+            .ThrowsAsync(invalidStudentDependencyException);
 
         // when
         ValueTask<Student> registerStudentTask =
@@ -86,9 +86,46 @@ public partial class StudentServiceTests
                 message: "Student dependency validation error occurred, try again.",
                 innerException: alreadyExistStudentException);
 
+        _apiBrokerMock.PostStudentAsync(Arg.Any<Student>())
+            .ThrowsAsync(alreadyExistStudentException);
+
+        // when
+        ValueTask<Student> registerStudentTask =
+            _studentService.RegisterStudentAsync(student: someStudent);
+
+        // then
+        await Assert.ThrowsAsync<StudentDependencyValidationException>(() =>
+            registerStudentTask.AsTask());
+
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Xeption>(actualException =>
+                actualException.SameExceptionAs(expectedDependencyValidationException)));
+
+        await _apiBrokerMock
+            .Received(requiredNumberOfCalls: 1)
+            .PostStudentAsync(student: someStudent);
+    }
+
+    [Theory]
+    [MemberData(nameof(CriticalApiException))]
+    public async Task ShouldThrowCriticalDependencyExceptionOnAddIfCriticalErrorOccursAndLogItAsync(
+            Xeption httpResponseCriticalException)
+    {
+        // given
+        Student someStudent = CreateRandomStudent();
+
+        var failedStudentDependencyException =
+            new FailedStudentDependencyException(
+                message: "Failed student dependency error occurred, please contact support.",
+                innerException: httpResponseCriticalException);
+
+        var expectedDependencyValidationException =
+            new StudentDependencyException(
+                message: "Student dependency error occurred, please contact support.",
+                innerException: failedStudentDependencyException);
 
         _apiBrokerMock.PostStudentAsync(Arg.Any<Student>())
-                .ThrowsAsync(alreadyExistStudentException);
+            .ThrowsAsync(failedStudentDependencyException);
 
         // when
         ValueTask<Student> registerStudentTask =

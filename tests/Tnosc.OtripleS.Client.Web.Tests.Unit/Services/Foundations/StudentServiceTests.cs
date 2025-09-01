@@ -5,12 +5,15 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Net.Http;
 using NSubstitute;
+using RESTFulSense.Exceptions;
 using Tnosc.OtripleS.Client.Application.Brokers.Apis;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
 using Tnosc.OtripleS.Client.Application.Services.Foundations.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Tynamix.ObjectFiller;
+using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
 
@@ -28,6 +31,32 @@ public partial class StudentServiceTests
         _studentService = new StudentService(
             apiBroker: _apiBrokerMock,
             loggingBroker: _loggingBrokerMock);
+    }
+
+    public static TheoryData CriticalApiException()
+    {
+        string exceptionMessage = GetRandomString();
+        var responseMessage = new HttpResponseMessage();
+
+        var httpRequestException =
+            new HttpRequestException();
+
+        var httpResponseUrlNotFoundException =
+            new HttpResponseUrlNotFoundException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+        var httpResponseUnAuthorizedException =
+            new HttpResponseUnauthorizedException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+        return new TheoryData<Exception>
+            {
+                httpRequestException,
+                httpResponseUrlNotFoundException,
+                httpResponseUnAuthorizedException
+            };
     }
 
     private static string GetRandomString() => new MnemonicString().GetValue();
