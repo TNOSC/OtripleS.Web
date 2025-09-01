@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Net.Http;
 using System.Threading.Tasks;
 using RESTFulSense.Exceptions;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
@@ -21,14 +22,41 @@ internal partial class ApiBroker
         {
             return await returningStudentFunction();
         }
+        catch (HttpRequestException httpRequestException)
+        {
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(
+                    message: "Failed student dependency error occurred, please contact support.",
+                    innerException: httpRequestException);
+
+            throw failedStudentDependencyException;
+        }
+        catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
+        {
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(
+                    message: "Failed student dependency error occurred, please contact support.",
+                    innerException: httpResponseUrlNotFoundException);
+
+            throw failedStudentDependencyException;
+        }
+        catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
+        {
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(
+                    message: "Failed student dependency error occurred, please contact support.",
+                    innerException: httpResponseUnauthorizedException);
+
+            throw failedStudentDependencyException;
+        }
         catch (HttpResponseBadRequestException httpResponseBadRequestException)
         {
-            var invalidStudentException =
-                new InvalidStudentException(
+            var invalidStudentDependencyException =
+                new InvalidStudentDependencyException(
                     message: "Invalid input, fix the errors and try again.",
                     innerException: httpResponseBadRequestException);
             
-            throw invalidStudentException;
+            throw invalidStudentDependencyException;
         }
         catch (HttpResponseConflictException httpResponseConfilictException)
         {

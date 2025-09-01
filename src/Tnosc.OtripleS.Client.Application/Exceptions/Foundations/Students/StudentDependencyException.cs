@@ -4,7 +4,6 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using System;
 using Xeptions;
 
 namespace Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
@@ -13,7 +12,7 @@ public sealed class StudentDependencyException : Xeption
 {
     public StudentDependencyException(
         string message,
-        Exception innerException)
+        Xeption innerException)
         : base(
             message: message,
             innerException: innerException)

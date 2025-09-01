@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NSubstitute;
@@ -108,8 +109,8 @@ public partial class StudentServiceTests
 
     [Theory]
     [MemberData(nameof(CriticalApiException))]
-    public async Task ShouldThrowCriticalDependencyExceptionOnAddIfCriticalErrorOccursAndLogItAsync(
-            Xeption httpResponseCriticalException)
+    public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfCriticalErrorOccursAndLogItAsync(
+        Exception httpResponseCriticalException)
     {
         // given
         Student someStudent = CreateRandomStudent();
@@ -132,11 +133,11 @@ public partial class StudentServiceTests
             _studentService.RegisterStudentAsync(student: someStudent);
 
         // then
-        await Assert.ThrowsAsync<StudentDependencyValidationException>(() =>
+        await Assert.ThrowsAsync<StudentDependencyException>(() =>
             registerStudentTask.AsTask());
 
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
-            .LogError(Arg.Is<Xeption>(actualException =>
+            .LogCritical(Arg.Is<Exception>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyValidationException)));
 
         await _apiBrokerMock
