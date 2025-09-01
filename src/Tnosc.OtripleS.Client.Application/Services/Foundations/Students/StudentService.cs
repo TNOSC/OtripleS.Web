@@ -13,10 +13,8 @@ namespace Tnosc.OtripleS.Client.Application.Services.Foundations.Students;
 
 public partial class StudentService : IStudentService
 {
-#pragma warning disable S4487 // Unread "private" fields should be removed
     private readonly IApiBroker _apiBroker;
     private readonly ILoggingBroker _loggingBroker;
-#pragma warning restore S4487 // Unread "private" fields should be removed
 
     public StudentService(
         IApiBroker apiBroker,

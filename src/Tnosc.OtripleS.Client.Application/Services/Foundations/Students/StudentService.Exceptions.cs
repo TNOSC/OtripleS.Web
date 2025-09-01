@@ -4,9 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using System;
 using System.Threading.Tasks;
-using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Xeptions;
@@ -27,10 +25,25 @@ public partial class StudentService
         {
             throw CreateAndLogValidationException(nullStudentException);
         }
+
         catch (InvalidStudentException invalidStudentException)
         {
             throw CreateAndLogValidationException(invalidStudentException);
         }
+        catch (InvalidStudentDependencyException invalidStudentDependencyException)
+        {
+            throw CreateAndLogDependencyValidationException(invalidStudentDependencyException);
+        }
+    }
+
+    private StudentDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
+    {
+        var studentDependencyValidationException = new StudentDependencyValidationException(
+            message: "Student dependency validation error occurred, try again.",
+            innerException: exception);
+        _loggingBroker.LogError(exception: studentDependencyValidationException);
+
+        return studentDependencyValidationException;
     }
 
     private StudentValidationException CreateAndLogValidationException(Xeption exception)

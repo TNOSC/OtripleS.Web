@@ -32,25 +32,25 @@ public partial class StudentServiceTests
 
         Student someStudent = CreateRandomStudent();
 
-        var invalidStudentException =
-            new InvalidStudentException(
+        var invalidStudentDependencyException =
+            new InvalidStudentDependencyException(
                 message: "Invalid input, fix the errors and try again.",
                 innerException: httpResponseBadRequestException);
 
         var expectedDependencyValidationException =
             new StudentDependencyValidationException(
                 message: "Student dependency validation error occurred, try again.",
-                innerException: invalidStudentException);
+                innerException: invalidStudentDependencyException);
 
         _apiBrokerMock.PostStudentAsync(Arg.Any<Student>())
-                .ThrowsAsync(httpResponseBadRequestException);
+                .ThrowsAsync(invalidStudentDependencyException);
 
         // when
         ValueTask<Student> registerStudentTask =
             _studentService.RegisterStudentAsync(student: someStudent);
 
         // then
-        await Assert.ThrowsAsync<StudentValidationException>(() =>
+        await Assert.ThrowsAsync<StudentDependencyValidationException>(() =>
             registerStudentTask.AsTask());
 
 
