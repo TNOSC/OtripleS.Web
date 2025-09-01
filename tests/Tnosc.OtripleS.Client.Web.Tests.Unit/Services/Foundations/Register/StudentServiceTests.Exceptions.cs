@@ -19,7 +19,7 @@ namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
 public partial class StudentServiceTests
 {
     [Fact]
-    public async Task ShouldThrowDependencyValidationExceptionAddIfBadRequestErrorOccursAndLogItAsync()
+    public async Task ShouldThrowDependencyValidationExceptionRegisterIfBadRequestErrorOccursAndLogItAsync()
     {
         // given
         string exceptionMessage = GetRandomString();
@@ -53,6 +53,50 @@ public partial class StudentServiceTests
         await Assert.ThrowsAsync<StudentDependencyValidationException>(() =>
             registerStudentTask.AsTask());
 
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Xeption>(actualException =>
+                actualException.SameExceptionAs(expectedDependencyValidationException)));
+
+        await _apiBrokerMock
+            .Received(requiredNumberOfCalls: 1)
+            .PostStudentAsync(student: someStudent);
+    }
+
+    [Fact]
+    public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfConflictErrorOccursAndLogItAsync()
+    {
+        // given
+        string exceptionMessage = GetRandomString();
+        var responseMessage = new HttpResponseMessage();
+
+        var httpResponseConflictException =
+            new HttpResponseConflictException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+        Student someStudent = CreateRandomStudent();
+
+        var alreadyExistStudentException =
+            new AlreadyExistsStudentException(
+                message: "Student with the same id already exists.",
+                innerException: httpResponseConflictException);
+
+        var expectedDependencyValidationException =
+            new StudentDependencyValidationException(
+                message: "Student dependency validation error occurred, try again.",
+                innerException: alreadyExistStudentException);
+
+
+        _apiBrokerMock.PostStudentAsync(Arg.Any<Student>())
+                .ThrowsAsync(alreadyExistStudentException);
+
+        // when
+        ValueTask<Student> registerStudentTask =
+            _studentService.RegisterStudentAsync(student: someStudent);
+
+        // then
+        await Assert.ThrowsAsync<StudentDependencyValidationException>(() =>
+            registerStudentTask.AsTask());
 
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
