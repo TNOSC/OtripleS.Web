@@ -13,7 +13,7 @@ public sealed class StudentServiceException : Xeption
 {
     public StudentServiceException(
         string message,
-        Exception innerException)
+        Xeption innerException)
         : base(
             message: message,
             innerException: innerException)
