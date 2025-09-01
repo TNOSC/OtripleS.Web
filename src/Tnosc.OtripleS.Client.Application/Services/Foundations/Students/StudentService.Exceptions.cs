@@ -46,7 +46,7 @@ public partial class StudentService
         {
             throw CreateAndLogDependencyValidationException(alreadyExistsStudentException);
         }
-        catch(Exception exception)
+        catch (Exception exception)
         {
             var failedStudentServiceException =
                   new FailedStudentServiceException(

@@ -195,7 +195,6 @@ public partial class StudentServiceTests
                 message: "Failed student service error occurred, contact support.",
                 innerException: serviceException);
 
-
         var expectedStudentServiceException =
             new StudentServiceException(
                 message: "Service error occurred, contact support.",

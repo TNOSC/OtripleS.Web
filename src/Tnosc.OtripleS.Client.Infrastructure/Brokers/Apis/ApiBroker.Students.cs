@@ -14,7 +14,7 @@ internal partial class ApiBroker
     private const string StudentsRelativeUrl = "api/students";
 
     public async ValueTask<Student> PostStudentAsync(Student student) =>
-        await TryCatch(async () => 
+        await TryCatch(async () =>
             await PostAsync(
                 relativeUrl: StudentsRelativeUrl,
                 content: student));

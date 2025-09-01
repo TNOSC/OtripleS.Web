@@ -16,7 +16,7 @@ public partial class StudentFormComponent : ComponentBase
     public TextBoxBase StudentNameTextBox { get; set; } = null!;
     public ComponentState State { get; set; }
 
-    protected override void OnInitialized() => 
+    protected override void OnInitialized() =>
         State = ComponentState.Content;
 }
 

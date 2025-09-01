@@ -124,7 +124,7 @@ public partial class StudentServiceTests
         await Assert.ThrowsAsync<StudentValidationException>(() =>
             registerStudentTask.AsTask());
 
-      
+
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedStudentValidationException)));

@@ -14,7 +14,7 @@ public partial class TextBoxBase
     public string Value { get; set; } = string.Empty;
 
     [Parameter]
-    public string PlaceHolder   { get; set; } = string.Empty;
+    public string PlaceHolder { get; set; } = string.Empty;
 
     public void SetValue(string value) => Value = value;
 
