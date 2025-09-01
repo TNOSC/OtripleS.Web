@@ -29,9 +29,13 @@ public partial class StudentService
         {
             throw CreateAndLogValidationException(invalidStudentException);
         }
+        catch (FailedStudentCriticalDependencyException failedStudentCriticalDependencyException)
+        {
+            throw CreateAndLogCriticalDependencyException(failedStudentCriticalDependencyException);
+        }
         catch (FailedStudentDependencyException failedStudentDependencyException)
         {
-            throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
+            throw CreateAndLogDependencyException(failedStudentDependencyException);
         }
         catch (InvalidStudentDependencyException invalidStudentDependencyException)
         {
@@ -41,6 +45,16 @@ public partial class StudentService
         {
             throw CreateAndLogDependencyValidationException(alreadyExistsStudentException);
         }
+    }
+
+    private StudentDependencyException CreateAndLogDependencyException(Xeption exception)
+    {
+        var studentDependencyException = new StudentDependencyException(
+           message: "Student dependency error occurred, please contact support.",
+           innerException: exception);
+        _loggingBroker.LogError(exception: studentDependencyException);
+
+        return studentDependencyException;
     }
 
     private StudentDependencyException CreateAndLogCriticalDependencyException(Xeption exception)

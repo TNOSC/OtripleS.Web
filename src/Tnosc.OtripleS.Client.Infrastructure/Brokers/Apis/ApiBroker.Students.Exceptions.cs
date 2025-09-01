@@ -24,30 +24,30 @@ internal partial class ApiBroker
         }
         catch (HttpRequestException httpRequestException)
         {
-            var failedStudentDependencyException =
-                new FailedStudentDependencyException(
-                    message: "Failed student dependency error occurred, please contact support.",
+            var failedStudentCriticalDependencyException =
+                new FailedStudentCriticalDependencyException(
+                    message: "Failed student critical dependency error occurred, please contact support.",
                     innerException: httpRequestException);
 
-            throw failedStudentDependencyException;
+            throw failedStudentCriticalDependencyException;
         }
         catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
         {
-            var failedStudentDependencyException =
-                new FailedStudentDependencyException(
-                    message: "Failed student dependency error occurred, please contact support.",
+            var failedStudentCriticalDependencyException =
+                new FailedStudentCriticalDependencyException(
+                    message: "Failed student critical dependency error occurred, please contact support.",
                     innerException: httpResponseUrlNotFoundException);
 
-            throw failedStudentDependencyException;
+            throw failedStudentCriticalDependencyException;
         }
         catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
         {
-            var failedStudentDependencyException =
-                new FailedStudentDependencyException(
-                    message: "Failed student dependency error occurred, please contact support.",
+            var failedStudentCriticalDependencyException =
+                new FailedStudentCriticalDependencyException(
+                    message: "Failed student critical dependency error occurred, please contact support.",
                     innerException: httpResponseUnauthorizedException);
 
-            throw failedStudentDependencyException;
+            throw failedStudentCriticalDependencyException;
         }
         catch (HttpResponseBadRequestException httpResponseBadRequestException)
         {
@@ -55,7 +55,7 @@ internal partial class ApiBroker
                 new InvalidStudentDependencyException(
                     message: "Invalid input, fix the errors and try again.",
                     innerException: httpResponseBadRequestException);
-            
+
             throw invalidStudentDependencyException;
         }
         catch (HttpResponseConflictException httpResponseConfilictException)
@@ -66,6 +66,24 @@ internal partial class ApiBroker
                     innerException: httpResponseConfilictException);
 
             throw alreadyExistsStudentException;
+        }
+        catch (HttpResponseInternalServerErrorException httpResponseInternalServerErrorException)
+        {
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(
+                    message: "Failed student dependency error occurred, please contact support.",
+                    innerException: httpResponseInternalServerErrorException);
+
+            throw failedStudentDependencyException;
+        }
+        catch (HttpResponseException httpResponseException)
+        {
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(
+                    message: "Failed student dependency error occurred, please contact support.",
+                    innerException: httpResponseException);
+
+            throw failedStudentDependencyException;
         }
     }
 }

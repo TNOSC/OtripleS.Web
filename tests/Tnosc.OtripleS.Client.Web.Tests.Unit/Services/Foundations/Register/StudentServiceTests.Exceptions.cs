@@ -115,18 +115,18 @@ public partial class StudentServiceTests
         // given
         Student someStudent = CreateRandomStudent();
 
-        var failedStudentDependencyException =
-            new FailedStudentDependencyException(
-                message: "Failed student dependency error occurred, please contact support.",
+        var failedStudentCriticalDependencyException =
+            new FailedStudentCriticalDependencyException(
+                message: "Failed student critical dependency error occurred, please contact support.",
                 innerException: httpResponseCriticalException);
 
         var expectedDependencyValidationException =
             new StudentDependencyException(
                 message: "Student dependency error occurred, please contact support.",
-                innerException: failedStudentDependencyException);
+                innerException: failedStudentCriticalDependencyException);
 
         _apiBrokerMock.PostStudentAsync(Arg.Any<Student>())
-            .ThrowsAsync(failedStudentDependencyException);
+            .ThrowsAsync(failedStudentCriticalDependencyException);
 
         // when
         ValueTask<Student> registerStudentTask =
