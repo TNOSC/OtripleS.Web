@@ -182,4 +182,42 @@ public partial class StudentServiceTests
             .Received(requiredNumberOfCalls: 1)
             .PostStudentAsync(student: someStudent);
     }
+
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnAddIfErrorOccursAndLogItAsync()
+    {
+        // given
+        Student someStudent = CreateRandomStudent();
+        var serviceException = new Exception();
+
+        var failedStudentServiceException =
+            new FailedStudentServiceException(
+                message: "Failed student service error occurred, contact support.",
+                innerException: serviceException);
+
+
+        var expectedStudentServiceException =
+            new StudentServiceException(
+                message: "Service error occurred, contact support.",
+                innerException: failedStudentServiceException);
+
+        _apiBrokerMock.PostStudentAsync(student: someStudent)
+            .ThrowsAsync(ex: serviceException);
+
+        // when
+        ValueTask<Student> retrieveStudentTask =
+             _studentService.RegisterStudentAsync(student: someStudent);
+
+        // then
+        await Assert.ThrowsAsync<StudentServiceException>(() =>
+            retrieveStudentTask.AsTask());
+
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Xeption>(actualException =>
+              actualException.SameExceptionAs(expectedStudentServiceException)));
+
+        await _apiBrokerMock
+            .Received(requiredNumberOfCalls: 1)
+            .PostStudentAsync(student: someStudent);
+    }
 }
