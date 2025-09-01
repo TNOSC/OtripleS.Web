@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using RESTFulSense.Exceptions;
-using Shouldly;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Xeptions;
@@ -38,7 +37,7 @@ public partial class StudentServiceTests
                 message: "Invalid input, fix the errors and try again.",
                 innerException: httpResponseBadRequestException);
 
-        var expectedDepndencyValidationException =
+        var expectedDependencyValidationException =
             new StudentDependencyValidationException(
                 message: "Student dependency validation error occurred, try again.",
                 innerException: invalidStudentException);
@@ -57,10 +56,10 @@ public partial class StudentServiceTests
 
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
-                actualException.SameExceptionAs(expectedDepndencyValidationException)));
+                actualException.SameExceptionAs(expectedDependencyValidationException)));
 
-        _apiBrokerMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
+        await _apiBrokerMock
+            .Received(requiredNumberOfCalls: 1)
+            .PostStudentAsync(student: someStudent);
     }
 }
