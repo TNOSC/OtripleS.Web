@@ -15,7 +15,7 @@ public class ExampleJsInterop : IAsyncDisposable
 {
     private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
-    public ExampleJsInterop(IJSRuntime jsRuntime) => 
+    public ExampleJsInterop(IJSRuntime jsRuntime) =>
         moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/Tnosc.Lib.Client.Web/exampleJsInterop.js").AsTask());
 
     public async ValueTask<string> Prompt(string message)

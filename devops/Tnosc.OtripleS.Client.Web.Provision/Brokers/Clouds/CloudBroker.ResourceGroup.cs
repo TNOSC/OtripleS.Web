@@ -14,7 +14,7 @@ namespace Tnosc.OtripleS.Server.Provision.Brokers.Clouds;
 
 internal partial class CloudBroker
 {
-    public async ValueTask<bool> CheckResourceGroupExistAsync(string resourceGroupName) 
+    public async ValueTask<bool> CheckResourceGroupExistAsync(string resourceGroupName)
     {
         SubscriptionResource subscription = await _armClient.GetDefaultSubscriptionAsync();
 
@@ -39,7 +39,7 @@ internal partial class CloudBroker
                 data: resourceGroupData
         );
 
-       return result.Value;
+        return result.Value;
     }
 
     public async ValueTask DeleteResourceGroupAsync(string resourceGroupName)

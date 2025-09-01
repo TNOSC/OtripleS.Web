@@ -20,7 +20,7 @@ internal sealed class ConfigurationBroker : IConfigurationBroker
             .AddJsonFile(path: "devops/Tnosc.OtripleS.Client.Web.Provision/appSettings.json", optional: false)
             .Build();
 
-        return configurationRoot.Get<CloudManagementConfiguration>() 
+        return configurationRoot.Get<CloudManagementConfiguration>()
             ?? throw new InvalidOperationException(message: $"{nameof(CloudManagementConfiguration)} does not exist.");
     }
 }

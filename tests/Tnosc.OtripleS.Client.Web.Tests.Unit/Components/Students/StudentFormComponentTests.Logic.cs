@@ -4,10 +4,10 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Tnosc.OtripleS.Client.Web.Components.Students;
-using Xunit;
 using Shouldly;
 using Tnosc.Lib.Client.Web.Enums;
+using Tnosc.OtripleS.Client.Web.Components.Students;
+using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit;
 
@@ -30,7 +30,7 @@ public partial class StudentFormComponentTests
         ComponentState expectedState = ComponentState.Content;
 
         // then
-        renderedStudentFormComponent = 
+        renderedStudentFormComponent =
             RenderComponent<StudentFormComponent>();
 
         // then

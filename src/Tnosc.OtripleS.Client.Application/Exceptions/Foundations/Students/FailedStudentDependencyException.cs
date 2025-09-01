@@ -4,19 +4,18 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Microsoft.AspNetCore.Components;
+using System;
+using Xeptions;
 
-namespace Tnosc.Lib.Client.Web.Bases;
+namespace Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 
-public partial class TextBoxBase
+public sealed class FailedStudentDependencyException : Xeption
 {
-    [Parameter]
-    public string Value { get; set; } = string.Empty;
-
-    [Parameter]
-    public string PlaceHolder { get; set; } = string.Empty;
-
-    public void SetValue(string value) => Value = value;
-
-    public void SetPlaceHolder(string value) => PlaceHolder = value;
+    public FailedStudentDependencyException(
+        string message,
+        Exception innerException)
+        : base(
+            message: message,
+            innerException: innerException)
+    { }
 }

@@ -7,15 +7,9 @@
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Domain.Students;
 
-namespace Tnosc.OtripleS.Client.Infrastructure.Brokers.Apis;
+namespace Tnosc.OtripleS.Client.Application.Services.Foundations.Students;
 
-internal partial class ApiBroker
+public interface IStudentService
 {
-    private const string StudentsRelativeUrl = "api/students";
-
-    public async ValueTask<Student> PostStudentAsync(Student student) =>
-        await TryCatch(async () =>
-            await PostAsync(
-                relativeUrl: StudentsRelativeUrl,
-                content: student));
+    ValueTask<Student> RegisterStudentAsync(Student student);
 }
