@@ -75,8 +75,8 @@ public partial class StudentViewServiceTests
                     .Returns(returnThis: returnedStudent);
         // when
         StudentView actualStudentView =
-            await _studentViewService.
-                RegisterStudentViewAsync(studentView: inputStudentView);
+            await _studentViewService
+                .RegisterStudentViewAsync(studentView: inputStudentView);
 
         // then
         actualStudentView.ShouldBeEquivalentTo(expected: expectedStudentView);
@@ -109,6 +109,4 @@ public partial class StudentViewServiceTests
            .ShouldBe(expected: 1);
 
     }
-
-
 }
