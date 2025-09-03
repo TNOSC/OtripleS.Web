@@ -4,9 +4,9 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-namespace Tnosc.OtripleS.Client.Domain.Students;
+namespace Tnosc.OtripleS.Client.Application.ViewModels.Students;
 
-public enum Gender
+public enum StudentViewGender
 {
     Female,
     Male

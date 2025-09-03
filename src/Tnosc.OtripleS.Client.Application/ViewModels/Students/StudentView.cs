@@ -6,20 +6,14 @@
 
 using System;
 
-namespace Tnosc.OtripleS.Client.Domain.Students;
+namespace Tnosc.OtripleS.Client.Application.ViewModels.Students;
 
-public sealed class Student
+public sealed class StudentView
 {
-    public Guid Id { get; set; }
-    public string UserId { get; set; } = null!;
     public string IdentityNumber { get; set; } = null!;
     public string FirstName { get; set; } = null!;
     public string MiddleName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public DateTimeOffset BirthDate { get; set; }
-    public StudentGender Gender { get; set; }
-    public DateTimeOffset CreatedDate { get; set; }
-    public DateTimeOffset UpdatedDate { get; set; }
-    public Guid CreatedBy { get; set; }
-    public Guid UpdatedBy { get; set; }
+    public StudentViewGender Gender { get; set; }
 }
