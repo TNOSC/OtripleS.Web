@@ -22,7 +22,7 @@ public partial class StudentViewServiceTests
     private readonly IUserService _userServiceMock;
     private readonly IDateTimeBroker _dateTimeBrokerMock;
     private readonly IStudentService _studentServiceMock;
-    private readonly ILoggingBroker _loggingBroker;
+    private readonly ILoggingBroker _loggingBrokerMock;
     private readonly StudentViewService _studentViewService;
 
     public StudentViewServiceTests()
@@ -30,13 +30,13 @@ public partial class StudentViewServiceTests
         _userServiceMock = Substitute.For<IUserService>();
         _dateTimeBrokerMock = Substitute.For<IDateTimeBroker>();
         _studentServiceMock = Substitute.For<IStudentService>();
-        _loggingBroker = Substitute.For<ILoggingBroker>();
+        _loggingBrokerMock = Substitute.For<ILoggingBroker>();
 
         _studentViewService = new StudentViewService(
             studentService: _studentServiceMock,
             userService: _userServiceMock,
             dateTimeBroker: _dateTimeBrokerMock,
-            loggingBroker: _loggingBroker);
+            loggingBroker: _loggingBrokerMock);
     }
 
     private static dynamic CreateRandomStudentViewProperties(
@@ -84,7 +84,6 @@ public partial class StudentViewServiceTests
 
     private static DateTimeOffset GetRandomDate() =>
         new DateTimeRange(earliestDate: DateTime.UtcNow).GetValue();
-
 
     private static bool SameStudentAs(Student actualStudent, Student expectedStudent) =>
         actualStudent.IdentityNumber == expectedStudent.IdentityNumber &&
