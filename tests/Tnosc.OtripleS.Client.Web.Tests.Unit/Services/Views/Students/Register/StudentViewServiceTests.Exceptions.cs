@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
@@ -66,7 +67,7 @@ public partial class StudentViewServiceTests
         // given
         StudentView someStudent = CreateRandomStudentView();
 
-        var expectedDependencyValidationException =
+        var expectedDependencyException =
             new StudentViewDependencyException(
                 message: "Student view dependency error occurred, try again.",
                 innerException: dependencyException);
@@ -84,7 +85,7 @@ public partial class StudentViewServiceTests
 
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
-                actualException.SameExceptionAs(expectedDependencyValidationException)));
+                actualException.SameExceptionAs(expectedDependencyException)));
 
         await _studentServiceMock
             .Received(requiredNumberOfCalls: 1)
@@ -96,6 +97,51 @@ public partial class StudentViewServiceTests
 
         _userServiceMock
            .Received(requiredNumberOfCalls: 1)
+           .GetCurrentlyLoggedInUser();
+    }
+
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnRegisterIfServiceErrorOccursAndLogItAsync()
+    {
+        // given
+        StudentView someStudent = CreateRandomStudentView();
+        var serviceException = new Exception();
+
+        var failedStudentViewServiceException =
+           new FailedStudentViewServiceException(
+               message: "Failed student view service occurred, please contact support.",
+               innerException: serviceException);
+
+        var expectedServiceException =
+            new StudentViewServiceException(
+                message: "Student service error occurred, try again.",
+                innerException: failedStudentViewServiceException);
+
+        _dateTimeBrokerMock.GetCurrentDateTime()
+            .Throws(ex: serviceException);
+
+        // when
+        ValueTask<StudentView> registeredStudentViewTask =
+            _studentViewService.RegisterStudentViewAsync(studentView: someStudent);
+
+        // then
+        await Assert.ThrowsAsync<StudentViewServiceException>(() =>
+            registeredStudentViewTask.AsTask());
+
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Xeption>(actualException =>
+                actualException.SameExceptionAs(expectedServiceException)));
+
+        await _studentServiceMock
+            .Received(requiredNumberOfCalls: 1)
+            .RegisterStudentAsync(student: Arg.Any<Student>());
+
+        _dateTimeBrokerMock
+            .Received(requiredNumberOfCalls: 1)
+            .GetCurrentDateTime();
+
+        _userServiceMock
+           .Received(requiredNumberOfCalls: 0)
            .GetCurrentlyLoggedInUser();
     }
 }
