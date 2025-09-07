@@ -48,13 +48,30 @@ public partial class StudentViewServiceTests
         string exceptionMessage = randomMessage;
         var innerException = new Xeption(message: exceptionMessage);
 
-        return new TheoryData<Exception>
+        return new TheoryData<Xeption>
         {
             new StudentValidationException(
                 message: "Invalid input, fix the errors and try again.",
                 innerException: innerException),
             new StudentDependencyValidationException(
                 message: "Student dependency validation error occurred, fix the errors and try again.",
+                innerException: innerException)
+        };
+    }
+
+    public static TheoryData DependencyExceptions()
+    {
+        string randomMessage = GetRandomString();
+        string exceptionMessage = randomMessage;
+        var innerException = new Xeption(message: exceptionMessage);
+
+        return new TheoryData<Exception>
+        {
+            new StudentDependencyException(
+                message: "Student dependency error occurred, please contact support.",
+                innerException: innerException),
+            new StudentServiceException(
+                message: "Service error occurred, contact support.",
                 innerException: innerException)
         };
     }

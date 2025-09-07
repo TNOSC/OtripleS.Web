@@ -20,7 +20,7 @@ public partial class StudentViewServiceTests
     [Theory]
     [MemberData(nameof(DependencyValidationExceptions))]
     public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfDependencyValidationErrorOccurredAndLogItAsync(
-            Xeption studentServiceValidationException)
+        Xeption dependencyValidationException)
     {
         // given
         StudentView someStudent = CreateRandomStudentView();
@@ -28,10 +28,10 @@ public partial class StudentViewServiceTests
         var expectedDependencyValidationException =
             new StudentViewDependencyValidationException(
                 message: "Student view dependency validation error occurred, try again.",
-                innerException: (studentServiceValidationException.InnerException as Xeption)!);
+                innerException: (dependencyValidationException.InnerException as Xeption)!);
 
         _studentServiceMock.RegisterStudentAsync(student: Arg.Any<Student>())
-            .ThrowsAsync(ex: studentServiceValidationException);
+            .ThrowsAsync(ex: dependencyValidationException);
 
         // when
         ValueTask<StudentView> registeredStudentViewTask =
@@ -39,6 +39,47 @@ public partial class StudentViewServiceTests
 
         // then
         await Assert.ThrowsAsync<StudentViewDependencyValidationException>(() =>
+            registeredStudentViewTask.AsTask());
+
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Xeption>(actualException =>
+                actualException.SameExceptionAs(expectedDependencyValidationException)));
+
+        await _studentServiceMock
+            .Received(requiredNumberOfCalls: 1)
+            .RegisterStudentAsync(student: Arg.Any<Student>());
+
+        _dateTimeBrokerMock
+            .Received(requiredNumberOfCalls: 1)
+            .GetCurrentDateTime();
+
+        _userServiceMock
+           .Received(requiredNumberOfCalls: 1)
+           .GetCurrentlyLoggedInUser();
+    }
+
+    [Theory]
+    [MemberData(nameof(DependencyExceptions))]
+    public async Task ShouldThrowDependencyExceptionOnRegisterIfDependencyErrorOccursAndLogItAsync(
+        Xeption dependencyException)
+    {
+        // given
+        StudentView someStudent = CreateRandomStudentView();
+
+        var expectedDependencyValidationException =
+            new StudentViewDependencyException(
+                message: "Student view dependency error occurred, try again.",
+                innerException: dependencyException);
+
+        _studentServiceMock.RegisterStudentAsync(student: Arg.Any<Student>())
+            .ThrowsAsync(ex: dependencyException);
+
+        // when
+        ValueTask<StudentView> registeredStudentViewTask =
+            _studentViewService.RegisterStudentViewAsync(studentView: someStudent);
+
+        // then
+        await Assert.ThrowsAsync<StudentViewDependencyException>(() =>
             registeredStudentViewTask.AsTask());
 
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
