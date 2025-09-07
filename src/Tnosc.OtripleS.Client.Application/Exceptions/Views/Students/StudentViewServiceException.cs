@@ -14,7 +14,7 @@ public sealed class StudentViewServiceException : Xeption
     public StudentViewServiceException(
         string message,
         Exception innerException)
-       : base(
+        : base(
            message: message,
            innerException: innerException)
     { }

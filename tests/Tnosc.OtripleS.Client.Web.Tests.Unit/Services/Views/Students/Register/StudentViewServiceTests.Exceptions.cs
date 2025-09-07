@@ -114,8 +114,8 @@ public partial class StudentViewServiceTests
 
         var expectedServiceException =
             new StudentViewServiceException(
-                message: "Student service error occurred, try again.",
-                innerException: failedStudentViewServiceException);
+               message: "Student service error occurred, contact support.",
+               innerException: failedStudentViewServiceException);
 
         _dateTimeBrokerMock.GetCurrentDateTime()
             .Throws(ex: serviceException);
@@ -132,16 +132,16 @@ public partial class StudentViewServiceTests
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedServiceException)));
 
-        await _studentServiceMock
-            .Received(requiredNumberOfCalls: 1)
-            .RegisterStudentAsync(student: Arg.Any<Student>());
+        _userServiceMock
+           .Received(requiredNumberOfCalls: 1)
+           .GetCurrentlyLoggedInUser();
 
         _dateTimeBrokerMock
             .Received(requiredNumberOfCalls: 1)
             .GetCurrentDateTime();
 
-        _userServiceMock
-           .Received(requiredNumberOfCalls: 0)
-           .GetCurrentlyLoggedInUser();
+        await _studentServiceMock
+            .Received(requiredNumberOfCalls: 0)
+            .RegisterStudentAsync(student: Arg.Any<Student>());
     }
 }

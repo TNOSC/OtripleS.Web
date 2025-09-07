@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
@@ -42,6 +43,24 @@ public partial class StudentViewService
         {
             throw CreateAndLogDependencyException(studentDependencyValidationException);
         }
+        catch(Exception exception)
+        {
+            var failedStudentViewServiceException =
+                new FailedStudentViewServiceException(
+                    message: "Failed student view service occurred, please contact support.",
+                    innerException: exception);
+            throw CreateAndLogServiceException(failedStudentViewServiceException);
+        }
+    }
+
+    private StudentViewServiceException CreateAndLogServiceException(Xeption exception)
+    {
+        var studentViewServiceException = new StudentViewServiceException(
+             message: "Student service error occurred, contact support.",
+             innerException: exception);
+        _loggingBroker.LogError(studentViewServiceException);
+
+        return studentViewServiceException;
     }
 
     private StudentViewValidationException CreateAndLogValidationException(Xeption exception)
