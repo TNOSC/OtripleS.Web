@@ -8,12 +8,15 @@ using System;
 using NSubstitute;
 using Tnosc.OtripleS.Client.Application.Brokers.DateTimes;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
+using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Services.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Services.Foundations.Users;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Tynamix.ObjectFiller;
+using Xeptions;
+using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Views.Students;
 
@@ -22,7 +25,7 @@ public partial class StudentViewServiceTests
     private readonly IUserService _userServiceMock;
     private readonly IDateTimeBroker _dateTimeBrokerMock;
     private readonly IStudentService _studentServiceMock;
-    private readonly ILoggingBroker _loggingBroker;
+    private readonly ILoggingBroker _loggingBrokerMock;
     private readonly StudentViewService _studentViewService;
 
     public StudentViewServiceTests()
@@ -30,13 +33,60 @@ public partial class StudentViewServiceTests
         _userServiceMock = Substitute.For<IUserService>();
         _dateTimeBrokerMock = Substitute.For<IDateTimeBroker>();
         _studentServiceMock = Substitute.For<IStudentService>();
-        _loggingBroker = Substitute.For<ILoggingBroker>();
+        _loggingBrokerMock = Substitute.For<ILoggingBroker>();
 
         _studentViewService = new StudentViewService(
             studentService: _studentServiceMock,
             userService: _userServiceMock,
             dateTimeBroker: _dateTimeBrokerMock,
-            loggingBroker: _loggingBroker);
+            loggingBroker: _loggingBrokerMock);
+    }
+
+    public static TheoryData DependencyValidationExceptions()
+    {
+        string randomMessage = GetRandomString();
+        string exceptionMessage = randomMessage;
+        var innerException = new Xeption(message: exceptionMessage);
+
+        return new TheoryData<Xeption>
+        {
+            new StudentValidationException(
+                message: "Invalid input, fix the errors and try again.",
+                innerException: innerException),
+            new StudentDependencyValidationException(
+                message: "Student dependency validation error occurred, fix the errors and try again.",
+                innerException: innerException)
+        };
+    }
+
+    public static TheoryData DependencyExceptions()
+    {
+        string randomMessage = GetRandomString();
+        string exceptionMessage = randomMessage;
+        var innerException = new Xeption(message: exceptionMessage);
+
+        return new TheoryData<Exception>
+        {
+            new StudentDependencyException(
+                message: "Student dependency error occurred, please contact support.",
+                innerException: innerException),
+            new StudentServiceException(
+                message: "Service error occurred, contact support.",
+                innerException: innerException)
+        };
+    }
+
+    private static StudentView CreateRandomStudentView() =>
+           CreateStudentViewFiller().Create();
+
+    private static Filler<StudentView> CreateStudentViewFiller()
+    {
+        var filler = new Filler<StudentView>();
+
+        filler.Setup()
+            .OnType<DateTimeOffset>().Use(DateTimeOffset.UtcNow);
+
+        return filler;
     }
 
     private static dynamic CreateRandomStudentViewProperties(
@@ -84,7 +134,6 @@ public partial class StudentViewServiceTests
 
     private static DateTimeOffset GetRandomDate() =>
         new DateTimeRange(earliestDate: DateTime.UtcNow).GetValue();
-
 
     private static bool SameStudentAs(Student actualStudent, Student expectedStudent) =>
         actualStudent.IdentityNumber == expectedStudent.IdentityNumber &&

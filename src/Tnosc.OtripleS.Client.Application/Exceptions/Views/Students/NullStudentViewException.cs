@@ -6,15 +6,11 @@
 
 using Xeptions;
 
-namespace Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
+namespace Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 
-public sealed class StudentValidationException : Xeption
+public sealed class NullStudentViewException : Xeption
 {
-    public StudentValidationException(
-        string message,
-        Xeption innerException)
-        : base(
-           message: message,
-           innerException: innerException)
+    public NullStudentViewException(string message)
+        : base(message: message)
     { }
 }

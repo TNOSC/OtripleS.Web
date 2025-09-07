@@ -15,7 +15,7 @@ using Tnosc.OtripleS.Client.Domain.Students;
 
 namespace Tnosc.OtripleS.Client.Application.Services.Views.Students;
 
-public sealed class StudentViewService : IStudentViewService
+public partial class StudentViewService : IStudentViewService
 {
 #pragma warning disable S4487 // Unread "private" fields should be removed
     private readonly IUserService _userService;
@@ -36,12 +36,15 @@ public sealed class StudentViewService : IStudentViewService
         _loggingBroker = loggingBroker;
     }
 
-    public async ValueTask<StudentView> RegisterStudentViewAsync(StudentView studentView)
+    public async ValueTask<StudentView> RegisterStudentViewAsync(StudentView studentView) =>
+    await TryCatch(async () =>
     {
+        ValidateStudentView(studentView: studentView);
         Student student = MapToStudent(studentView);
         await _studentService.RegisterStudentAsync(student);
+
         return studentView;
-    }
+    });
 
     private Student MapToStudent(StudentView studentView)
     {
