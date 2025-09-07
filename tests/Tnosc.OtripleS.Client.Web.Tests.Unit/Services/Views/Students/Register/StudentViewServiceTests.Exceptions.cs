@@ -19,7 +19,7 @@ public partial class StudentViewServiceTests
 {
     [Theory]
     [MemberData(nameof(DependencyValidationExceptions))]
-    public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfDependencyValidationErrorOccurredAndLogItAsync(
+    public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfDependencyValidationErrorOccursAndLogItAsync(
         Xeption dependencyValidationException)
     {
         // given

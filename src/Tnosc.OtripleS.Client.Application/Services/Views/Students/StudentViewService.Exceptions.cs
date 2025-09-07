@@ -34,6 +34,14 @@ public partial class StudentViewService
         {
             throw CreateAndLogDependencyValidationException(studentDependencyValidationException);
         }
+        catch (StudentDependencyException studentValidationException)
+        {
+            throw CreateAndLogDependencyException(studentValidationException);
+        }
+        catch (StudentServiceException studentDependencyValidationException)
+        {
+            throw CreateAndLogDependencyException(studentDependencyValidationException);
+        }
     }
 
     private StudentViewValidationException CreateAndLogValidationException(Xeption exception)
@@ -52,6 +60,18 @@ public partial class StudentViewService
             new StudentViewDependencyValidationException(
                 message: "Student view dependency validation error occurred, try again.",
                 innerException: (exception.InnerException as Xeption)!);
+
+        _loggingBroker.LogError(studentViewDependencyValidationException);
+
+        return studentViewDependencyValidationException;
+    }
+
+    private StudentViewDependencyException CreateAndLogDependencyException(Xeption exception)
+    {
+        var studentViewDependencyValidationException =
+            new StudentViewDependencyException(
+                message: "Student view dependency error occurred, try again.",
+                innerException: exception);
 
         _loggingBroker.LogError(studentViewDependencyValidationException);
 
