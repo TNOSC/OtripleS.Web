@@ -17,13 +17,10 @@ namespace Tnosc.OtripleS.Client.Application.Services.Views.Students;
 
 public partial class StudentViewService : IStudentViewService
 {
-#pragma warning disable S4487 // Unread "private" fields should be removed
     private readonly IUserService _userService;
     private readonly IDateTimeBroker _dateTimeBroker;
     private readonly IStudentService _studentService;
     private readonly ILoggingBroker _loggingBroker;
-#pragma warning restore S4487 // Unread "private" fields should be removed
-
     public StudentViewService(
         IStudentService studentService,
         IUserService userService,
