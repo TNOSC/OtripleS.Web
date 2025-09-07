@@ -4,18 +4,17 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using System;
 using Xeptions;
 
 namespace Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 
-public sealed class StudentViewValidationException : Xeption
+public class StudentViewDependencyValidationException : Xeption
 {
-    public StudentViewValidationException(
-        string message,
-        Xeption innerException)
-       : base(
-           message: message,
-           innerException: innerException)
+    public StudentViewDependencyValidationException(
+         string message,
+         Xeption innerException)
+        : base(
+            message: message,
+            innerException: innerException)
     { }
 }

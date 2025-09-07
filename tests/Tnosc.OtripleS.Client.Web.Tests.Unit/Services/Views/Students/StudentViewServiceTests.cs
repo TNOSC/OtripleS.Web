@@ -8,12 +8,15 @@ using System;
 using NSubstitute;
 using Tnosc.OtripleS.Client.Application.Brokers.DateTimes;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
+using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Services.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Services.Foundations.Users;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Tynamix.ObjectFiller;
+using Xeptions;
+using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Views.Students;
 
@@ -37,6 +40,36 @@ public partial class StudentViewServiceTests
             userService: _userServiceMock,
             dateTimeBroker: _dateTimeBrokerMock,
             loggingBroker: _loggingBrokerMock);
+    }
+
+    public static TheoryData StudentServiceValidationExceptions()
+    {
+        string randomMessage = GetRandomString();
+        string exceptionMessage = randomMessage;
+        var innerException = new Xeption(message: exceptionMessage);
+
+        return new TheoryData<Exception>
+        {
+            new StudentValidationException(
+                message: "Invalid input, fix the errors and try again.",
+                innerException: innerException),
+            new StudentDependencyValidationException(
+                message: "Student dependency validation error occurred, fix the errors and try again.",
+                innerException: innerException)
+        };
+    }
+
+    private static StudentView CreateRandomStudentView() =>
+           CreateStudentViewFiller().Create();
+
+    private static Filler<StudentView> CreateStudentViewFiller()
+    {
+        var filler = new Filler<StudentView>();
+
+        filler.Setup()
+            .OnType<DateTimeOffset>().Use(DateTimeOffset.UtcNow);
+
+        return filler;
     }
 
     private static dynamic CreateRandomStudentViewProperties(
