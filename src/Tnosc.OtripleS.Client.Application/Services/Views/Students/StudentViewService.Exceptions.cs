@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------------
 
 using System.Threading.Tasks;
+using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Xeptions;
@@ -25,6 +26,14 @@ public partial class StudentViewService
         {
             throw CreateAndLogValidationException(nullStudentViewException);
         }
+        catch (StudentValidationException studentValidationException)
+        {
+            throw CreateAndLogDependencyValidationException(studentValidationException);
+        }
+        catch (StudentDependencyValidationException studentDependencyValidationException)
+        {
+            throw CreateAndLogDependencyValidationException(studentDependencyValidationException);
+        }
     }
 
     private StudentViewValidationException CreateAndLogValidationException(Xeption exception)
@@ -35,5 +44,17 @@ public partial class StudentViewService
         _loggingBroker.LogError(studentViewValidationException);
 
         return studentViewValidationException;
+    }
+
+    private StudentViewDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
+    {
+        var studentViewDependencyValidationException =
+            new StudentViewDependencyValidationException(
+                message: "Student view dependency validation error occurred, try again.",
+                innerException: (exception.InnerException as Xeption)!);
+
+        _loggingBroker.LogError(studentViewDependencyValidationException);
+
+        return studentViewDependencyValidationException;
     }
 }

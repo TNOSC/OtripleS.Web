@@ -18,8 +18,8 @@ namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Views.Students;
 public partial class StudentViewServiceTests
 {
     [Theory]
-    [MemberData(nameof(StudentServiceValidationExceptions))]
-    public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfStudentValidationErrorOccuredAndLogItAsync(
+    [MemberData(nameof(DependencyValidationExceptions))]
+    public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfDependencyValidationErrorOccurredAndLogItAsync(
             Xeption studentServiceValidationException)
     {
         // given

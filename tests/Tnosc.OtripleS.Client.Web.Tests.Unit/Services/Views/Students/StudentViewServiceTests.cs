@@ -42,7 +42,7 @@ public partial class StudentViewServiceTests
             loggingBroker: _loggingBrokerMock);
     }
 
-    public static TheoryData StudentServiceValidationExceptions()
+    public static TheoryData DependencyValidationExceptions()
     {
         string randomMessage = GetRandomString();
         string exceptionMessage = randomMessage;
