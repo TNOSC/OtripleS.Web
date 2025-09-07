@@ -13,7 +13,7 @@ public sealed class StudentValidationException : Xeption
     public StudentValidationException(
         string message,
         Xeption innerException)
-       : base(
+        : base(
            message: message,
            innerException: innerException)
     { }

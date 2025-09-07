@@ -10,7 +10,9 @@ namespace Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 
 public sealed class InvalidStudentDependencyException : Xeption
 {
-    public InvalidStudentDependencyException(string message, Xeption innerException)
+    public InvalidStudentDependencyException(
+        string message,
+        Xeption innerException)
         : base(message: message,
                 innerException,
                 innerException.Data)

@@ -13,7 +13,7 @@ public class StudentDependencyValidationException : Xeption
     public StudentDependencyValidationException(
         string message,
         Xeption innerException)
-       : base(
+        : base(
            message: message,
            innerException: innerException)
     { }
