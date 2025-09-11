@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\lib\Tnosc.Lib.Client.Web\Tnosc.Lib.Client.Web.csproj" />
+    <ProjectReference Include="..\Tnosc.OtripleS.Client.Application\Tnosc.OtripleS.Client.Application.csproj" />
+  </ItemGroup>
+
 </Project>

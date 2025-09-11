@@ -4,12 +4,19 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Bunit;
-using Tnosc.OtripleS.Client.Web.Components.Students;
+using System;
+using Microsoft.AspNetCore.Components;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit;
+namespace Tnosc.Lib.Client.Web.Bases.Forms;
 
-public partial class StudentFormComponentTests : TestContext
+public partial class ButtonBase : ComponentBase
 {
-    private IRenderedComponent<StudentFormComponent>? renderedStudentFormComponent;
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public Action? OnClick { get; set; }
+
+    public void Click() =>
+        OnClick?.Invoke();  
 }

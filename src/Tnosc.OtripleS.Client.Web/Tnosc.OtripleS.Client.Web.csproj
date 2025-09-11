@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Tnosc.OtripleS.Client.Web.Client\Tnosc.OtripleS.Client.Web.Client.csproj" />
     <ProjectReference Include="..\Tnosc.OtripleS.Client.Infrastructure\Tnosc.OtripleS.Client.Infrastructure.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Students\" />
+  </ItemGroup>
 </Project>

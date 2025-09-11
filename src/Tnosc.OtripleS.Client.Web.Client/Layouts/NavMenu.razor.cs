@@ -4,12 +4,11 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Xunit;
+using Microsoft.AspNetCore.Components;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit;
+namespace Tnosc.OtripleS.Client.Web.Client.Layouts;
 
-public class DeleteMe
+public partial class NavMenu : ComponentBase
 {
-    [Fact]
-    public void ShouldBeTrue() => Assert.True(true);
+    public bool Expanded { get; set; } = true;
 }

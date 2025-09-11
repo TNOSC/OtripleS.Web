@@ -5,18 +5,18 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Tnosc.Lib.Client.Web.Enums;
 
-namespace Tnosc.Lib.Client.Web.Bases;
+namespace Tnosc.Lib.Client.Web.Containers;
 
-public partial class TextBoxBase
+public partial class ContainerComponent : ComponentBase
 {
     [Parameter]
-    public string Value { get; set; } = string.Empty;
+    public ComponentState State { get; set; }
 
     [Parameter]
-    public string PlaceHolder { get; set; } = string.Empty;
+    public RenderFragment Content { get; set; } = null!;
 
-    public void SetValue(string value) => Value = value;
-
-    public void SetPlaceHolder(string value) => PlaceHolder = value;
+    [Parameter]
+    public string Error { get; set; } = string.Empty;
 }
