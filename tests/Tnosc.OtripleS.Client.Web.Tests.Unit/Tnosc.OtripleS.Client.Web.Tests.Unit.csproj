@@ -22,8 +22,4 @@
     <ProjectReference Include="..\..\src\Tnosc.OtripleS.Client.Web\Tnosc.OtripleS.Client.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\Students\" />
-  </ItemGroup>
-
 </Project>

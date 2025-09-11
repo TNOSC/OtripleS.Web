@@ -22,11 +22,12 @@ public partial class StudentRegistrationComponent : ComponentBase
     
     public ComponentState State { get; set; }
     public StudentRegistrationComponentException? Exception { get; set; }
-    public StudentView StudentView { get; set; } = new();
+    public StudentView StudentView { get; set; } = null!;
     public TextBoxBase StudentIdentityTextBox { get; set; } = null!;
     public TextBoxBase StudentFirstNameTextBox { get; set; } = null!;
     public TextBoxBase StudentMiddleNameTextBox { get; set; } = null!;
     public TextBoxBase StudentLastNameTextBox { get; set; } = null!;
+    public ButtonBase SubmitButton { get; set; } = null!;
 
     protected override void OnInitialized() =>
         State = ComponentState.Content;
