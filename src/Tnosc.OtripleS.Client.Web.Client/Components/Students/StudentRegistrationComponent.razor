@@ -1,1 +1,25 @@
-﻿@rendermode InteractiveAuto
+﻿@using Tnosc.Lib.Client.Web.Bases.Forms
+@using Tnosc.Lib.Client.Web.Containers
+@rendermode InteractiveAuto
+
+
+<ContainerComponent State=State>
+	<Content>
+		<div>
+			<TextBoxBase @ref=StudentIdentityTextBox
+						 PlaceHolder="Student Identity" />
+			<br />
+			<TextBoxBase @ref=StudentFirstNameTextBox
+						 Placeholder="First Name" />
+			<br />
+			<TextBoxBase @ref=@StudentMiddleNameTextBox
+						 Placeholder="Middle Name" />
+			<br />
+			<TextBoxBase @ref=@StudentLastNameTextBox
+						 Placeholder="Last Name" />
+			<br />
+			<ButtonBase @ref=@SubmitButton
+						Label="SUBMIT" />
+		</div>
+	</Content>
+</ContainerComponent>

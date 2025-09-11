@@ -29,7 +29,10 @@ public partial class StudentRegistrationComponent : ComponentBase
     public TextBoxBase StudentLastNameTextBox { get; set; } = null!;
     public ButtonBase SubmitButton { get; set; } = null!;
 
-    protected override void OnInitialized() =>
+    protected override void OnInitialized()
+    {
+        StudentView = new StudentView();
         State = ComponentState.Content;
+    }
 }
 #pragma warning restore CA1515
