@@ -42,7 +42,6 @@ public partial class StudentRegistrationComponentTests
         ComponentState expectedComponentState =
            ComponentState.Content;
 
-
         string expectedIdentityTextBoxPlaceholder = "Student Identity";
         string expectedFirstNameTextBoxPlaceholder = "First Name";
         string expectedMiddleNameTextBoxPlaceholder = "Middle Name";

@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.FluentUI.AspNetCore.Components;
+using Tnosc.OtripleS.Client.Application;
+using Tnosc.OtripleS.Client.Infrastructure;
 using Tnosc.OtripleS.Client.Web;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 builder.Services.AddFluentUIComponents();
+
+builder.Services.AddApplicationServices();
+builder.Services.AddBrokers();
 
 WebApplication app = builder.Build();
 
