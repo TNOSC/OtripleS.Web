@@ -1,24 +1,28 @@
 ﻿@using Tnosc.Lib.Client.Web.Bases.Forms
 @using Tnosc.Lib.Client.Web.Containers
+@using Tnosc.OtripleS.Client.Application.ViewModels.Students
 @rendermode InteractiveAuto
 
 
 <ContainerComponent State=State>
 	<Content>
 		<div>
-			<TextBoxBase @ref=StudentIdentityTextBox
+			<TextBoxBase @ref="StudentIdentityTextBox"
 						 PlaceHolder="Student Identity" />
 			<br />
-			<TextBoxBase @ref=StudentFirstNameTextBox
+			<TextBoxBase @ref="StudentFirstNameTextBox"
 						 Placeholder="First Name" />
 			<br />
-			<TextBoxBase @ref=@StudentMiddleNameTextBox
+			<TextBoxBase @ref="StudentMiddleNameTextBox"
 						 Placeholder="Middle Name" />
 			<br />
-			<TextBoxBase @ref=@StudentLastNameTextBox
+			<TextBoxBase @ref="StudentLastNameTextBox"
 						 Placeholder="Last Name" />
 			<br />
-			<ButtonBase @ref=@SubmitButton
+			<DropDownBase @ref="StudentGenderDropDown"
+						  TEnum="StudentViewGender" />
+			<br />
+			<ButtonBase @ref="SubmitButton"
 						Label="SUBMIT" />
 		</div>
 	</Content>
