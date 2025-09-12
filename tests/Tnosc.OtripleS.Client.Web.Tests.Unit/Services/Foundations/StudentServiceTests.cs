@@ -7,7 +7,7 @@
 using System;
 using System.Net.Http;
 using NSubstitute;
-using RESTFulSense.Exceptions;
+using RESTFulSense.WebAssembly.Exceptions;
 using Tnosc.OtripleS.Client.Application.Brokers.Apis;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
 using Tnosc.OtripleS.Client.Application.Services.Foundations.Students;

@@ -1,0 +1,8 @@
+﻿@typeparam TEnum
+
+<select>
+    @foreach (var enumValue in Enum.GetValues(typeof(TEnum)))
+    {
+        <option value="@enumValue">@enumValue</option>
+    }
+</select>

@@ -31,6 +31,7 @@ public partial class StudentRegistrationComponentTests
         initialStudentRegistrationComponent.StudentFirstNameTextBox.ShouldBeNull();
         initialStudentRegistrationComponent.StudentMiddleNameTextBox.ShouldBeNull();
         initialStudentRegistrationComponent.StudentLastNameTextBox.ShouldBeNull();
+        initialStudentRegistrationComponent.StudentGenderDropDown.ShouldBeNull();
         initialStudentRegistrationComponent.SubmitButton.ShouldBeNull();
         initialStudentRegistrationComponent.StudentView.ShouldBeNull();
     }
@@ -79,9 +80,12 @@ public partial class StudentRegistrationComponentTests
 
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
             .ShouldNotBeNull();
-
+            
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.PlaceHolder
             .ShouldBe(expectedLastnameTextBoxPlaceholder);
+
+        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
+            .ShouldNotBeNull();
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Label
             .ShouldBe(expectedSubmitButtonLabel);
