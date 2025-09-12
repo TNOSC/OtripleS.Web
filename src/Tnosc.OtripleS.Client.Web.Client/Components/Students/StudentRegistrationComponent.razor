@@ -9,25 +9,32 @@
 		<div>
 
 			<TextBoxBase @ref="StudentIdentityTextBox"
-						 PlaceHolder="Student Identity" />
+						 PlaceHolder="Student Identity" 
+						 @bind-Value="StudentView.IdentityNumber"/>
 			<br />
 			<TextBoxBase @ref="StudentFirstNameTextBox"
-						 Placeholder="First Name" />
+						 Placeholder="First Name"
+						 @bind-Value="StudentView.FirstName"/>
 			<br />
 			<TextBoxBase @ref="StudentMiddleNameTextBox"
-						 Placeholder="Middle Name" />
+						 Placeholder="Middle Name"
+						 @bind-Value="StudentView.MiddleName" />
 			<br />
 			<TextBoxBase @ref="StudentLastNameTextBox"
-						 Placeholder="Last Name" />
+						 Placeholder="Last Name" 
+						 @bind-Value="StudentView.LastName" />
 			<br />
 			<DropDownBase @ref="StudentGenderDropDown"
-						  TEnum="StudentViewGender" />
+						  TEnum="StudentViewGender" 
+						  @bind-Value="StudentView.Gender" />
 			<br />
-			<DatePickerBase @ref="DateOfBirthPicker"/>
+			<DatePickerBase @ref="DateOfBirthPicker"
+							@bind-Value="StudentView.BirthDate" />
 			<br />
 
 			<ButtonBase @ref="SubmitButton"
-						Label="SUBMIT" />
+						Label="SUBMIT"
+						OnClick="(async() => await RegisterStudentAsync())" />
 		</div>
 	</Content>
 </ContainerComponent>

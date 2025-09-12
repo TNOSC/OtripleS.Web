@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
@@ -16,9 +17,15 @@ public partial class TextBoxBase : ComponentBase
     [Parameter]
     public string PlaceHolder { get; set; } = string.Empty;
 
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
     public void SetValue(string value) =>
         Value = value;
 
     public void SetPlaceHolder(string value) =>
         PlaceHolder = value;
+
+    private async Task OnValueChanged(ChangeEventArgs args) =>
+        await ValueChanged.InvokeAsync(args.Value?.ToString() ?? string.Empty);
 }

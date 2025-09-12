@@ -4,6 +4,8 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Tnosc.Lib.Client.Web.Bases.Forms;
 using Tnosc.Lib.Client.Web.Enums;
@@ -35,5 +37,8 @@ public partial class StudentRegistrationComponent : ComponentBase
         StudentView = new StudentView();
         State = ComponentState.Content;
     }
+
+    public async Task RegisterStudentAsync() => 
+        await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
 }
 #pragma warning restore CA1515

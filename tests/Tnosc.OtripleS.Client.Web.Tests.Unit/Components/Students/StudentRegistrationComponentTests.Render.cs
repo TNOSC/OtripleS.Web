@@ -4,11 +4,15 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Linq;
+using System.Threading.Tasks;
+using FluentAssertions;
 using NSubstitute;
 using Shouldly;
 using Tnosc.Lib.Client.Web.Enums;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Components.Students;
+using Xeptions;
 using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
@@ -101,5 +105,61 @@ public partial class StudentRegistrationComponentTests
         _studentViewServiceMock
             .ReceivedCalls()
             .ShouldBeEmpty();
+    }
+
+    [Fact]
+    public async Task ShouldSubmitStudentRegistration()
+    {
+        // given
+        StudentView randomStudentView = CreateRandomStudentView();
+        StudentView inputStudentView = randomStudentView;
+
+        // when
+        _renderedStudentRegistrationComponent =
+            RenderComponent<StudentRegistrationComponent>();
+
+        _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
+            .SetValue(inputStudentView.IdentityNumber);
+
+        _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox
+            .SetValue(inputStudentView.FirstName);
+
+        _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox
+            .SetValue(inputStudentView.MiddleName);
+
+        _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
+            .SetValue(inputStudentView.LastName);
+
+        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
+            .SetValue(inputStudentView.Gender);
+
+        _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
+            .SetValue(inputStudentView.BirthDate);
+
+        _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
+        // then
+        _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Value
+            .ShouldBeEquivalentTo(inputStudentView.IdentityNumber);
+
+        _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Value
+            .ShouldBeEquivalentTo(inputStudentView.FirstName);
+
+        _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Value
+            .ShouldBeEquivalentTo(inputStudentView.MiddleName);
+
+        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
+            .ShouldBeEquivalentTo(inputStudentView.Gender);
+
+        _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
+            .ShouldBeEquivalentTo(inputStudentView.BirthDate);
+
+        await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
+            .RegisterStudentViewAsync(studentView : _renderedStudentRegistrationComponent.Instance.StudentView);
+
+        _studentViewServiceMock
+            .ReceivedCalls()
+            .Count()
+            .ShouldBe(expected: 1);
     }
 }

@@ -5,13 +5,16 @@
 // ----------------------------------------------------------------------------------
 
 
+using System;
 using Bunit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
+using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Components.Students;
+using Tynamix.ObjectFiller;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
 
@@ -30,4 +33,18 @@ public partial class StudentRegistrationComponentTests : TestContext
         Services.AddSingleton(configMock);
         Services.AddServerSideBlazor();
     }
+
+    private static StudentView CreateRandomStudentView() =>
+          CreateStudentFiller().Create();
+
+    private static Filler<StudentView> CreateStudentFiller()
+    {
+        var filler = new Filler<StudentView>();
+
+        filler.Setup()
+            .OnType<DateTimeOffset>().Use(DateTimeOffset.UtcNow);
+
+        return filler;
+    }
+
 }

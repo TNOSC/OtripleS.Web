@@ -5,6 +5,8 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Security.Principal;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
@@ -14,6 +16,12 @@ public partial class DatePickerBase : ComponentBase
     [Parameter]
     public DateTimeOffset Value { get; set; }
 
+    [Parameter]
+    public EventCallback<DateTimeOffset> ValueChanged { get; set; }
+
     public void SetValue(DateTimeOffset value) =>
         Value = value;
+
+    private async Task OnValueChanged(ChangeEventArgs args) =>
+        await ValueChanged.InvokeAsync(arg: DateTimeOffset.Parse(input: args.Value?.ToString() ?? string.Empty));
 }
