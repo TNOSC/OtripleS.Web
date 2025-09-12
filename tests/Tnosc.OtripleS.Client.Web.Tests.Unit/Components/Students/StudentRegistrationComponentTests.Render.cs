@@ -7,6 +7,7 @@
 using NSubstitute;
 using Shouldly;
 using Tnosc.Lib.Client.Web.Enums;
+using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Components.Students;
 using Xunit;
 
@@ -32,6 +33,7 @@ public partial class StudentRegistrationComponentTests
         initialStudentRegistrationComponent.StudentMiddleNameTextBox.ShouldBeNull();
         initialStudentRegistrationComponent.StudentLastNameTextBox.ShouldBeNull();
         initialStudentRegistrationComponent.StudentGenderDropDown.ShouldBeNull();
+        initialStudentRegistrationComponent.DateOfBirthPicker.ShouldBeNull();
         initialStudentRegistrationComponent.SubmitButton.ShouldBeNull();
         initialStudentRegistrationComponent.StudentView.ShouldBeNull();
     }
@@ -84,7 +86,10 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.PlaceHolder
             .ShouldBe(expectedLastnameTextBoxPlaceholder);
 
-        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
+        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
+            .ShouldBeOfType<StudentViewGender>();
+
+        _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
             .ShouldNotBeNull();
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Label

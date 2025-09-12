@@ -27,6 +27,7 @@ public partial class StudentRegistrationComponent : ComponentBase
     public TextBoxBase StudentMiddleNameTextBox { get; set; } = null!;
     public TextBoxBase StudentLastNameTextBox { get; set; } = null!;
     public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; } = null!;
+    public DatePickerBase DateOfBirthPicker { get; set; } = null!;
     public ButtonBase SubmitButton { get; set; } = null!;
 
     protected override void OnInitialized()
