@@ -7,6 +7,7 @@
 <ContainerComponent State=State>
 	<Content>
 		<div>
+
 			<TextBoxBase @ref="StudentIdentityTextBox"
 						 PlaceHolder="Student Identity" />
 			<br />
@@ -22,6 +23,9 @@
 			<DropDownBase @ref="StudentGenderDropDown"
 						  TEnum="StudentViewGender" />
 			<br />
+			<DatePickerBase @ref="DateOfBirthPicker"/>
+			<br />
+
 			<ButtonBase @ref="SubmitButton"
 						Label="SUBMIT" />
 		</div>
