@@ -47,6 +47,27 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
            .ShouldBe(Color.Red);
 
+        _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
+          .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
+            .ShouldBeFalse();
+
         _studentViewServiceMock
             .ReceivedCalls()
             .Count()
@@ -80,6 +101,27 @@ public partial class StudentRegistrationComponentTests
 
        await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
+
+        _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
+           .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
+            .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
+          .ShouldBeFalse();
+
+        _renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
+            .ShouldBeFalse();
 
         _studentViewServiceMock
             .ReceivedCalls()

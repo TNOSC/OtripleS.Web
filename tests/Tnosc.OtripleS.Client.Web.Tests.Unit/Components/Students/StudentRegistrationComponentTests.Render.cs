@@ -162,25 +162,25 @@ public partial class StudentRegistrationComponentTests
             .ShouldBe(Color.Black);
 
         _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
-           .ShouldBeTrue();
+            .ShouldBeTrue();
 
         _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
-           .ShouldBeTrue();
+            .ShouldBeTrue();
 
         _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
-           .ShouldBeTrue();
+            .ShouldBeTrue();
 
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
-           .ShouldBeTrue();
+            .ShouldBeTrue();
 
         _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
-           .ShouldBeTrue();
+            .ShouldBeTrue();
 
         _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
-          .ShouldBeTrue();
+            .ShouldBeTrue();
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
-          .ShouldBeTrue();
+            .ShouldBeTrue();
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
