@@ -106,6 +106,9 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.ErrorLabel
             .ShouldNotBeNull();
 
+        _renderedStudentRegistrationComponent.Instance.ErrorLabel.Color
+           .ShouldBe(Color.Red);
+
         _studentViewServiceMock
             .ReceivedCalls()
             .ShouldBeEmpty();

@@ -5,13 +5,17 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using Tnosc.Lib.Client.Web.Enums;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
 
-public partial class LabelBase: ComponentBase
+public partial class LabelBase : ComponentBase
 {
     [Parameter]
     public string Value { get; set; } = string.Empty;
+
+    [Parameter]
+    public Color Color { get; set; }
 
     public void SetValue(string value)
     {
