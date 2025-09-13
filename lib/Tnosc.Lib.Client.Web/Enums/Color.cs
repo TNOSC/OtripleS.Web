@@ -9,5 +9,6 @@ namespace Tnosc.Lib.Client.Web.Enums;
 public enum Color
 {
     Black,
-    Red
+    Red,
+    Green
 }

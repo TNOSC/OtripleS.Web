@@ -160,7 +160,10 @@ public partial class StudentRegistrationComponentTests
             .ShouldBeEquivalentTo(inputStudentView.BirthDate);
 
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Value
-           .ShouldBeEmpty();
+           .ShouldBe("Submitted Successfully.");
+
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+            .ShouldBe(Color.Green);
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
