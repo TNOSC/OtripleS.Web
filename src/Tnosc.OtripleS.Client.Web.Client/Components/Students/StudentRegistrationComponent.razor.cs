@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Tnosc.Lib.Client.Web.Bases.Forms;
 using Tnosc.Lib.Client.Web.Enums;
+using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Exceptions.Students;
@@ -38,7 +39,29 @@ public partial class StudentRegistrationComponent : ComponentBase
         State = ComponentState.Content;
     }
 
-    public async Task RegisterStudentAsync() => 
-        await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
+    public async Task RegisterStudentAsync()
+    {
+        try
+        {
+            await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
+        }
+        catch (StudentViewValidationException studentViewValidationException)
+        {
+            string validationMessage =
+                studentViewValidationException.InnerException!.Message;
+
+            ApplySubmissionFailed(errorMessage: validationMessage);
+        }
+        catch (StudentViewDependencyValidationException dependencyValidationException)
+        {
+            string validationMessage =
+                dependencyValidationException.InnerException!.Message;
+
+            ApplySubmissionFailed(errorMessage: validationMessage);
+        }
+    }
+
+    private void ApplySubmissionFailed(string errorMessage) =>
+        ErrorLabel.SetValue(errorMessage);
 }
 #pragma warning restore CA1515
