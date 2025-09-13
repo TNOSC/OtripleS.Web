@@ -52,30 +52,29 @@ public partial class StudentRegistrationComponent : ComponentBase
             string validationMessage =
                 studentViewValidationException.InnerException!.Message;
 
-            ReportStudentSubmissionFailed(errorMessage: validationMessage);
+            ApplySubmissionFailed(errorMessage: validationMessage);
         }
         catch (StudentViewDependencyValidationException dependencyValidationException)
         {
             string validationMessage =
                 dependencyValidationException.InnerException!.Message;
 
-            ReportStudentSubmissionFailed(errorMessage: validationMessage);
+            ApplySubmissionFailed(errorMessage: validationMessage);
         }
         catch (StudentViewServiceException studentViewServiceException)
         {
             string validationMessage =
                 studentViewServiceException.Message;
 
-            ReportStudentSubmissionFailed(errorMessage: validationMessage);
+            ApplySubmissionFailed(errorMessage: validationMessage);
         }
         catch (StudentViewDependencyException dependencyException)
         {
             string validationMessage =
                 dependencyException.Message;
 
-            ReportStudentSubmissionFailed(errorMessage: validationMessage);
+            ApplySubmissionFailed(errorMessage: validationMessage);
         }
-
     }
 
     private void ApplySubmittingStatus()
@@ -97,10 +96,17 @@ public partial class StudentRegistrationComponent : ComponentBase
         StatusLabel.SetValue("Submitted Successfully.");
     }
 
-    private void ReportStudentSubmissionFailed(string errorMessage)
+    private void ApplySubmissionFailed(string errorMessage)
     {
         StatusLabel.SetColor(Color.Red);
         StatusLabel.SetValue(errorMessage);
+        StudentIdentityTextBox.Enable();
+        StudentFirstNameTextBox.Enable();
+        StudentMiddleNameTextBox.Enable();
+        StudentLastNameTextBox.Enable();
+        StudentGenderDropDown.Enable();
+        DateOfBirthPicker.Enable();
+        SubmitButton.Enable();
     }
 }
 #pragma warning restore CA1515
