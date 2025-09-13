@@ -6,13 +6,11 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using FluentAssertions;
 using NSubstitute;
 using Shouldly;
 using Tnosc.Lib.Client.Web.Enums;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Components.Students;
-using Xeptions;
 using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
@@ -87,7 +85,7 @@ public partial class StudentRegistrationComponentTests
 
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
             .ShouldNotBeNull();
-            
+
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.PlaceHolder
             .ShouldBe(expectedLastNameTextBoxPlaceholder);
 
@@ -165,7 +163,7 @@ public partial class StudentRegistrationComponentTests
            .ShouldBeEmpty();
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
-            .RegisterStudentViewAsync(studentView : _renderedStudentRegistrationComponent.Instance.StudentView);
+            .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
 
         _studentViewServiceMock
             .ReceivedCalls()
