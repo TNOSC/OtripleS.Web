@@ -38,7 +38,7 @@ public partial class StudentRegistrationComponentTests
         initialStudentRegistrationComponent.DateOfBirthPicker.ShouldBeNull();
         initialStudentRegistrationComponent.SubmitButton.ShouldBeNull();
         initialStudentRegistrationComponent.StudentView.ShouldBeNull();
-        initialStudentRegistrationComponent.ErrorLabel.ShouldBeNull();
+        initialStudentRegistrationComponent.StatusLabel.ShouldBeNull();
     }
 
     [Fact]
@@ -101,10 +101,10 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.SubmitButton
             .ShouldNotBeNull();
 
-        _renderedStudentRegistrationComponent.Instance.ErrorLabel
+        _renderedStudentRegistrationComponent.Instance.StatusLabel
             .ShouldNotBeNull();
 
-        _renderedStudentRegistrationComponent.Instance.ErrorLabel.Color
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
            .ShouldBe(Color.Red);
 
         _studentViewServiceMock
@@ -159,7 +159,7 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
             .ShouldBeEquivalentTo(inputStudentView.BirthDate);
 
-        _renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Value
            .ShouldBeEmpty();
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)

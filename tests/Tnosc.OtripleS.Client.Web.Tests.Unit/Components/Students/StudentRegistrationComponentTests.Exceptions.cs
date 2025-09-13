@@ -37,7 +37,7 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
         // then
-        _renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Value
             .ShouldBeEquivalentTo(expected: expectedErrorMessage);
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
@@ -69,7 +69,7 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
         // then
-        _renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Value
             .ShouldBeEquivalentTo(expected: expectedErrorMessage);
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)

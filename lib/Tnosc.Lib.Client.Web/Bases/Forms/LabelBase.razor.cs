@@ -22,4 +22,7 @@ public partial class LabelBase : ComponentBase
         Value = value;
         InvokeAsync(StateHasChanged);
     }
+
+    public void SetValue(Color color) =>
+        Color = color;
 }

@@ -31,7 +31,7 @@ public partial class StudentRegistrationComponent : ComponentBase
     public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; } = null!;
     public DatePickerBase DateOfBirthPicker { get; set; } = null!;
     public ButtonBase SubmitButton { get; set; } = null!;
-    public LabelBase ErrorLabel { get; set; } = null!;
+    public LabelBase StatusLabel { get; set; } = null!;
 
     protected override void OnInitialized()
     {
@@ -77,6 +77,6 @@ public partial class StudentRegistrationComponent : ComponentBase
     }
 
     private void ApplySubmissionFailed(string errorMessage) =>
-        ErrorLabel.SetValue(errorMessage);
+        StatusLabel.SetValue(errorMessage);
 }
 #pragma warning restore CA1515
