@@ -59,6 +59,21 @@ public partial class StudentRegistrationComponent : ComponentBase
 
             ApplySubmissionFailed(errorMessage: validationMessage);
         }
+        catch (StudentViewServiceException studentViewServiceException)
+        {
+            string validationMessage =
+                studentViewServiceException.Message;
+
+            ApplySubmissionFailed(errorMessage: validationMessage);
+        }
+        catch (StudentViewDependencyException dependencyException)
+        {
+            string validationMessage =
+                dependencyException.Message;
+
+            ApplySubmissionFailed(errorMessage: validationMessage);
+        }
+
     }
 
     private void ApplySubmissionFailed(string errorMessage) =>

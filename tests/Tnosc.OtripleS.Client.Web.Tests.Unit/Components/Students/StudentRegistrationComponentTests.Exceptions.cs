@@ -64,7 +64,7 @@ public partial class StudentRegistrationComponentTests
 
         // when
         _renderedStudentRegistrationComponent =
-           RenderComponent<StudentRegistrationComponent>();
+            RenderComponent<StudentRegistrationComponent>();
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
