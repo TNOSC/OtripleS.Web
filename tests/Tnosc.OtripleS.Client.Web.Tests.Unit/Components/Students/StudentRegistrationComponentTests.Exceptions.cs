@@ -22,7 +22,7 @@ public partial class StudentRegistrationComponentTests
     [Theory]
     [MemberData(nameof(StudentViewValidationExceptions))]
     public async Task ShouldRenderInnerExceptionMessageIfValidationErrorOccurred(
-            Xeption studentViewValidationException)
+        Xeption studentViewValidationException)
     {
         // given
         string expectedErrorMessage =
@@ -53,11 +53,10 @@ public partial class StudentRegistrationComponentTests
             .ShouldBe(expected: 1);
     }
 
-
     [Theory]
     [MemberData(nameof(StudentViewDependencyServiceExceptions))]
     public async Task ShouldRenderExceptionMessageIfDependencyOrServiceErrorOccurred(
-            Xeption studentViewDependencyServiceException)
+        Xeption studentViewDependencyServiceException)
     {
         // given
         string expectedErrorMessage =

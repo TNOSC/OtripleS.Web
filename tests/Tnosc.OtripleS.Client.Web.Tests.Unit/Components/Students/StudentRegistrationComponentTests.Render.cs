@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
@@ -46,7 +47,7 @@ public partial class StudentRegistrationComponentTests
     {
         // given
         ComponentState expectedComponentState =
-           ComponentState.Content;
+            ComponentState.Content;
 
         string expectedIdentityTextBoxPlaceholder = "Student Identity";
         string expectedFirstNameTextBoxPlaceholder = "First Name";
@@ -105,11 +106,46 @@ public partial class StudentRegistrationComponentTests
             .ShouldNotBeNull();
 
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-           .ShouldBe(Color.Red);
+            .ShouldBe(Color.Red);
 
         _studentViewServiceMock
             .ReceivedCalls()
             .ShouldBeEmpty();
+    }
+
+    [Fact]
+    public async Task ShouldDisplaySubmittingStatusAndDisabledControlsBeforeStudentSubmissionCompletes()
+    {
+        // given
+        StudentView someStudentView = CreateRandomStudentView();
+
+        _studentViewServiceMock.RegisterStudentViewAsync(studentView: Arg.Any<StudentView>())
+            .Returns(ci =>
+            {
+                Task.Delay(500).Wait();
+                return someStudentView;
+            });
+
+        // when
+        _renderedStudentRegistrationComponent =
+            RenderComponent<StudentRegistrationComponent>();
+
+        _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
+        // then
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Value
+            .ShouldBeEquivalentTo("Submitting ... ");
+
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+            .ShouldBe(Color.Black);
+
+        await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
+            .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
+
+        _studentViewServiceMock
+            .ReceivedCalls()
+            .Count()
+            .ShouldBe(expected: 1);
     }
 
     [Fact]
