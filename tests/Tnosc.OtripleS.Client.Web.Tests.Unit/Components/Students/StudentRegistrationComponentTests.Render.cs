@@ -40,6 +40,7 @@ public partial class StudentRegistrationComponentTests
         initialStudentRegistrationComponent.DateOfBirthPicker.ShouldBeNull();
         initialStudentRegistrationComponent.SubmitButton.ShouldBeNull();
         initialStudentRegistrationComponent.StudentView.ShouldBeNull();
+        initialStudentRegistrationComponent.ErrorLabel.ShouldBeNull();
     }
 
     [Fact]
@@ -52,7 +53,7 @@ public partial class StudentRegistrationComponentTests
         string expectedIdentityTextBoxPlaceholder = "Student Identity";
         string expectedFirstNameTextBoxPlaceholder = "First Name";
         string expectedMiddleNameTextBoxPlaceholder = "Middle Name";
-        string expectedLastnameTextBoxPlaceholder = "Last Name";
+        string expectedLastNameTextBoxPlaceholder = "Last Name";
         string expectedSubmitButtonLabel = "SUBMIT";
 
         // when
@@ -88,7 +89,7 @@ public partial class StudentRegistrationComponentTests
             .ShouldNotBeNull();
             
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.PlaceHolder
-            .ShouldBe(expectedLastnameTextBoxPlaceholder);
+            .ShouldBe(expectedLastNameTextBoxPlaceholder);
 
         _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
             .ShouldBeOfType<StudentViewGender>();
@@ -100,6 +101,9 @@ public partial class StudentRegistrationComponentTests
             .ShouldBe(expectedSubmitButtonLabel);
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton
+            .ShouldNotBeNull();
+
+        _renderedStudentRegistrationComponent.Instance.ErrorLabel
             .ShouldNotBeNull();
 
         _studentViewServiceMock
@@ -153,6 +157,9 @@ public partial class StudentRegistrationComponentTests
 
         _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
             .ShouldBeEquivalentTo(inputStudentView.BirthDate);
+
+        _renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+           .ShouldBeNull();
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView : _renderedStudentRegistrationComponent.Instance.StudentView);

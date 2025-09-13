@@ -4,7 +4,6 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Tnosc.Lib.Client.Web.Bases.Forms;
@@ -31,6 +30,7 @@ public partial class StudentRegistrationComponent : ComponentBase
     public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; } = null!;
     public DatePickerBase DateOfBirthPicker { get; set; } = null!;
     public ButtonBase SubmitButton { get; set; } = null!;
+    public LabelBase ErrorLabel { get; set; } = null!;
 
     protected override void OnInitialized()
     {
