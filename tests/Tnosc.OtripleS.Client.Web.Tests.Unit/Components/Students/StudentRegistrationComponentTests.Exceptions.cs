@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using Shouldly;
+using Tnosc.Lib.Client.Web.Enums;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Components.Students;
 using Xeptions;
@@ -42,6 +43,9 @@ public partial class StudentRegistrationComponentTests
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
+        
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+           .ShouldBe(Color.Red);
 
         _studentViewServiceMock
             .ReceivedCalls()
@@ -72,7 +76,10 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Value
             .ShouldBeEquivalentTo(expected: expectedErrorMessage);
 
-        await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
+        _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+            .ShouldBe(Color.Red);
+
+       await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
 
         _studentViewServiceMock

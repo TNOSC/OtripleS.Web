@@ -45,41 +45,49 @@ public partial class StudentRegistrationComponent : ComponentBase
         {
             await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
 
-            StatusLabel.SetColor(Color.Green);
-            StatusLabel.SetValue("Submitted Successfully.");
+            ReportStudentSubmissionSuccesseded();
         }
         catch (StudentViewValidationException studentViewValidationException)
         {
             string validationMessage =
                 studentViewValidationException.InnerException!.Message;
 
-            ApplySubmissionFailed(errorMessage: validationMessage);
+            ReportStudentSubmissionFailed(errorMessage: validationMessage);
         }
         catch (StudentViewDependencyValidationException dependencyValidationException)
         {
             string validationMessage =
                 dependencyValidationException.InnerException!.Message;
 
-            ApplySubmissionFailed(errorMessage: validationMessage);
+            ReportStudentSubmissionFailed(errorMessage: validationMessage);
         }
         catch (StudentViewServiceException studentViewServiceException)
         {
             string validationMessage =
                 studentViewServiceException.Message;
 
-            ApplySubmissionFailed(errorMessage: validationMessage);
+            ReportStudentSubmissionFailed(errorMessage: validationMessage);
         }
         catch (StudentViewDependencyException dependencyException)
         {
             string validationMessage =
                 dependencyException.Message;
 
-            ApplySubmissionFailed(errorMessage: validationMessage);
+            ReportStudentSubmissionFailed(errorMessage: validationMessage);
         }
 
     }
 
-    private void ApplySubmissionFailed(string errorMessage) =>
+    private void ReportStudentSubmissionSuccesseded()
+    {
+        StatusLabel.SetColor(Color.Green);
+        StatusLabel.SetValue("Submitted Successfully.");
+    }
+
+    private void ReportStudentSubmissionFailed(string errorMessage)
+    {
+        StatusLabel.SetColor(Color.Red);
         StatusLabel.SetValue(errorMessage);
+    }
 }
 #pragma warning restore CA1515
