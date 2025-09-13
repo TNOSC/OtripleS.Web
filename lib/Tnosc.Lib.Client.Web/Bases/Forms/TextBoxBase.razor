@@ -1,4 +1,5 @@
-﻿<input  @oninput="OnValueChanged"
-        type="text" 
-        placeholder="@PlaceHolder" 
-        @bind-value="Value"/>
+﻿<input @oninput="OnValueChanged"
+       @bind-value="Value"
+       type="text"
+       placeholder="@PlaceHolder"
+       disabled="@IsDisabled"/>

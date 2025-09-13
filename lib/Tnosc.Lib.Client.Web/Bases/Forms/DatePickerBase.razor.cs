@@ -19,8 +19,23 @@ public partial class DatePickerBase : ComponentBase
     [Parameter]
     public EventCallback<DateTimeOffset> ValueChanged { get; set; }
 
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
     public void SetValue(DateTimeOffset value) =>
         Value = value;
+
+    public void Disable()
+    {
+        IsDisabled = true;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Enable()
+    {
+        IsDisabled = false;
+        InvokeAsync(StateHasChanged);
+    }
 
     private async Task OnValueChanged(ChangeEventArgs args) =>
         await ValueChanged.InvokeAsync(arg: DateTimeOffset.Parse(input: args.Value?.ToString() ?? string.Empty));
