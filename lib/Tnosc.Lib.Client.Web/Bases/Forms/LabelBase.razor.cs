@@ -13,6 +13,9 @@ public partial class LabelBase: ComponentBase
     [Parameter]
     public string Value { get; set; } = string.Empty;
 
-    public void SetValue(string value) =>
+    public void SetValue(string value)
+    {
         Value = value;
+        InvokeAsync(StateHasChanged);
+    }
 }

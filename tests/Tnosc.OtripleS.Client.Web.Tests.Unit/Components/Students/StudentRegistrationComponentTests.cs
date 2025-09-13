@@ -53,6 +53,23 @@ public partial class StudentRegistrationComponentTests : TestContext
         };
     }
 
+    public static TheoryData StudentViewDependencyServiceExceptions()
+    {
+        string randomMessage = GetRandomString();
+        string validationMessage = randomMessage;
+        var innerValidationException = new Xeption(message: validationMessage);
+
+        return new TheoryData<Exception>
+        {
+            new StudentViewServiceException(
+                message: "Student service error occurred, contact support.",
+                innerException: innerValidationException),
+            new StudentViewDependencyException(
+                message : "Student view dependency error occurred, try again.",
+                innerException: innerValidationException)
+        };
+    }
+
     private static string GetRandomString() =>
         new MnemonicString().GetValue();
 

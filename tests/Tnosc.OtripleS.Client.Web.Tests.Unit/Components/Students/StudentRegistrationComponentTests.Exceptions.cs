@@ -32,16 +32,48 @@ public partial class StudentRegistrationComponentTests
 
         // when
         _renderedStudentRegistrationComponent =
-             RenderComponent<StudentRegistrationComponent>();
+            RenderComponent<StudentRegistrationComponent>();
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
         // then
         _renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
-            .ShouldBeEquivalentTo(expectedErrorMessage);
+            .ShouldBeEquivalentTo(expected: expectedErrorMessage);
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
-             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
+            .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
+
+        _studentViewServiceMock
+            .ReceivedCalls()
+            .Count()
+            .ShouldBe(expected: 1);
+    }
+
+
+    [Theory]
+    [MemberData(nameof(StudentViewDependencyServiceExceptions))]
+    public async Task ShouldRenderExceptionMessageIfDependencyOrServiceErrorOccurred(
+            Xeption studentViewDependencyServiceException)
+    {
+        // given
+        string expectedErrorMessage =
+            studentViewDependencyServiceException.Message;
+
+        _studentViewServiceMock.RegisterStudentViewAsync(studentView: Arg.Any<StudentView>())
+           .ThrowsAsync(ex: studentViewDependencyServiceException);
+
+        // when
+        _renderedStudentRegistrationComponent =
+           RenderComponent<StudentRegistrationComponent>();
+
+        _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
+        // then
+        _renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+            .ShouldBeEquivalentTo(expected: expectedErrorMessage);
+
+        await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
+            .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
 
         _studentViewServiceMock
             .ReceivedCalls()
