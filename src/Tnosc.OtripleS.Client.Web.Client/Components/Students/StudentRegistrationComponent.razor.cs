@@ -43,8 +43,8 @@ public partial class StudentRegistrationComponent : ComponentBase
     {
         try
         {
+            ReportStudentSubmissionWaiting();
             await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
-
             ReportStudentSubmissionSuccesseded();
         }
         catch (StudentViewValidationException studentViewValidationException)
@@ -76,6 +76,12 @@ public partial class StudentRegistrationComponent : ComponentBase
             ReportStudentSubmissionFailed(errorMessage: validationMessage);
         }
 
+    }
+
+    private void ReportStudentSubmissionWaiting()
+    {
+        StatusLabel.SetColor(Color.Black);
+        StatusLabel.SetValue("Submitting ... ");
     }
 
     private void ReportStudentSubmissionSuccesseded()
