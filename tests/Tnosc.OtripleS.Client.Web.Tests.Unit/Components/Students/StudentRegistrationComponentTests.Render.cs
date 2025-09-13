@@ -69,6 +69,9 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
             .ShouldNotBeNull();
 
+        _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
+            .ShouldBeFalse();
+
         _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.PlaceHolder
             .ShouldBe(expectedIdentityTextBoxPlaceholder);
 
@@ -78,11 +81,17 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.PlaceHolder
             .ShouldBe(expectedFirstNameTextBoxPlaceholder);
 
+        _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
         _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox
             .ShouldNotBeNull();
 
         _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.PlaceHolder
             .ShouldBe(expectedMiddleNameTextBoxPlaceholder);
+
+        _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
+            .ShouldBeFalse();
 
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
             .ShouldNotBeNull();
@@ -90,17 +99,29 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.PlaceHolder
             .ShouldBe(expectedLastNameTextBoxPlaceholder);
 
+        _renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
+            .ShouldBeFalse();
+
         _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
             .ShouldBeOfType<StudentViewGender>();
 
+        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
+            .ShouldBeFalse();
+
         _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
             .ShouldNotBeNull();
+
+        _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
+            .ShouldBeFalse();
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Label
             .ShouldBe(expectedSubmitButtonLabel);
 
         _renderedStudentRegistrationComponent.Instance.SubmitButton
             .ShouldNotBeNull();
+
+        _renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
+            .ShouldBeFalse();
 
         _renderedStudentRegistrationComponent.Instance.StatusLabel
             .ShouldNotBeNull();
