@@ -43,7 +43,7 @@ public partial class StudentRegistrationComponent : ComponentBase
     {
         try
         {
-            ReportStudentSubmissionWaiting();
+            ApplySubmittingStatus();
             await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
             ReportStudentSubmissionSuccesseded();
         }
@@ -78,10 +78,17 @@ public partial class StudentRegistrationComponent : ComponentBase
 
     }
 
-    private void ReportStudentSubmissionWaiting()
+    private void ApplySubmittingStatus()
     {
         StatusLabel.SetColor(Color.Black);
         StatusLabel.SetValue("Submitting ... ");
+        StudentIdentityTextBox.Disable();
+        StudentFirstNameTextBox.Disable();
+        StudentMiddleNameTextBox.Disable();
+        StudentLastNameTextBox.Disable();
+        StudentGenderDropDown.Disable();
+        DateOfBirthPicker.Disable();
+        SubmitButton.Disable();
     }
 
     private void ReportStudentSubmissionSuccesseded()

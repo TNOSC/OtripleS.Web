@@ -142,7 +142,7 @@ public partial class StudentRegistrationComponentTests
 
 #pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
         var delayedResult = new ValueTask<StudentView>(
-            Task.Delay(700).ContinueWith(_ => someStudentView));
+            Task.Delay(1000).ContinueWith(_ => someStudentView));
 #pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
 
         _ = _studentViewServiceMock.RegisterStudentViewAsync(Arg.Any<StudentView>())
