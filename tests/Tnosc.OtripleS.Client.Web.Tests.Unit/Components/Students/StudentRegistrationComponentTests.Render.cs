@@ -159,7 +159,7 @@ public partial class StudentRegistrationComponentTests
             .ShouldBeEquivalentTo(inputStudentView.BirthDate);
 
         _renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
-           .ShouldBeNull();
+           .ShouldBeEmpty();
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView : _renderedStudentRegistrationComponent.Instance.StudentView);

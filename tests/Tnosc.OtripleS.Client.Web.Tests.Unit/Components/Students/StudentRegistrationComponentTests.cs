@@ -4,17 +4,19 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-
 using System;
 using Bunit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
+using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Components.Students;
 using Tynamix.ObjectFiller;
+using Xeptions;
+using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
 
@@ -33,6 +35,26 @@ public partial class StudentRegistrationComponentTests : TestContext
         Services.AddSingleton(configMock);
         Services.AddServerSideBlazor();
     }
+
+    public static TheoryData StudentViewValidationExceptions()
+    {
+        string randomMessage = GetRandomString();
+        string validationMessage = randomMessage;
+        var innerValidationException = new Xeption(message: validationMessage);
+
+        return new TheoryData<Exception>
+        {
+            new StudentViewValidationException(
+                message: "Invalid input, fix the errors and try again.",
+                innerException: innerValidationException),
+            new StudentViewDependencyValidationException(
+                message : "Student view dependency validation error occurred, try again.",
+                innerException: innerValidationException)
+        };
+    }
+
+    private static string GetRandomString() =>
+        new MnemonicString().GetValue();
 
     private static StudentView CreateRandomStudentView() =>
           CreateStudentFiller().Create();
