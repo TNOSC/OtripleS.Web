@@ -44,6 +44,9 @@ public partial class StudentRegistrationComponent : ComponentBase
         try
         {
             await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
+
+            StatusLabel.SetColor(Color.Green);
+            StatusLabel.SetValue("Submitted Successfully.");
         }
         catch (StudentViewValidationException studentViewValidationException)
         {

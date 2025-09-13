@@ -23,6 +23,6 @@ public partial class LabelBase : ComponentBase
         InvokeAsync(StateHasChanged);
     }
 
-    public void SetValue(Color color) =>
+    public void SetColor(Color color) =>
         Color = color;
 }
