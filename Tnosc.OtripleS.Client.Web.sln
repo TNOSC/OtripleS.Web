@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36025.13 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11010.61 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tnosc.OtripleS.Client.Web", "src\Tnosc.OtripleS.Client.Web\Tnosc.OtripleS.Client.Web.csproj", "{5FC03409-8B4B-4800-B0BF-0318530D98A2}"
 EndProject
