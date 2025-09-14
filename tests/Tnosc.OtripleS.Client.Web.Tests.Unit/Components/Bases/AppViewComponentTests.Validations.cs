@@ -4,36 +4,36 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using System.Linq;
+using System;
 using NSubstitute;
 using Shouldly;
-using Tnosc.Lib.Client.Web.Bases;
+using Tnosc.Lib.Client.Web.Bases.Components;
+using Tnosc.Lib.Client.Web.Exceptions;
 using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Bases;
 
-public partial class AppComponentTests
+public partial class AppViewComponentTests
 {
-    [Fact]
-    public void ShouldNavigateToRoute()
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("    ")]
+    public void ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
+        string invalidRoute)
     {
         // given
-        string randomRoute = GetRandomRoute();
-        string inputRoute = randomRoute;
+        _renderedAppComponent = RenderComponent<AppViewComponent>();
 
         // when
-        _renderedAppComponent =
-            RenderComponent<AppComponent>();
-
-        _renderedAppComponent.Instance.NavigateTo(inputRoute);
+        Action navigateToAction = () =>
+            _renderedAppComponent.Instance.NavigateTo(invalidRoute);
 
         // then
-        _navigationBrokerMock.Received(requiredNumberOfCalls: 1)
-             .NavigateTo(route: inputRoute);
+        Assert.Throws<AppViewComponentValidationException>(navigateToAction);
 
         _navigationBrokerMock
             .ReceivedCalls()
-            .Count()
-            .ShouldBe(expected: 1);
+            .ShouldBeEmpty();
     }
 }

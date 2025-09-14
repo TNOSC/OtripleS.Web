@@ -9,18 +9,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
-using Tnosc.Lib.Client.Web.Bases;
-using Tnosc.Lib.Client.Web.Navigations;
+using Tnosc.Lib.Client.Web.Bases.Components;
+using Tnosc.Lib.Client.Web.Brokers.Navigations;
 using Tynamix.ObjectFiller;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Bases;
 
-public partial class AppComponentTests : TestContext
+public partial class AppViewComponentTests : TestContext
 {
     private readonly INavigationBroker _navigationBrokerMock;
-    private IRenderedComponent<AppComponent> _renderedAppComponent = null!;
+    private IRenderedComponent<AppViewComponent> _renderedAppComponent = null!;
 
-    public AppComponentTests()
+    public AppViewComponentTests()
     {
         _navigationBrokerMock = Substitute.For<INavigationBroker>();
         IWebHostEnvironment envMock = Substitute.For<IWebHostEnvironment>();
