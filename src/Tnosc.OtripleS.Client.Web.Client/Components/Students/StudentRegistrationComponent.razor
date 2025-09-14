@@ -1,46 +1,52 @@
 ﻿@using Tnosc.Lib.Client.Web.Bases
+@using Tnosc.Lib.Client.Web.Bases.Cards
 @using Tnosc.Lib.Client.Web.Bases.Components
 @using Tnosc.Lib.Client.Web.Bases.Forms
 @using Tnosc.Lib.Client.Web.Containers
 @using Tnosc.OtripleS.Client.Application.ViewModels.Students
-@rendermode InteractiveAuto
 @inherits AppViewComponent
+@rendermode InteractiveAuto
 
-
-<ContainerComponent State=State>
+<CardBase Title="Student Registration"
+		  SubTitle="Please fill in the below fields">
 	<Content>
-		<div>
-
-			<TextBoxBase @ref="StudentIdentityTextBox"
-						 PlaceHolder="Student Identity" 
-						 @bind-Value="StudentView.IdentityNumber"/>
-			<br />
-			<TextBoxBase @ref="StudentFirstNameTextBox"
-						 Placeholder="First Name"
-						 @bind-Value="StudentView.FirstName"/>
-			<br />
-			<TextBoxBase @ref="StudentMiddleNameTextBox"
-						 Placeholder="Middle Name"
-						 @bind-Value="StudentView.MiddleName" />
-			<br />
-			<TextBoxBase @ref="StudentLastNameTextBox"
-						 Placeholder="Last Name" 
-						 @bind-Value="StudentView.LastName" />
-			<br />
-			<DropDownBase @ref="StudentGenderDropDown"
-						  TEnum="StudentViewGender" 
-						  @bind-Value="StudentView.Gender" />
-			<br />
-			<DatePickerBase @ref="DateOfBirthPicker"
-							@bind-Value="StudentView.BirthDate" />
-			<br />
-
+		<ContainerComponent State=State>
+			<Content>
+				<div>
+					<TextBoxBase @ref="StudentIdentityTextBox"
+								 PlaceHolder="Student Identity"
+								 @bind-Value="StudentView.IdentityNumber" />
+					<br />
+					<TextBoxBase @ref="StudentFirstNameTextBox"
+								 Placeholder="First Name"
+								 @bind-Value="StudentView.FirstName" />
+					<br />
+					<TextBoxBase @ref="StudentMiddleNameTextBox"
+								 Placeholder="Middle Name"
+								 @bind-Value="StudentView.MiddleName" />
+					<br />
+					<TextBoxBase @ref="StudentLastNameTextBox"
+								 Placeholder="Last Name"
+								 @bind-Value="StudentView.LastName" />
+					<br />
+					<DropDownBase @ref="StudentGenderDropDown"
+								  TEnum="StudentViewGender"
+								  @bind-Value="StudentView.Gender" />
+					<br />
+					<DatePickerBase @ref="DateOfBirthPicker"
+									@bind-Value="StudentView.BirthDate" />
+					<br />
+					<LabelBase @ref="StatusLabel"
+							   Color="Tnosc.Lib.Client.Web.Enums.Color.Red" />
+				</div>
+			</Content>
+		</ContainerComponent>
+	</Content>
+	<Footer>
+		<div align=right>
 			<ButtonBase @ref="SubmitButton"
 						Label="SUBMIT"
 						OnClick="(async() => await RegisterStudentAsync())" />
-			<br />
-			<LabelBase @ref="StatusLabel"
-					   Color="Tnosc.Lib.Client.Web.Enums.Color.Red" />
 		</div>
-	</Content>
-</ContainerComponent>
+	</Footer>
+</CardBase>

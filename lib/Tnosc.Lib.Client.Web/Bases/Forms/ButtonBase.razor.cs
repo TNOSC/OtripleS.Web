@@ -20,6 +20,8 @@ public partial class ButtonBase : ComponentBase
     [Parameter]
     public bool IsDisabled { get; set; }
 
+    public bool Loading { get; set; }
+
     public void Click() =>
         OnClick?.Invoke();
 
@@ -34,4 +36,7 @@ public partial class ButtonBase : ComponentBase
         IsDisabled = false;
         InvokeAsync(StateHasChanged);
     }
+
+    public void SetLoading(bool value) =>
+        Loading = value;
 }

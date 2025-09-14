@@ -21,7 +21,6 @@ public partial class StudentRegistrationComponent : AppViewComponent
 {
     [Inject]
     public IStudentViewService StudentViewService { get; set; } = null!;
-
    
     public StudentRegistrationComponentException? Exception { get; set; }
     public StudentView StudentView { get; set; } = null!;
@@ -89,6 +88,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
         StudentGenderDropDown.Disable();
         DateOfBirthPicker.Disable();
         SubmitButton.Disable();
+        SubmitButton.SetLoading(true);
     }
 
     private void NavigateToStudentSubmittedPage() =>
@@ -105,6 +105,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
         StudentGenderDropDown.Enable();
         DateOfBirthPicker.Enable();
         SubmitButton.Enable();
+        SubmitButton.SetLoading(false);
     }
 }
 #pragma warning restore CA1515
