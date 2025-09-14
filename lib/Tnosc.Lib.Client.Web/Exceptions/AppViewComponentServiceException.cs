@@ -4,15 +4,16 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 using Xeptions;
 
 namespace Tnosc.Lib.Client.Web.Exceptions;
 
-public sealed class AppViewComponentValidationException : Xeption
+public sealed class AppViewComponentServiceException : Xeption
 {
-    public AppViewComponentValidationException(
+    public AppViewComponentServiceException(
         string message,
-        Xeption innerException)
+        Exception innerException)
         : base(
            message: message,
            innerException: innerException)

@@ -9,3 +9,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Minor Code Smell", "S2325:Methods and properties that don't access instance data should be static", Justification = "<Pending>", Scope = "member", Target = "~M:Tnosc.Lib.Client.Web.Bases.AppViewComponent.NavigateTo(System.String)")]
 [assembly: SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.Lib.Client.Web.Exceptions.InvalidAppViewComponentException")]
 [assembly: SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.Lib.Client.Web.Exceptions.AppViewComponentValidationException")]
+[assembly: SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.Lib.Client.Web.Exceptions.AppViewComponentServiceException")]
