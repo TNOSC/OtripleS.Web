@@ -64,17 +64,17 @@ public partial class StudentRegistrationComponent : AppViewComponent
         }
         catch (StudentViewServiceException studentViewServiceException)
         {
-            string validationMessage =
+            string errorMessage =
                 studentViewServiceException.Message;
 
-            ApplySubmissionFailed(errorMessage: validationMessage);
+            ApplySubmissionFailed(errorMessage: errorMessage);
         }
         catch (StudentViewDependencyException dependencyException)
         {
-            string validationMessage =
+            string errorMessage =
                 dependencyException.Message;
 
-            ApplySubmissionFailed(errorMessage: validationMessage);
+            ApplySubmissionFailed(errorMessage: errorMessage);
         }
     }
 

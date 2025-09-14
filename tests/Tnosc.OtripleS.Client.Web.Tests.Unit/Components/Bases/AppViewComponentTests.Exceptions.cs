@@ -5,12 +5,11 @@
 // ----------------------------------------------------------------------------------
 
 using System;
-using Microsoft.Extensions.Logging;
+using System.Linq;
 using NSubstitute;
 using Shouldly;
+using Tnosc.Lib.Client.Web.Bases.Components;
 using Tnosc.Lib.Client.Web.Exceptions;
-using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
-using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Bases;
@@ -24,6 +23,8 @@ public partial class AppViewComponentTests
         string someRoute = GetRandomRoute();
         var serviceException = new Exception();
 
+        _renderedAppComponent = RenderComponent<AppViewComponent>();
+
         _navigationBrokerMock.When(l => l.NavigateTo(route: someRoute))
             .Do(x => throw serviceException);
 
@@ -35,7 +36,8 @@ public partial class AppViewComponentTests
         Assert.Throws<AppViewComponentServiceException>(navigateToAction);
 
         _navigationBrokerMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
+           .ReceivedCalls()
+           .Count()
+           .ShouldBe(expected: 1);
     }
 }

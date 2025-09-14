@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 using Tnosc.Lib.Client.Web.Exceptions;
 
 namespace Tnosc.Lib.Client.Web.Bases.Components;
@@ -23,6 +24,12 @@ public partial class AppViewComponent
             throw new AppViewComponentValidationException(
                 message: "App View validation error occurred, try again.",
                 innerException: invalidAppViewComponentException);
+        }
+        catch (Exception serviceException)
+        {
+            throw new AppViewComponentServiceException(
+                message: "App View service error occured, contact support",
+                innerException: serviceException);
         }
     }
 }
