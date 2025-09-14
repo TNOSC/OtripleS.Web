@@ -223,27 +223,6 @@ public partial class StudentRegistrationComponentTests
         _renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
         // then
-        _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Value
-            .ShouldBeEquivalentTo(inputStudentView.IdentityNumber);
-
-        _renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Value
-            .ShouldBeEquivalentTo(inputStudentView.FirstName);
-
-        _renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Value
-            .ShouldBeEquivalentTo(inputStudentView.MiddleName);
-
-        _renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
-            .ShouldBeEquivalentTo(inputStudentView.Gender);
-
-        _renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
-            .ShouldBeEquivalentTo(inputStudentView.BirthDate);
-
-        _renderedStudentRegistrationComponent.Instance.StatusLabel.Value
-           .ShouldBe("Submitted Successfully.");
-
-        _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-            .ShouldBe(Color.Green);
-
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
 
@@ -251,5 +230,10 @@ public partial class StudentRegistrationComponentTests
             .ReceivedCalls()
             .Count()
             .ShouldBe(expected: 1);
+
+        _navigationBrokerMock
+          .ReceivedCalls()
+          .Count()
+          .ShouldBe(expected: 1);
     }
 }

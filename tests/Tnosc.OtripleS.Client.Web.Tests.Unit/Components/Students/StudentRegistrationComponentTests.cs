@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
+using Tnosc.Lib.Client.Web.Brokers.Navigations;
 using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
@@ -23,14 +24,17 @@ namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
 public partial class StudentRegistrationComponentTests : TestContext
 {
     private readonly IStudentViewService _studentViewServiceMock;
+    private readonly INavigationBroker _navigationBrokerMock;
     private IRenderedComponent<StudentRegistrationComponent> _renderedStudentRegistrationComponent = null!;
 
     public StudentRegistrationComponentTests()
     {
         _studentViewServiceMock = Substitute.For<IStudentViewService>();
+        _navigationBrokerMock = Substitute.For<INavigationBroker>();
         IWebHostEnvironment envMock = Substitute.For<IWebHostEnvironment>();
         IConfiguration configMock = Substitute.For<IConfiguration>();
         Services.AddScoped(services => _studentViewServiceMock);
+        Services.AddScoped(services => _navigationBrokerMock);
         Services.AddSingleton(envMock);
         Services.AddSingleton(configMock);
         Services.AddServerSideBlazor();
