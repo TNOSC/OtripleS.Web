@@ -4,9 +4,16 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-namespace Tnosc.Lib.Client.Web.Navigations;
+using Xeptions;
 
-public interface INavigationBroker
+namespace Tnosc.Lib.Client.Web.Exceptions;
+
+public class InvalidAppViewComponentException : Xeption
 {
-    void NavigateTo(string route);
+    public InvalidAppViewComponentException(string parameterName, object parameterValue)
+        : base($"Invalid App View error occured. " +
+             $"parameter name: {parameterName}, " +
+             $"parameter value: {parameterValue}")
+    { }
 }
+

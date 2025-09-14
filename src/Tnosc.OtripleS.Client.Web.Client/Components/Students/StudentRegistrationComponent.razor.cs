@@ -6,7 +6,7 @@
 
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using Tnosc.Lib.Client.Web.Bases;
+using Tnosc.Lib.Client.Web.Bases.Components;
 using Tnosc.Lib.Client.Web.Bases.Forms;
 using Tnosc.Lib.Client.Web.Enums;
 using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
@@ -17,7 +17,7 @@ using Tnosc.OtripleS.Client.Web.Client.Exceptions.Students;
 namespace Tnosc.OtripleS.Client.Web.Client.Components.Students;
 
 #pragma warning disable CA1515
-public partial class StudentRegistrationComponent : AppComponent
+public partial class StudentRegistrationComponent : AppViewComponent
 {
     [Inject]
     public IStudentViewService StudentViewService { get; set; } = null!;

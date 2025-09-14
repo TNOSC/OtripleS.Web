@@ -4,20 +4,23 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using System;
 using Microsoft.AspNetCore.Components;
+using Tnosc.Lib.Client.Web.Brokers.Navigations;
 using Tnosc.Lib.Client.Web.Enums;
-using Tnosc.Lib.Client.Web.Navigations;
 
-namespace Tnosc.Lib.Client.Web.Bases;
+namespace Tnosc.Lib.Client.Web.Bases.Components;
 
-public class AppComponent : ComponentBase
+public partial class AppViewComponent : ComponentBase
 {
-    [Inject] 
+    [Inject]
     protected INavigationBroker NavigationBroker { get; set; } = default!;
 
     public ComponentState State { get; set; }
 
-    public void NavigateTo(string route)
-        => NavigationBroker.NavigateTo(route: route);
+    public void NavigateTo(string route) =>
+    TryCatch(() =>
+    {
+        ValidateRoute(route);
+        NavigationBroker.NavigateTo(route: route);
+    });
 }

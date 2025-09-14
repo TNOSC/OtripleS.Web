@@ -4,13 +4,9 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Extensions.DependencyInjection;
-using Tnosc.Lib.Client.Web.Brokers.Navigations;
+namespace Tnosc.Lib.Client.Web.Brokers.Navigations;
 
-namespace Tnosc.OtripleS.Client.Application;
-
-public static class ServiceCollectionExtensions
+public interface INavigationBroker
 {
-    public static void AddShared(this IServiceCollection services) =>
-        services.AddScoped<INavigationBroker, NavigationBroker>();
+    void NavigateTo(string route);
 }

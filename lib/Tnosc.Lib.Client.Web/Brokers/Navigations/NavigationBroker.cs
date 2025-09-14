@@ -6,7 +6,7 @@
 
 using Microsoft.AspNetCore.Components;
 
-namespace Tnosc.Lib.Client.Web.Navigations;
+namespace Tnosc.Lib.Client.Web.Brokers.Navigations;
 
 internal sealed class NavigationBroker : INavigationBroker
 {

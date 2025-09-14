@@ -4,13 +4,18 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Extensions.DependencyInjection;
-using Tnosc.Lib.Client.Web.Brokers.Navigations;
+using Xeptions;
 
-namespace Tnosc.OtripleS.Client.Application;
+namespace Tnosc.Lib.Client.Web.Exceptions;
 
-public static class ServiceCollectionExtensions
+public sealed class AppViewComponentValidationException : Xeption
 {
-    public static void AddShared(this IServiceCollection services) =>
-        services.AddScoped<INavigationBroker, NavigationBroker>();
+    public AppViewComponentValidationException(
+        string message,
+        Xeption innerException)
+        : base(
+           message: message,
+           innerException: innerException)
+    { }
 }
+
