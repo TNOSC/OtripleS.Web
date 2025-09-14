@@ -1,8 +1,9 @@
-﻿@typeparam TEnum
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@typeparam TEnum
 
-<select @oninput="OnValueChanged" disabled="@IsDisabled">
-    @foreach (var enumValue in Enum.GetValues(typeof(TEnum)))
-    {
-        <option value="@enumValue">@enumValue</option>
-    }
-</select>
+<FluentSelect Items="EnumValues"
+              OptionText="@(i => i.ToString())"
+              OptionValue="@(i => i.ToString())"
+              @bind-Value:event="ValueChanged"
+              @bind-Value="SelectedValue"
+              Disabled="@IsDisabled" />

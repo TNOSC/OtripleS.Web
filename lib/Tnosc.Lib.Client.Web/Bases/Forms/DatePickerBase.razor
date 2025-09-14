@@ -1,4 +1,4 @@
-﻿<input	type="date" 
-		@oninput="OnValueChanged"
-		@bind-value="Value"
-		disabled="@IsDisabled"/>
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+
+<FluentDatePicker @bind-Value="@SelectedDate" 
+				  Disabled="IsDisabled"/>

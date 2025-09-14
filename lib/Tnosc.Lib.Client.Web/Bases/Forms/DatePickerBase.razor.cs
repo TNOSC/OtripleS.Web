@@ -5,8 +5,6 @@
 // ----------------------------------------------------------------------------------
 
 using System;
-using System.Security.Principal;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
@@ -14,7 +12,7 @@ namespace Tnosc.Lib.Client.Web.Bases.Forms;
 public partial class DatePickerBase : ComponentBase
 {
     [Parameter]
-    public DateTimeOffset Value { get; set; }
+    public required DateTimeOffset Value { get; set; }
 
     [Parameter]
     public EventCallback<DateTimeOffset> ValueChanged { get; set; }
@@ -22,8 +20,11 @@ public partial class DatePickerBase : ComponentBase
     [Parameter]
     public bool IsDisabled { get; set; }
 
-    public void SetValue(DateTimeOffset value) =>
+    public void SetValue(DateTimeOffset value)
+    {
         Value = value;
+        _selectedDate = value.DateTime;
+    }
 
     public void Disable()
     {
@@ -37,6 +38,24 @@ public partial class DatePickerBase : ComponentBase
         InvokeAsync(StateHasChanged);
     }
 
-    private async Task OnValueChanged(ChangeEventArgs args) =>
-        await ValueChanged.InvokeAsync(arg: DateTimeOffset.Parse(input: args.Value?.ToString() ?? string.Empty));
+    private DateTime? _selectedDate;
+
+    private DateTime? SelectedDate
+    {
+        get => _selectedDate;
+        set
+        {
+            if (_selectedDate != value)
+            {
+                _selectedDate = value;
+
+                if (value.HasValue)
+                {
+                    Value = new DateTimeOffset(value.Value);
+                    ValueChanged.InvokeAsync(Value);
+                }
+            }
+        }
+    }
 }
+

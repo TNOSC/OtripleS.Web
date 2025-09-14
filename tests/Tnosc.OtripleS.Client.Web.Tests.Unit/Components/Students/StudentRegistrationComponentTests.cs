@@ -6,9 +6,11 @@
 
 using System;
 using Bunit;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.FluentUI.AspNetCore.Components;
 using NSubstitute;
 using Tnosc.Lib.Client.Web.Brokers.Navigations;
 using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
@@ -37,7 +39,11 @@ public partial class StudentRegistrationComponentTests : TestContext
         Services.AddScoped(services => _navigationBrokerMock);
         Services.AddSingleton(envMock);
         Services.AddSingleton(configMock);
-        Services.AddServerSideBlazor();
+
+        Services.AddFluentUIComponents();
+        JSInterop.Mode = JSRuntimeMode.Loose;
+        JSInterop.SetupModule("./_content/Microsoft.FluentUI.AspNetCore.Components/Components/TextField/FluentTextField.razor.js?v=4.12.1.25197");
+        JSInterop.SetupVoid("setControlAttribute", _ => true);
     }
 
     public static TheoryData StudentViewValidationExceptions()
@@ -55,6 +61,18 @@ public partial class StudentRegistrationComponentTests : TestContext
                 message : "Student view dependency validation error occurred, try again.",
                 innerException: innerValidationException)
         };
+    }
+
+    private IRenderedComponent<TComponent> RenderWithDispatcher<TComponent>(params ComponentParameter[] parameters)
+       where TComponent : IComponent
+    {
+        IRenderedComponent<TComponent>? cut = null;
+        Renderer.Dispatcher.InvokeAsync(() =>
+        {
+            cut = RenderComponent<TComponent>(parameters);
+        }).Wait();
+
+        return cut!;
     }
 
     public static TheoryData StudentViewDependencyServiceExceptions()

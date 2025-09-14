@@ -5,15 +5,16 @@
 // ----------------------------------------------------------------------------------
 
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
 
 public partial class DropDownBase<TEnum> : ComponentBase
+    where TEnum : struct, Enum
 {
     [Parameter]
-    public TEnum? Value { get; set; }
+    public required TEnum Value { get; set; }
 
     [Parameter]
     public EventCallback<TEnum> ValueChanged { get; set; }
@@ -36,6 +37,18 @@ public partial class DropDownBase<TEnum> : ComponentBase
         InvokeAsync(StateHasChanged);
     }
 
-    private async Task OnValueChanged(ChangeEventArgs args) =>
-        await ValueChanged.InvokeAsync(arg: (TEnum)Enum.Parse(typeof(TEnum), args.Value?.ToString() ?? string.Empty));
+    private static IEnumerable<TEnum> EnumValues => Enum.GetValues<TEnum>();
+
+    private string SelectedValue
+    {
+        get => Value.ToString();
+        set 
+        {
+            if (Enum.TryParse(value, out TEnum enumValue))
+            {
+                Value = enumValue;
+                ValueChanged.InvokeAsync(enumValue);
+            }
+        }
+    }
 }

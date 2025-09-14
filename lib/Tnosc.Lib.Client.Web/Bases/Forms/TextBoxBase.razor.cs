@@ -12,10 +12,10 @@ namespace Tnosc.Lib.Client.Web.Bases.Forms;
 public partial class TextBoxBase : ComponentBase
 {
     [Parameter]
-    public string Value { get; set; } = string.Empty;
+    public required string Value { get; set; }
 
     [Parameter]
-    public string PlaceHolder { get; set; } = string.Empty;
+    public required string PlaceHolder { get; set; }
 
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }

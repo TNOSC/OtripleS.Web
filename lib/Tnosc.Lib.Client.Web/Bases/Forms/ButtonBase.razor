@@ -1,3 +1,7 @@
-﻿<button onclick="@Click" disabled="@IsDisabled">
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+
+<FluentButton Appearance="Appearance.Accent"
+              Disabled="IsDisabled"
+              OnClick="Click"> 
     @Label
-</button>
+</FluentButton>

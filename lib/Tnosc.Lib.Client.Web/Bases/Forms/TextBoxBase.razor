@@ -1,5 +1,6 @@
-﻿<input @oninput="OnValueChanged"
-       @bind-value="Value"
-       type="text"
-       placeholder="@PlaceHolder"
-       disabled="@IsDisabled"/>
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+
+<FluentTextField @bind-Value="Value"
+                 @oninput="OnValueChanged"
+                 Placeholder="@PlaceHolder"
+                 Disabled="IsDisabled" />

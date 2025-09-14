@@ -10,3 +10,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.Lib.Client.Web.Exceptions.InvalidAppViewComponentException")]
 [assembly: SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.Lib.Client.Web.Exceptions.AppViewComponentValidationException")]
 [assembly: SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<Pending>", Scope = "type", Target = "~T:Tnosc.Lib.Client.Web.Exceptions.AppViewComponentServiceException")]
+[assembly: SuppressMessage("Major Code Smell", "S6562:Always set the \"DateTimeKind\" when creating new \"DateTime\" instances", Justification = "<Pending>", Scope = "member", Target = "~M:Tnosc.Lib.Client.Web.Bases.Forms.DatePickerBase.OnParametersSet")]

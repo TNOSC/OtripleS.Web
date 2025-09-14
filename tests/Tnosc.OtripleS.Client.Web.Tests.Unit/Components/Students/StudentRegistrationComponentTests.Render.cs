@@ -200,7 +200,7 @@ public partial class StudentRegistrationComponentTests
 
         // when
         _renderedStudentRegistrationComponent =
-            RenderComponent<StudentRegistrationComponent>();
+            RenderWithDispatcher<StudentRegistrationComponent>();
 
         _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
             .SetValue(inputStudentView.IdentityNumber);
