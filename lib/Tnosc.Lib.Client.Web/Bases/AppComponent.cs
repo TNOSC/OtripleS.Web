@@ -19,5 +19,5 @@ public class AppComponent : ComponentBase
     public ComponentState State { get; set; }
 
     public void NavigateTo(string route)
-        => throw new NotImplementedException();
+        => NavigationBroker.NavigateTo(route: route);
 }
