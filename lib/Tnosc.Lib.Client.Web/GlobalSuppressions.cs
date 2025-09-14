@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Major Code Smell", "S6580:Use a format provider when parsing date and time", Justification = "<Pending>", Scope = "member", Target = "~M:Tnosc.Lib.Client.Web.Bases.Forms.DatePickerBase.OnValueChanged(Microsoft.AspNetCore.Components.ChangeEventArgs)~System.Threading.Tasks.Task")]
+[assembly: SuppressMessage("Minor Code Smell", "S2325:Methods and properties that don't access instance data should be static", Justification = "<Pending>", Scope = "member", Target = "~M:Tnosc.Lib.Client.Web.Bases.AppComponent.NavigateTo(System.String)")]

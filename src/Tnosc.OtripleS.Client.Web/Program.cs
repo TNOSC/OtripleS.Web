@@ -15,6 +15,7 @@ builder.Services.AddFluentUIComponents();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddBrokers();
+builder.Services.AddShared();
 
 WebApplication app = builder.Build();
 
