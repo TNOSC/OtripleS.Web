@@ -46,7 +46,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
         {
             ApplySubmittingStatus();
             await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
-            ReportStudentSubmissionSuccesseded();
+            NavigateToStudentSubmittedPage();
         }
         catch (StudentViewValidationException studentViewValidationException)
         {
@@ -91,11 +91,8 @@ public partial class StudentRegistrationComponent : AppViewComponent
         SubmitButton.Disable();
     }
 
-    private void ReportStudentSubmissionSuccesseded()
-    {
-        StatusLabel.SetColor(Color.Green);
-        StatusLabel.SetValue("Submitted Successfully.");
-    }
+    private void NavigateToStudentSubmittedPage() =>
+        NavigateTo("/studentsubmitted");
 
     private void ApplySubmissionFailed(string errorMessage)
     {
