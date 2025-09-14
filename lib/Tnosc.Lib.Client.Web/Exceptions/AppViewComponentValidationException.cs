@@ -4,12 +4,17 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Xunit;
+using Xeptions;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit;
+namespace Tnosc.Lib.Client.Web.Exceptions;
 
-public class DeleteMe
+public sealed class AppViewComponentValidationException : Xeption
 {
-    [Fact]
-    public void ShouldBeTrue() => Assert.True(true);
+    public AppViewComponentValidationException(
+        string message,
+        Xeption innerException)
+        : base(
+           message: message,
+           innerException: innerException)
+    { }
 }

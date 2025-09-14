@@ -4,12 +4,19 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Bunit;
-using Tnosc.OtripleS.Client.Web.Components.Students;
+using Microsoft.AspNetCore.Components;
+using Tnosc.Lib.Client.Web.Enums;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit;
+namespace Tnosc.Lib.Client.Web.Containers;
 
-public partial class StudentFormComponentTests : TestContext
+public partial class ContainerComponent : ComponentBase
 {
-    private IRenderedComponent<StudentFormComponent>? renderedStudentFormComponent;
+    [Parameter]
+    public ComponentState State { get; set; }
+
+    [Parameter]
+    public RenderFragment Content { get; set; } = null!;
+
+    [Parameter]
+    public string Error { get; set; } = string.Empty;
 }

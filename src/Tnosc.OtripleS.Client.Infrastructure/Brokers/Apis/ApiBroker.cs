@@ -8,7 +8,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using RESTFulSense.Clients;
+using RESTFulSense.WebAssembly.Clients;
 using Tnosc.OtripleS.Client.Application.Brokers.Apis;
 
 namespace Tnosc.OtripleS.Client.Infrastructure.Brokers.Apis;

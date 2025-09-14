@@ -5,19 +5,24 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
-using Tnosc.Lib.Client.Web.Bases;
 using Tnosc.Lib.Client.Web.Enums;
 
-namespace Tnosc.OtripleS.Client.Web.Components.Students;
+namespace Tnosc.Lib.Client.Web.Bases.Forms;
 
-#pragma warning disable CA1515
-public partial class StudentFormComponent : ComponentBase
+public partial class LabelBase : ComponentBase
 {
-    public TextBoxBase StudentNameTextBox { get; set; } = null!;
-    public ComponentState State { get; set; }
+    [Parameter]
+    public string Value { get; set; } = string.Empty;
 
-    protected override void OnInitialized() =>
-        State = ComponentState.Content;
+    [Parameter]
+    public Color Color { get; set; }
+
+    public void SetValue(string value)
+    {
+        Value = value;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void SetColor(Color color) =>
+        Color = color;
 }
-
-#pragma warning restore CA1515

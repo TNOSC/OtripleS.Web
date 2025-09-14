@@ -9,7 +9,7 @@ using Tnosc.OtripleS.Client.Application.Services.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Services.Foundations.Users;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 
-namespace Tnosc.OtripleS.Client.Infrastructure;
+namespace Tnosc.OtripleS.Client.Application;
 
 public static class ServiceCollectionExtensions
 {

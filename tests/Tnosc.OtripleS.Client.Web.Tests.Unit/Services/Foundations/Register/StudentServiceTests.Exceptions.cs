@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
-using RESTFulSense.Exceptions;
+using RESTFulSense.WebAssembly.Exceptions;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Xeptions;

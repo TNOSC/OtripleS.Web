@@ -1,0 +1,9 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@typeparam TEnum
+
+<FluentSelect Items="EnumValues"
+              OptionText="@(i => i.ToString())"
+              OptionValue="@(i => i.ToString())"
+              @bind-Value:event="ValueChanged"
+              @bind-Value="SelectedValue"
+              Disabled="@IsDisabled" />

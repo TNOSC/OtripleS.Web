@@ -4,19 +4,13 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.DependencyInjection;
+using Tnosc.Lib.Client.Web.Brokers.Navigations;
 
-namespace Tnosc.Lib.Client.Web.Bases;
+namespace Tnosc.OtripleS.Client.Application;
 
-public partial class TextBoxBase
+public static class ServiceCollectionExtensions
 {
-    [Parameter]
-    public string Value { get; set; } = string.Empty;
-
-    [Parameter]
-    public string PlaceHolder { get; set; } = string.Empty;
-
-    public void SetValue(string value) => Value = value;
-
-    public void SetPlaceHolder(string value) => PlaceHolder = value;
+    public static void AddShared(this IServiceCollection services) =>
+        services.AddScoped<INavigationBroker, NavigationBroker>();
 }
