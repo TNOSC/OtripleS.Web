@@ -13,7 +13,7 @@ using Tnosc.OtripleS.Client.Domain.Students;
 using Xeptions;
 using Xunit;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
+namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations.Students;
 
 public partial class StudentServiceTests
 {
@@ -30,6 +30,7 @@ public partial class StudentServiceTests
             new StudentValidationException(
                 message: "Invalid input, fix the errors and try again.",
                 innerException: nullStudentException);
+
         // when
 #pragma warning disable CS8604 // Possible null reference argument.
         ValueTask<Student> registerStudentTask =
