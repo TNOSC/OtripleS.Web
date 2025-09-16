@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Application.Brokers.Apis;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
@@ -30,4 +31,8 @@ public partial class StudentService : IStudentService
         ValidateStudentOnRegister(student);
         return await _apiBroker.PostStudentAsync(student: student);
     });
+
+    public async ValueTask<IEnumerable<Student>> RetrieveAllStudentsAsync() =>
+        await TryCatch(async () =>
+            await _apiBroker.GetAllStudentsAsync());
 }

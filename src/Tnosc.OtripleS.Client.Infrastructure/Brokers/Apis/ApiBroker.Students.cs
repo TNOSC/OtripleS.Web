@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Domain.Students;
 
@@ -18,4 +19,8 @@ internal partial class ApiBroker
             await PostAsync(
                 relativeUrl: StudentsRelativeUrl,
                 content: student));
+
+    public async ValueTask<IEnumerable<Student>> GetAllStudentsAsync() =>
+         await TryCatch(async () =>
+             await GetAsync<IEnumerable<Student>>(relativeUrl: StudentsRelativeUrl));
 }

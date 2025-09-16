@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using NSubstitute;
 using RESTFulSense.WebAssembly.Exceptions;
@@ -15,7 +16,7 @@ using Tnosc.OtripleS.Client.Domain.Students;
 using Tynamix.ObjectFiller;
 using Xunit;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
+namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations.Students;
 
 public partial class StudentServiceTests
 {
@@ -81,11 +82,14 @@ public partial class StudentServiceTests
             };
     }
 
-    private static string GetRandomString() => new MnemonicString().GetValue();
+   
 
     private static Student CreateRandomStudent() =>
          CreateStudentFiller().Create();
 
+    private static IEnumerable<Student> CreateRandomStudents() =>
+           CreateStudentFiller().Create(count: GetRandomNumber());
+   
     private static Filler<Student> CreateStudentFiller()
     {
         var filler = new Filler<Student>();
@@ -95,4 +99,10 @@ public partial class StudentServiceTests
 
         return filler;
     }
+
+    private static int GetRandomNumber() =>
+       new IntRange(min: 2, max: 10).GetValue();
+
+    private static string GetRandomString() =>
+       new MnemonicString().GetValue();
 }

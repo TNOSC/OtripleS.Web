@@ -11,7 +11,7 @@ using Shouldly;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Xunit;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
+namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations.Students;
 
 public partial class StudentServiceTests
 {
@@ -32,6 +32,7 @@ public partial class StudentServiceTests
         Student actualStudent =
             await _studentService.
                 RegisterStudentAsync(student: inputStudent);
+
         // then
         actualStudent
             .ShouldBeEquivalentTo(expected: expectedStudent);

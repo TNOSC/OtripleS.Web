@@ -15,7 +15,7 @@ using Tnosc.OtripleS.Client.Domain.Students;
 using Xeptions;
 using Xunit;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
+namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations.Students;
 
 public partial class StudentServiceTests
 {
@@ -147,7 +147,7 @@ public partial class StudentServiceTests
 
     [Theory]
     [MemberData(nameof(DependencyApiException))]
-    public async Task ShouldThrowDependencyExceptionOnRegisterIfCriticalErrorOccursAndLogItAsync(
+    public async Task ShouldThrowDependencyExceptionOnRegisterIfErrorOccursAndLogItAsync(
        Exception httpResponseCriticalException)
     {
         // given
