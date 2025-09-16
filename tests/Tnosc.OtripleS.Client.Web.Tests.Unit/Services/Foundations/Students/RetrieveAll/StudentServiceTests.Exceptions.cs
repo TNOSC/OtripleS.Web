@@ -128,7 +128,7 @@ public partial class StudentServiceTests
            _studentService.RetrieveAllStudentsAsync();
 
         // then
-        await Assert.ThrowsAsync<StudentDependencyException>(() =>
+        await Assert.ThrowsAsync<StudentServiceException>(() =>
             retrievedStudentTask.AsTask());
 
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)

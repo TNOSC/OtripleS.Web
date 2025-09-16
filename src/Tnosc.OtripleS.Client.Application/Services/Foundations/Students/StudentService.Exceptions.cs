@@ -72,6 +72,14 @@ public partial class StudentService
         {
             throw CreateAndLogDependencyException(failedStudentDependencyException);
         }
+        catch (Exception exception)
+        {
+            var failedStudentServiceException =
+                  new FailedStudentServiceException(
+                      message: "Failed student service error occurred, contact support.",
+                      innerException: exception);
+            throw CreateAndLogServiceException(failedStudentServiceException);
+        }
     }
 
     private StudentServiceException CreateAndLogServiceException(Xeption exception)
