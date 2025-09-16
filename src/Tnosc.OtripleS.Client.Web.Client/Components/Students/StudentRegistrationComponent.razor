@@ -16,25 +16,43 @@
 					<TextBoxBase @ref="StudentIdentityTextBox"
 								 PlaceHolder="Student Identity"
 								 @bind-Value="StudentView.IdentityNumber" />
+
+					<ValidationSummaryBase Key="@nameof(StudentView.IdentityNumber)"
+											ValidationData="@ValidationData"/>
 					<br />
 					<TextBoxBase @ref="StudentFirstNameTextBox"
 								 Placeholder="First Name"
 								 @bind-Value="StudentView.FirstName" />
+
+					<ValidationSummaryBase Key="@nameof(StudentView.FirstName)"
+										   ValidationData="@ValidationData" />
 					<br />
 					<TextBoxBase @ref="StudentMiddleNameTextBox"
 								 Placeholder="Middle Name"
 								 @bind-Value="StudentView.MiddleName" />
+
+					<ValidationSummaryBase Key="@nameof(StudentView.MiddleName)"
+										   ValidationData="@ValidationData" />
 					<br />
 					<TextBoxBase @ref="StudentLastNameTextBox"
 								 Placeholder="Last Name"
 								 @bind-Value="StudentView.LastName" />
+
+					<ValidationSummaryBase Key="@nameof(StudentView.LastName)"
+										   ValidationData="@ValidationData" />
 					<br />
 					<DropDownBase @ref="StudentGenderDropDown"
 								  TEnum="StudentViewGender"
 								  @bind-Value="StudentView.Gender" />
+
+					<ValidationSummaryBase Key="@nameof(StudentView.Gender)"
+										   ValidationData="@ValidationData" />
 					<br />
 					<DatePickerBase @ref="DateOfBirthPicker"
 									@bind-Value="StudentView.BirthDate" />
+
+					<ValidationSummaryBase Key="@nameof(StudentView.BirthDate)"
+										   ValidationData="@ValidationData" />
 					<br />
 					<LabelBase @ref="StatusLabel"
 							   Color="Tnosc.Lib.Client.Web.Enums.Color.Red" />

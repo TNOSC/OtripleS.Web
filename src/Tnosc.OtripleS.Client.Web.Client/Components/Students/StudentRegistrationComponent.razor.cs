@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Collections;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Tnosc.Lib.Client.Web.Bases.Components;
@@ -32,6 +33,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
     public DatePickerBase DateOfBirthPicker { get; set; } = null!;
     public ButtonBase SubmitButton { get; set; } = null!;
     public LabelBase StatusLabel { get; set; } = null!;
+    public IDictionary? ValidationData { get; set; }
 
     protected override void OnInitialized()
     {
@@ -58,6 +60,8 @@ public partial class StudentRegistrationComponent : AppViewComponent
         {
             string validationMessage =
                 dependencyValidationException.InnerException!.Message;
+            
+            ValidationData = dependencyValidationException.InnerException!.Data;
 
             ApplySubmissionFailed(errorMessage: validationMessage);
         }
@@ -106,6 +110,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
         DateOfBirthPicker.Enable();
         SubmitButton.Enable();
         SubmitButton.SetLoading(false);
+        InvokeAsync(StateHasChanged);
     }
 }
 #pragma warning restore CA1515
