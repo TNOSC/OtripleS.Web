@@ -23,7 +23,7 @@ public partial class StudentServiceTests
     [Theory]
     [MemberData(nameof(CriticalApiException))]
     public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalErrorOccursAndLogItAsync(
-       Exception httpResponseCriticalException)
+        Exception httpResponseCriticalException)
     {
         // given
         var failedStudentCriticalDependencyException =
@@ -67,7 +67,7 @@ public partial class StudentServiceTests
     [Theory]
     [MemberData(nameof(DependencyApiException))]
     public async Task ShouldThrowDependencyExceptionOnRetrieveAllIfErrorOccursAndLogItAsync(
-      Exception httpResponseCriticalException)
+        Exception httpResponseCriticalException)
     {
         // given
         var failedStudentDependencyException =
@@ -94,6 +94,46 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Exception>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyValidationException)));
+
+        _apiBrokerMock.ReceivedCalls()
+            .Count()
+            .ShouldBe(expected: 1);
+
+        _loggingBrokerMock.ReceivedCalls()
+            .Count()
+            .ShouldBe(expected: 1);
+    }
+
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnRetrieveAllIfErrorOccursAndLogItAsync()
+    {
+        // given
+        var serviceException = new Exception();
+
+        var failedStudentServiceException =
+            new FailedStudentServiceException(
+                message: "Failed student service error occurred, contact support.",
+                innerException: serviceException);
+
+        var expectedStudentServiceException =
+            new StudentServiceException(
+                message: "Service error occurred, contact support.",
+                innerException: failedStudentServiceException);
+
+        _apiBrokerMock.GetAllStudentsAsync()
+            .ThrowsAsync(ex: serviceException);
+
+        // when
+        ValueTask<IEnumerable<Student>> retrievedStudentTask =
+           _studentService.RetrieveAllStudentsAsync();
+
+        // then
+        await Assert.ThrowsAsync<StudentDependencyException>(() =>
+            retrievedStudentTask.AsTask());
+
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Exception>(actualException =>
+                actualException.SameExceptionAs(expectedStudentServiceException)));
 
         _apiBrokerMock.ReceivedCalls()
             .Count()
