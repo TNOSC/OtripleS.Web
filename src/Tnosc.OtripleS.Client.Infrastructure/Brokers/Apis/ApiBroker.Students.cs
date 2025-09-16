@@ -19,6 +19,8 @@ internal partial class ApiBroker
             await PostAsync(
                 relativeUrl: StudentsRelativeUrl,
                 content: student));
+
     public async ValueTask<IEnumerable<Student>> GetAllStudentsAsync() =>
-            await GetAsync<IEnumerable<Student>>(relativeUrl: StudentsRelativeUrl);
+         await TryCatch(async () =>
+             await GetAsync<IEnumerable<Student>>(relativeUrl: StudentsRelativeUrl));
 }

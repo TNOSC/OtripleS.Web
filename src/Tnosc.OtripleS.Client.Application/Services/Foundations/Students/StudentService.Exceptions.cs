@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
@@ -15,6 +16,7 @@ namespace Tnosc.OtripleS.Client.Application.Services.Foundations.Students;
 public partial class StudentService
 {
     private delegate ValueTask<Student> ReturningStudentFunction();
+    private delegate ValueTask<IEnumerable<Student>> ReturningStudentsFunction();
 
     private async ValueTask<Student> TryCatch(ReturningStudentFunction returningStudentFunction)
     {
@@ -53,6 +55,18 @@ public partial class StudentService
                       message: "Failed student service error occurred, contact support.",
                       innerException: exception);
             throw CreateAndLogServiceException(failedStudentServiceException);
+        }
+    }
+
+    private async ValueTask<IEnumerable<Student>> TryCatch(ReturningStudentsFunction returningStudentsFunction)
+    {
+        try
+        {
+            return await returningStudentsFunction();
+        }
+        catch (FailedStudentCriticalDependencyException failedStudentCriticalDependencyException)
+        {
+            throw CreateAndLogCriticalDependencyException(failedStudentCriticalDependencyException);
         }
     }
 

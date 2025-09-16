@@ -33,5 +33,6 @@ public partial class StudentService : IStudentService
     });
 
     public async ValueTask<IEnumerable<Student>> RetrieveAllStudentsAsync() =>
-        await _apiBroker.GetAllStudentsAsync();
+        await TryCatch(async () =>
+            await _apiBroker.GetAllStudentsAsync());
 }
