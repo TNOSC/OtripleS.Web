@@ -147,7 +147,7 @@ public partial class StudentServiceTests
 
     [Theory]
     [MemberData(nameof(DependencyApiException))]
-    public async Task ShouldThrowDependencyExceptionOnRegisterIfCriticalErrorOccursAndLogItAsync(
+    public async Task ShouldThrowDependencyExceptionOnRegisterIfErrorOccursAndLogItAsync(
        Exception httpResponseCriticalException)
     {
         // given
