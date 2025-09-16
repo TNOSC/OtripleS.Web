@@ -68,6 +68,10 @@ public partial class StudentService
         {
             throw CreateAndLogCriticalDependencyException(failedStudentCriticalDependencyException);
         }
+        catch (FailedStudentDependencyException failedStudentDependencyException)
+        {
+            throw CreateAndLogDependencyException(failedStudentDependencyException);
+        }
     }
 
     private StudentServiceException CreateAndLogServiceException(Xeption exception)

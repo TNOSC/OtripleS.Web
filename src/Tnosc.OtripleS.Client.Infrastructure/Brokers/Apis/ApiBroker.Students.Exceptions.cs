@@ -123,5 +123,23 @@ internal partial class ApiBroker
 
             throw failedStudentCriticalDependencyException;
         }
+        catch (HttpResponseInternalServerErrorException httpResponseInternalServerErrorException)
+        {
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(
+                    message: "Failed student dependency error occurred, please contact support.",
+                    innerException: httpResponseInternalServerErrorException);
+
+            throw failedStudentDependencyException;
+        }
+        catch (HttpResponseException httpResponseException)
+        {
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(
+                    message: "Failed student dependency error occurred, please contact support.",
+                    innerException: httpResponseException);
+
+            throw failedStudentDependencyException;
+        }
     }
 }
