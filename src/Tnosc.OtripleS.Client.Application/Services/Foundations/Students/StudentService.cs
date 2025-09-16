@@ -32,6 +32,6 @@ public partial class StudentService : IStudentService
         return await _apiBroker.PostStudentAsync(student: student);
     });
 
-    public ValueTask<IEnumerable<Student>> RetrieveAllStudentsAsync() =>
-        throw new System.NotImplementedException();
+    public async ValueTask<IEnumerable<Student>> RetrieveAllStudentsAsync() =>
+        await _apiBroker.GetAllStudentsAsync();
 }
