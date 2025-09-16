@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <GenerateMvcApplicationPartsAssemblyInfo>false</GenerateMvcApplicationPartsAssemblyInfo>
   </PropertyGroup>
@@ -12,9 +12,5 @@
     <ProjectReference Include="..\..\lib\Tnosc.Lib.Client.Web\Tnosc.Lib.Client.Web.csproj" />
     <ProjectReference Include="..\Tnosc.OtripleS.Client.Web.Client\Tnosc.OtripleS.Client.Web.Client.csproj" />
     <ProjectReference Include="..\Tnosc.OtripleS.Client.Infrastructure\Tnosc.OtripleS.Client.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\" />
   </ItemGroup>
 </Project>
