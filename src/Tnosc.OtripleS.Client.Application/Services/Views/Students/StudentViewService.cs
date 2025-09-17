@@ -5,6 +5,8 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Application.Brokers.DateTimes;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
@@ -43,6 +45,15 @@ public partial class StudentViewService : IStudentViewService
         return studentView;
     });
 
+    public async ValueTask<IEnumerable<StudentView>> RetrieveAllStudentViewsAsync() =>
+    await TryCatch(async () =>
+    {
+        IEnumerable<Student> students =
+            await _studentService.RetrieveAllStudentsAsync();
+
+        return students.Select(AsStudentView);
+    });
+
     private Student MapToStudent(StudentView studentView)
     {
         Guid currentLoggedInUserId = _userService.GetCurrentlyLoggedInUser();
@@ -64,4 +75,15 @@ public partial class StudentViewService : IStudentViewService
             UpdatedDate = currentDateTime
         };
     }
+
+    private static Func<Student, StudentView> AsStudentView =>
+        student => new StudentView
+        {
+            IdentityNumber = student.IdentityNumber,
+            FirstName = student.FirstName,
+            MiddleName = student.MiddleName,
+            LastName = student.LastName,
+            BirthDate = student.BirthDate,
+            Gender = (StudentViewGender)student.Gender
+        };
 }

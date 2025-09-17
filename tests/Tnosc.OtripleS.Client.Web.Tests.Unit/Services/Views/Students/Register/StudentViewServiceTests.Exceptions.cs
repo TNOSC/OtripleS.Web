@@ -5,9 +5,11 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
+using Shouldly;
 using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
@@ -45,18 +47,17 @@ public partial class StudentViewServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        await _studentServiceMock
-            .Received(requiredNumberOfCalls: 1)
+        await _studentServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentAsync(student: Arg.Any<Student>());
+        _studentServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _dateTimeBrokerMock
-            .Received(requiredNumberOfCalls: 1)
-            .GetCurrentDateTime();
+        _dateTimeBrokerMock.Received(requiredNumberOfCalls: 1).GetCurrentDateTime();
+        _dateTimeBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _userServiceMock
-           .Received(requiredNumberOfCalls: 1)
-           .GetCurrentlyLoggedInUser();
+        _userServiceMock.Received(requiredNumberOfCalls: 1).GetCurrentlyLoggedInUser();
+        _userServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
     }
 
     [Theory]
@@ -86,18 +87,17 @@ public partial class StudentViewServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        await _studentServiceMock
-            .Received(requiredNumberOfCalls: 1)
+        await _studentServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentAsync(student: Arg.Any<Student>());
+        _studentServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _dateTimeBrokerMock
-            .Received(requiredNumberOfCalls: 1)
-            .GetCurrentDateTime();
+        _dateTimeBrokerMock.Received(requiredNumberOfCalls: 1).GetCurrentDateTime();
+        _dateTimeBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _userServiceMock
-           .Received(requiredNumberOfCalls: 1)
-           .GetCurrentlyLoggedInUser();
+        _userServiceMock.Received(requiredNumberOfCalls: 1).GetCurrentlyLoggedInUser();
+        _userServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
     }
 
     [Fact]
@@ -131,17 +131,14 @@ public partial class StudentViewServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedServiceException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _userServiceMock
-           .Received(requiredNumberOfCalls: 1)
-           .GetCurrentlyLoggedInUser();
+        _userServiceMock.Received(requiredNumberOfCalls: 1).GetCurrentlyLoggedInUser();
+        _userServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _dateTimeBrokerMock
-            .Received(requiredNumberOfCalls: 1)
-            .GetCurrentDateTime();
+        _dateTimeBrokerMock.Received(requiredNumberOfCalls: 1).GetCurrentDateTime();
+        _dateTimeBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        await _studentServiceMock
-            .Received(requiredNumberOfCalls: 0)
-            .RegisterStudentAsync(student: Arg.Any<Student>());
+        _studentServiceMock.ReceivedCalls().ShouldBeEmpty();
     }
 }

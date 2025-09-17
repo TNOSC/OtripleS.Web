@@ -5,17 +5,19 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using RESTFulSense.WebAssembly.Exceptions;
+using Shouldly;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Domain.Students;
 using Xeptions;
 using Xunit;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
+namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations.Students;
 
 public partial class StudentServiceTests
 {
@@ -57,10 +59,12 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
         await _apiBrokerMock
             .Received(requiredNumberOfCalls: 1)
             .PostStudentAsync(student: someStudent);
+        _apiBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
     }
 
     [Fact]
@@ -101,10 +105,12 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
         await _apiBrokerMock
             .Received(requiredNumberOfCalls: 1)
             .PostStudentAsync(student: someStudent);
+        _apiBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
     }
 
     [Theory]
@@ -139,15 +145,17 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogCritical(Arg.Is<Exception>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
         await _apiBrokerMock
             .Received(requiredNumberOfCalls: 1)
             .PostStudentAsync(student: someStudent);
+        _apiBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
     }
 
     [Theory]
     [MemberData(nameof(DependencyApiException))]
-    public async Task ShouldThrowDependencyExceptionOnRegisterIfCriticalErrorOccursAndLogItAsync(
+    public async Task ShouldThrowDependencyExceptionOnRegisterIfErrorOccursAndLogItAsync(
        Exception httpResponseCriticalException)
     {
         // given
@@ -177,10 +185,12 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Exception>(actualException =>
                 actualException.SameExceptionAs(expectedDependencyValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
         await _apiBrokerMock
             .Received(requiredNumberOfCalls: 1)
             .PostStudentAsync(student: someStudent);
+        _apiBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
     }
 
     [Fact]
@@ -214,9 +224,11 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
               actualException.SameExceptionAs(expectedStudentServiceException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
         await _apiBrokerMock
             .Received(requiredNumberOfCalls: 1)
             .PostStudentAsync(student: someStudent);
+        _apiBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
     }
 }

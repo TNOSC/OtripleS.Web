@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
 using Shouldly;
@@ -42,13 +43,10 @@ public partial class StudentViewServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedStudentViewValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _studentServiceMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
-
-        _dateTimeBrokerMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
+        _studentServiceMock.ReceivedCalls().ShouldBeEmpty();
+        _dateTimeBrokerMock.ReceivedCalls().ShouldBeEmpty();
+        _userServiceMock.ReceivedCalls().ShouldBeEmpty();
     }
 }

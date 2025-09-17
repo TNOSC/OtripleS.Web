@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
 using Shouldly;
@@ -13,7 +14,7 @@ using Tnosc.OtripleS.Client.Domain.Students;
 using Xeptions;
 using Xunit;
 
-namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations;
+namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Services.Foundations.Students;
 
 public partial class StudentServiceTests
 {
@@ -30,6 +31,7 @@ public partial class StudentServiceTests
             new StudentValidationException(
                 message: "Invalid input, fix the errors and try again.",
                 innerException: nullStudentException);
+
         // when
 #pragma warning disable CS8604 // Possible null reference argument.
         ValueTask<Student> registerStudentTask =
@@ -43,11 +45,9 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedStudentValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _apiBrokerMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
-
+        _apiBrokerMock.ReceivedCalls().ShouldBeEmpty();
     }
 
     [Theory]
@@ -124,13 +124,11 @@ public partial class StudentServiceTests
         await Assert.ThrowsAsync<StudentValidationException>(() =>
             registerStudentTask.AsTask());
 
-
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedStudentValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _apiBrokerMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
+        _apiBrokerMock.ReceivedCalls().ShouldBeEmpty();
     }
 }

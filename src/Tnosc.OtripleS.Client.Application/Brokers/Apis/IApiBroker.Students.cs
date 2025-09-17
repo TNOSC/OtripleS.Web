@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Domain.Students;
 
@@ -12,4 +13,5 @@ namespace Tnosc.OtripleS.Client.Application.Brokers.Apis;
 public partial interface IApiBroker
 {
     ValueTask<Student> PostStudentAsync(Student student);
+    ValueTask<IEnumerable<Student>> GetAllStudentsAsync();
 }
