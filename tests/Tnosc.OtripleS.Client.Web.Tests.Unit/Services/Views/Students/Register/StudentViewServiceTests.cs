@@ -79,34 +79,20 @@ public partial class StudentViewServiceTests
                 .RegisterStudentViewAsync(studentView: inputStudentView);
 
         // then
-        actualStudentView.ShouldBeEquivalentTo(expected: expectedStudentView);
+        actualStudentView
+            .ShouldBeEquivalentTo(expected: expectedStudentView);
 
-        _userServiceMock
-            .Received(requiredNumberOfCalls: 1)
-            .GetCurrentlyLoggedInUser();
+        _userServiceMock.Received(requiredNumberOfCalls: 1).GetCurrentlyLoggedInUser();
+        _userServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _userServiceMock
-            .ReceivedCalls()
-            .Count()
-            .ShouldBe(expected: 1);
-
-        _dateTimeBrokerMock
-           .Received(requiredNumberOfCalls: 1)
-           .GetCurrentDateTime();
-
-        _dateTimeBrokerMock
-            .ReceivedCalls()
-            .Count()
-            .ShouldBe(expected: 1);
+        _dateTimeBrokerMock.Received(requiredNumberOfCalls: 1).GetCurrentDateTime();
+        _dateTimeBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
         await _studentServiceMock.Received(requiredNumberOfCalls: 1)
                 .RegisterStudentAsync(Arg.Is<Student>(student =>
                       SameStudentAs(student, expectedInputStudent)));
+        _studentServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _studentServiceMock
-           .ReceivedCalls()
-           .Count()
-           .ShouldBe(expected: 1);
-
+        _loggingBrokerMock.ReceivedCalls().ShouldBeEmpty();
     }
 }

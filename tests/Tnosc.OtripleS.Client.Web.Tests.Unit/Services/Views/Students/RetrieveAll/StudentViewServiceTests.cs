@@ -61,17 +61,17 @@ public partial class StudentViewServiceTests
         IEnumerable<StudentView> expectedStudentViews = randomStudentViews;
 
         _studentServiceMock.RetrieveAllStudentsAsync()
-            .Returns(retrievedStudents);
+            .Returns(returnThis: retrievedStudents);
 
         // when
         IEnumerable<StudentView> actualStudentViews =
             await _studentViewService.RetrieveAllStudentViewsAsync();
 
         // then
-        actualStudentViews.ShouldBeEquivalentTo(expectedStudentViews);
+        actualStudentViews.ShouldBeEquivalentTo(expected: expectedStudentViews);
 
         await _studentServiceMock.Received(1).RetrieveAllStudentsAsync();
-        _studentServiceMock.ReceivedCalls().Count().ShouldBe(1);
+        _studentServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
         _loggingBrokerMock.ReceivedCalls().ShouldBeEmpty();
         _dateTimeBrokerMock.ReceivedCalls().ShouldBeEmpty();
