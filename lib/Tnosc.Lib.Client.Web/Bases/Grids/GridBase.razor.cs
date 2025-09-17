@@ -5,15 +5,23 @@
 // ----------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Components;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Grids;
 
-public partial class GridBase<T> : ComponentBase
+public partial class GridBase<TItem> : ComponentBase
 {
     [Parameter]
-    public IEnumerable<T> DataSource { get; set; } = [];
+    public IEnumerable<TItem> DataSource { get; set; } = Enumerable.Empty<TItem>();
 
-    private readonly PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+    [Parameter]
+    public RenderFragment? Columns { get; set; }
+
+    private readonly PaginationState pagination = new() { ItemsPerPage = 10 };
+
+    private IQueryable<TItem> PagedData =>
+        DataSource.Skip(pagination.CurrentPageIndex * pagination.ItemsPerPage)
+                  .Take(pagination.ItemsPerPage).AsQueryable();
 }

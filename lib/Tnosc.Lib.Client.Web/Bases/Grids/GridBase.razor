@@ -1,6 +1,9 @@
 ﻿@using Microsoft.FluentUI.AspNetCore.Components
-@typeparam T
+@typeparam TItem
 
-<FluentDataGrid Pagination="@pagination"
-				Items="@DataSource.AsQueryable()">
+<FluentDataGrid Items="@PagedData"
+				Pagination="@pagination">
+	@Columns
 </FluentDataGrid>
+
+<FluentPaginator State="@pagination" />
