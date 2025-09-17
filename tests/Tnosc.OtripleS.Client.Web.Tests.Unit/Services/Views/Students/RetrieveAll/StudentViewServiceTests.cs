@@ -22,7 +22,7 @@ public partial class StudentViewServiceTests
     {
         // given
         IEnumerable<dynamic> dynamicStudentViewPropertiesCollection =
-            CreateRandomStudentViewCollections();
+            [.. CreateRandomStudentViewCollections()];
 
         IEnumerable<Student> randomStudents =
             dynamicStudentViewPropertiesCollection.Select(property =>
@@ -39,7 +39,7 @@ public partial class StudentViewServiceTests
                     CreatedBy = property.CreatedBy,
                     CreatedDate = property.CreatedDate,
                     UpdatedBy = property.UpdatedBy,
-                    UpdatedDate = property.upToDate,
+                    UpdatedDate = property.UpdatedDate,
                 }
             );
 
