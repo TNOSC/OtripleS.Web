@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Application.Brokers.DateTimes;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
@@ -42,6 +43,9 @@ public partial class StudentViewService : IStudentViewService
 
         return studentView;
     });
+
+    public ValueTask<IEnumerable<StudentView>> RetrieveAllStudentViewsAsync() =>
+        throw new NotImplementedException();
 
     private Student MapToStudent(StudentView studentView)
     {

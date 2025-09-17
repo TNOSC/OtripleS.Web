@@ -5,6 +5,8 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using NSubstitute;
 using Tnosc.OtripleS.Client.Application.Brokers.DateTimes;
 using Tnosc.OtripleS.Client.Application.Brokers.Loggings;
@@ -76,6 +78,33 @@ public partial class StudentViewServiceTests
         };
     }
 
+    private static IEnumerable<dynamic> CreateRandomStudentViewCollections()
+    {
+        int randomCount = GetRandomNumber();
+
+        return Enumerable.Range(0, randomCount).Select(static item =>
+        {
+            StudentGender studentGender = GetRandomGender();
+
+            return new
+            {
+                Id = Guid.NewGuid(),
+                UserId = Guid.NewGuid().ToString(),
+                IdentityNumber = GetRandomString(),
+                FirstName = GetRandomName(),
+                MiddleName = GetRandomName(),
+                LastName = GetRandomName(),
+                BirthDate = GetRandomDate(),
+                Gender = studentGender,
+                GenderView = (StudentViewGender)studentGender,
+                CreatedDate = GetRandomDate(),
+                UpdatedDate = GetRandomDate(),
+                CreatedBy = Guid.NewGuid(),
+                UpdatedBy = Guid.NewGuid()
+            };
+        });
+    }
+
     private static StudentView CreateRandomStudentView() =>
            CreateStudentViewFiller().Create();
 
@@ -134,6 +163,8 @@ public partial class StudentViewServiceTests
 
     private static DateTimeOffset GetRandomDate() =>
         new DateTimeRange(earliestDate: DateTime.UtcNow).GetValue();
+    private static int GetRandomNumber() =>
+        new IntRange(min: 2, max: 10).GetValue();
 
     private static bool SameStudentAs(Student actualStudent, Student expectedStudent) =>
         actualStudent.IdentityNumber == expectedStudent.IdentityNumber &&
