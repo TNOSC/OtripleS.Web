@@ -5,10 +5,12 @@
 // ----------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Tnosc.Lib.Client.Web.Bases.Components;
 using Tnosc.Lib.Client.Web.Bases.Forms;
 using Tnosc.Lib.Client.Web.Bases.Grids;
+using Tnosc.Lib.Client.Web.Enums;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 
@@ -23,6 +25,14 @@ public partial class StudentsComponent : AppViewComponent
     public GridBase<StudentView> StudentGrid { get; set; } = null!;
     public string? ErrorMessage { get; set; }
     public LabelBase? ErrorLabel { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        StudentViews =
+            await StudentViewService.RetrieveAllStudentViewsAsync();
+     
+        State = ComponentState.Content;
+    }
 }
 
 

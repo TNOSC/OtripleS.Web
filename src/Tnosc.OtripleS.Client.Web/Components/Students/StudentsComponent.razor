@@ -1,2 +1,21 @@
-﻿@using Tnosc.Lib.Client.Web.Bases.Components
+﻿@using PrettyBlazor
+@using Tnosc.Lib.Client.Web.Bases.Cards
+@using Tnosc.Lib.Client.Web.Bases.Components
+@using Tnosc.Lib.Client.Web.Bases.Grids
+@using Tnosc.Lib.Client.Web.Containers
+@using Tnosc.Lib.Client.Web.Enums
 @inherits AppViewComponent
+
+<Condition Evaluation=@(State == ComponentState.Content)>
+    <Match>
+        <GridBase @ref="@StudentGrid" DataSource="@StudentViews" />
+        <FluentDataGrid Items="@StudentViews.AsQueryable()">
+            <PropertyColumn Property="@(p => p.IdentityNumber)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.FirstName)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.MiddleName)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.LastName)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.Gender)" Sortable="true" />
+            <PropertyColumn Property="@(p => p.BirthDate)" Format="yyyy-MM-dd" Sortable="true" />
+        </FluentDataGrid>
+    </Match>
+</Condition>

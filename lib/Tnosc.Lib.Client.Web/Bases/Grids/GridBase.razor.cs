@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Grids;
 
@@ -13,4 +14,6 @@ public partial class GridBase<T> : ComponentBase
 {
     [Parameter]
     public IEnumerable<T> DataSource { get; set; } = [];
+
+    private readonly PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 }

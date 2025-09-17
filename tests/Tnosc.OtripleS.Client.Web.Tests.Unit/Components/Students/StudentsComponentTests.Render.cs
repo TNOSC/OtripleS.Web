@@ -33,7 +33,7 @@ public partial class StudentsComponentTests
     }
 
     [Fact]
-    public async Task ShouldRenderTeachersAsync()
+    public async Task ShouldRenderStudentsAsync()
     {
         // given
         ComponentState expectedState =
