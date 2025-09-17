@@ -54,4 +54,44 @@ public partial class StudentViewServiceTests
         _dateTimeBrokerMock.ReceivedCalls().ShouldBeEmpty();
         _userServiceMock.ReceivedCalls().ShouldBeEmpty();
     }
+
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnRetrieveAllStudentsIfServiceErrorOccursAndLogItAsync()
+    {
+        // given
+        var serviceException = new Exception();
+
+        var failedStudentViewServiceException =
+           new FailedStudentViewServiceException(
+               message: "Failed student view service occurred, please contact support.",
+               innerException: serviceException);
+
+        var expectedServiceException =
+            new StudentViewServiceException(
+               message: "Student service error occurred, contact support.",
+               innerException: failedStudentViewServiceException);
+
+        _studentServiceMock.RetrieveAllStudentsAsync()
+            .ThrowsAsync(ex: serviceException);
+
+        // when
+        ValueTask<IEnumerable<StudentView>> retrieveAllStudentViewsTask =
+           _studentViewService.RetrieveAllStudentViewsAsync();
+
+        // then
+        await Assert.ThrowsAsync<StudentViewServiceException>(() =>
+            retrieveAllStudentViewsTask.AsTask());
+
+        _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
+            .LogError(Arg.Is<Xeption>(actualException =>
+                actualException.SameExceptionAs(expectedServiceException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
+
+        await _studentServiceMock.Received(requiredNumberOfCalls: 1)
+            .RetrieveAllStudentsAsync();
+        _studentServiceMock.ReceivedCalls().Count().ShouldBe(expected: 1);
+
+        _dateTimeBrokerMock.ReceivedCalls().ShouldBeEmpty();
+        _userServiceMock.ReceivedCalls().ShouldBeEmpty();
+    }
 }
