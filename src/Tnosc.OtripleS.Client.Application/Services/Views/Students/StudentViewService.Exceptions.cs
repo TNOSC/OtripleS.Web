@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tnosc.OtripleS.Client.Application.Exceptions.Foundations.Students;
 using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
@@ -16,6 +17,7 @@ namespace Tnosc.OtripleS.Client.Application.Services.Views.Students;
 public partial class StudentViewService
 {
     private delegate ValueTask<StudentView> ReturningStudentViewFunction();
+    private delegate ValueTask<IEnumerable<StudentView>> ReturningStudentViewsFunction();
 
     private async ValueTask<StudentView> TryCatch(ReturningStudentViewFunction returningStudentViewFunction)
     {
@@ -44,6 +46,30 @@ public partial class StudentViewService
             throw CreateAndLogDependencyException(studentDependencyValidationException);
         }
         catch(Exception exception)
+        {
+            var failedStudentViewServiceException =
+                new FailedStudentViewServiceException(
+                    message: "Failed student view service occurred, please contact support.",
+                    innerException: exception);
+            throw CreateAndLogServiceException(failedStudentViewServiceException);
+        }
+    }
+
+    private async ValueTask<IEnumerable<StudentView>> TryCatch(ReturningStudentViewsFunction returningStudentViewsFunction)
+    {
+        try
+        {
+            return await returningStudentViewsFunction();
+        }
+        catch (StudentDependencyException studentValidationException)
+        {
+            throw CreateAndLogDependencyException(studentValidationException);
+        }
+        catch (StudentServiceException studentDependencyValidationException)
+        {
+            throw CreateAndLogDependencyException(studentDependencyValidationException);
+        }
+        catch (Exception exception)
         {
             var failedStudentViewServiceException =
                 new FailedStudentViewServiceException(

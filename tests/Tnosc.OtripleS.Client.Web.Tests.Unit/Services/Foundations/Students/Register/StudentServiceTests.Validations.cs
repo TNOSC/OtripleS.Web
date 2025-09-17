@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NSubstitute;
 using Shouldly;
@@ -44,11 +45,9 @@ public partial class StudentServiceTests
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedStudentValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _apiBrokerMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
-
+        _apiBrokerMock.ReceivedCalls().ShouldBeEmpty();
     }
 
     [Theory]
@@ -125,13 +124,11 @@ public partial class StudentServiceTests
         await Assert.ThrowsAsync<StudentValidationException>(() =>
             registerStudentTask.AsTask());
 
-
         _loggingBrokerMock.Received(requiredNumberOfCalls: 1)
             .LogError(Arg.Is<Xeption>(actualException =>
                 actualException.SameExceptionAs(expectedStudentValidationException)));
+        _loggingBrokerMock.ReceivedCalls().Count().ShouldBe(expected: 1);
 
-        _apiBrokerMock
-            .ReceivedCalls()
-            .ShouldBeEmpty();
+        _apiBrokerMock.ReceivedCalls().ShouldBeEmpty();
     }
 }
