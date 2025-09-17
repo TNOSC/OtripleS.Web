@@ -1,6 +1,7 @@
 ﻿@using PrettyBlazor
 @using Tnosc.Lib.Client.Web.Bases.Cards
 @using Tnosc.Lib.Client.Web.Bases.Components
+@using Tnosc.Lib.Client.Web.Bases.Forms
 @using Tnosc.Lib.Client.Web.Bases.Grids
 @using Tnosc.Lib.Client.Web.Containers
 @using Tnosc.Lib.Client.Web.Enums
@@ -17,5 +18,11 @@
             <PropertyColumn Property="@(p => p.Gender)" Sortable="true" />
             <PropertyColumn Property="@(p => p.BirthDate)" Format="yyyy-MM-dd" Sortable="true" />
         </FluentDataGrid>
+    </Match>
+</Condition>
+
+<Condition Evaluation=@(State == ComponentState.Error)>
+    <Match>
+        <LabelBase @ref=ErrorLabel Value=@ErrorMessage />
     </Match>
 </Condition>

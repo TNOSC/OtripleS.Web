@@ -4,6 +4,7 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -28,10 +29,19 @@ public partial class StudentsComponent : AppViewComponent
 
     protected override async Task OnInitializedAsync()
     {
-        StudentViews =
+        try
+        {
+            StudentViews =
             await StudentViewService.RetrieveAllStudentViewsAsync();
-     
-        State = ComponentState.Content;
+
+            State = ComponentState.Content;
+        }
+        catch (Exception exception)
+        {
+            ErrorMessage = exception.Message;
+            State = ComponentState.Error;
+        }
+       
     }
 }
 
