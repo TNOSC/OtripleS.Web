@@ -45,13 +45,14 @@ public partial class StudentViewService : IStudentViewService
         return studentView;
     });
 
-    public async ValueTask<IEnumerable<StudentView>> RetrieveAllStudentViewsAsync()
+    public async ValueTask<IEnumerable<StudentView>> RetrieveAllStudentViewsAsync() =>
+    await TryCatch(async () =>
     {
         IEnumerable<Student> students =
             await _studentService.RetrieveAllStudentsAsync();
 
         return students.Select(AsStudentView);
-    }
+    });
 
     private Student MapToStudent(StudentView studentView)
     {
