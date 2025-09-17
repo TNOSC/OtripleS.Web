@@ -69,6 +69,14 @@ public partial class StudentViewService
         {
             throw CreateAndLogDependencyException(studentDependencyValidationException);
         }
+        catch (Exception exception)
+        {
+            var failedStudentViewServiceException =
+                new FailedStudentViewServiceException(
+                    message: "Failed student view service occurred, please contact support.",
+                    innerException: exception);
+            throw CreateAndLogServiceException(failedStudentViewServiceException);
+        }
     }
 
     private StudentViewServiceException CreateAndLogServiceException(Xeption exception)
