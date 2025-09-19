@@ -41,7 +41,7 @@ public partial class StudentsComponent : AppViewComponent
             ErrorMessage = exception.Message;
             State = ComponentState.Error;
         }
-       
+
     }
 }
 

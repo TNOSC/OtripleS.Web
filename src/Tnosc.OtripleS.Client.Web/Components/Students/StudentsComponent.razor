@@ -14,12 +14,32 @@
 				  TItem="StudentView"
 				  DataSource="@StudentViews">
 			<Columns>
-				<PropertyColumn TGridItem="StudentView" TProp="string" Property="@(p => p.IdentityNumber)"/>
-				<PropertyColumn TGridItem="StudentView" TProp="string" Property="@(p => p.FirstName)" />
-				<PropertyColumn TGridItem="StudentView" TProp="string" Property="@(p => p.MiddleName)" />
-				<PropertyColumn TGridItem="StudentView" TProp="string" Property="@(p => p.LastName)" />
-				<PropertyColumn TGridItem="StudentView" TProp="StudentViewGender" Property="@(p => p.Gender)" />
-				<PropertyColumn TGridItem="StudentView" TProp="DateTimeOffset" Property="@(p => p.BirthDate)" Format="yyyy-MM-dd" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Title="Identity Number"
+							Property="@(p => p.IdentityNumber)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Property="@(p => p.FirstName)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Property="@(p => p.MiddleName)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Property="@(p => p.LastName)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="StudentViewGender"
+							Property="@(p => p.Gender)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="DateTimeOffset"
+							Property="@(p => p.BirthDate)"
+							Format="yyyy-MM-dd" />
 			</Columns>
 		</GridBase>
 	</Match>
