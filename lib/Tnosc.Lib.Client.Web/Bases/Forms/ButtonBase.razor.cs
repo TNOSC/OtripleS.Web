@@ -5,14 +5,15 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
 
 public partial class ButtonBase : ComponentBase
 {
-    [Parameter]
-    public string Label { get; set; } = string.Empty;
+    [Parameter] public string Label { get; set; } = string.Empty;
 
     [Parameter]
     public Action? OnClick { get; set; }
@@ -20,7 +21,20 @@ public partial class ButtonBase : ComponentBase
     [Parameter]
     public bool IsDisabled { get; set; }
 
+    [Parameter]
     public bool Loading { get; set; }
+
+    [Parameter] 
+    public Appearance Appearance { get; set; } = Appearance.Accent;
+
+    [Parameter] 
+    public Icon? IconStart { get; set; }
+
+    [Parameter]
+    public Icon? IconEnd { get; set; }
+
+    [Parameter] 
+    public string? Title { get; set; }
 
     public void Click() =>
         OnClick?.Invoke();
@@ -37,6 +51,9 @@ public partial class ButtonBase : ComponentBase
         InvokeAsync(StateHasChanged);
     }
 
-    public void SetLoading(bool value) =>
+    public void SetLoading(bool value)
+    {
         Loading = value;
+        InvokeAsync(StateHasChanged);
+    }
 }
