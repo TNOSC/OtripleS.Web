@@ -7,12 +7,14 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.FluentUI.AspNetCore.Components;
 using NSubstitute;
 using Shouldly;
 using Tnosc.Lib.Client.Web.Enums;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Components.Students;
 using Xunit;
+using Color = Tnosc.Lib.Client.Web.Enums.Color;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
 
@@ -24,9 +26,13 @@ public partial class StudentRegistrationComponentTests
         // given
         ComponentState expectedComponentState =
             ComponentState.Loading;
-
+     
         // when
-        var initialStudentRegistrationComponent = new StudentRegistrationComponent();
+        var initialStudentRegistrationComponent = new StudentRegistrationComponent
+        {
+            DialogService = Substitute.For<IDialogService>(),
+            ToastService = Substitute.For<IToastService>()
+        };
 
         // then
         initialStudentRegistrationComponent.State.ShouldBe(expectedComponentState);
@@ -49,10 +55,10 @@ public partial class StudentRegistrationComponentTests
         ComponentState expectedComponentState =
             ComponentState.Content;
 
-        string expectedIdentityTextBoxPlaceholder = "Student Identity";
-        string expectedFirstNameTextBoxPlaceholder = "First Name";
-        string expectedMiddleNameTextBoxPlaceholder = "Middle Name";
-        string expectedLastNameTextBoxPlaceholder = "Last Name";
+        string expectedIdentityTextBoxPlaceholder = "Enter Student Identity";
+        string expectedFirstNameTextBoxPlaceholder = "Enter First Name";
+        string expectedMiddleNameTextBoxPlaceholder = "Enter Middle Name";
+        string expectedLastNameTextBoxPlaceholder = "Enter Last Name";
         string expectedSubmitButtonLabel = "SUBMIT";
 
         // when
@@ -127,7 +133,7 @@ public partial class StudentRegistrationComponentTests
             .ShouldNotBeNull();
 
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-            .ShouldBe(Color.Red);
+            .ShouldBe(Color.Error);
 
         _studentViewServiceMock
             .ReceivedCalls()
@@ -159,7 +165,7 @@ public partial class StudentRegistrationComponentTests
             .ShouldBeEquivalentTo("Submitting ... ");
 
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-            .ShouldBe(Color.Black);
+            .ShouldBe(Color.Info);
 
         _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
             .ShouldBeTrue();
@@ -230,10 +236,5 @@ public partial class StudentRegistrationComponentTests
             .ReceivedCalls()
             .Count()
             .ShouldBe(expected: 1);
-
-        _navigationBrokerMock
-          .ReceivedCalls()
-          .Count()
-          .ShouldBe(expected: 1);
     }
 }

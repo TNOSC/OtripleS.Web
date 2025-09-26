@@ -1,8 +1,11 @@
 ﻿@using Microsoft.FluentUI.AspNetCore.Components
 
-<FluentButton Appearance="Appearance.Accent"
+<FluentButton Appearance="@Appearance"
+              IconStart="@IconStart"
+              IconEnd="@IconEnd"
+              Title="@Title"
               Loading="@Loading"
               Disabled="@IsDisabled"
-              OnClick="@Click"> 
+              OnClick="@Click">
     @Label
 </FluentButton>

@@ -1,4 +1,10 @@
 ﻿@using Microsoft.FluentUI.AspNetCore.Components
 
-<FluentDatePicker @bind-Value="@SelectedDate" 
-				  Disabled="IsDisabled"/>
+<FluentDatePicker @bind-Value="@SelectedDate"
+				  Label="@Label"
+				  Required="@Required"
+				  Class="@CssClass"
+				  Disabled="IsDisabled" />
+
+<ValidationSummaryBase Key="@Key"
+					   ValidationData="@ValidationData" />

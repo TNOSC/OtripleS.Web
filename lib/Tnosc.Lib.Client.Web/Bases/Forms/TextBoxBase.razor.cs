@@ -4,6 +4,9 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -11,6 +14,9 @@ namespace Tnosc.Lib.Client.Web.Bases.Forms;
 
 public partial class TextBoxBase : ComponentBase
 {
+    [Parameter]
+    public string? Label { get; set; }
+
     [Parameter]
     public required string Value { get; set; }
 
@@ -22,6 +28,21 @@ public partial class TextBoxBase : ComponentBase
 
     [Parameter]
     public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public bool Required { get; set; }
+
+    [Parameter]
+    public IDictionary? ValidationData { get; set; }
+
+    [Parameter]
+    public string? Key { get; set; }
+
+    private string CssClass
+     => !string.IsNullOrEmpty(Key)
+        && (ValidationData?[Key] as IEnumerable<string>)?.Any() == true
+            ? "invalid"
+            : string.Empty;
 
     public void SetValue(string value) =>
         Value = value;

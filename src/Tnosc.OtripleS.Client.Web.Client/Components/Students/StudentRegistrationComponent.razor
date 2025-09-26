@@ -5,48 +5,83 @@
 @using Tnosc.Lib.Client.Web.Containers
 @using Tnosc.OtripleS.Client.Application.ViewModels.Students
 @inherits AppViewComponent
+@implements IDialogContentComponent
 @rendermode InteractiveAuto
 
-<CardBase Title="Student Registration"
-		  SubTitle="Please fill in the below fields">
-	<Content>
-		<ContainerComponent State=State>
-			<Content>
-				<div>
-					<TextBoxBase @ref="StudentIdentityTextBox"
-								 PlaceHolder="Student Identity"
-								 @bind-Value="StudentView.IdentityNumber" />
-					<br />
-					<TextBoxBase @ref="StudentFirstNameTextBox"
-								 Placeholder="First Name"
-								 @bind-Value="StudentView.FirstName" />
-					<br />
-					<TextBoxBase @ref="StudentMiddleNameTextBox"
-								 Placeholder="Middle Name"
-								 @bind-Value="StudentView.MiddleName" />
-					<br />
-					<TextBoxBase @ref="StudentLastNameTextBox"
-								 Placeholder="Last Name"
-								 @bind-Value="StudentView.LastName" />
-					<br />
-					<DropDownBase @ref="StudentGenderDropDown"
-								  TEnum="StudentViewGender"
-								  @bind-Value="StudentView.Gender" />
-					<br />
-					<DatePickerBase @ref="DateOfBirthPicker"
-									@bind-Value="StudentView.BirthDate" />
-					<br />
-					<LabelBase @ref="StatusLabel"
-							   Color="Tnosc.Lib.Client.Web.Enums.Color.Red" />
-				</div>
-			</Content>
-		</ContainerComponent>
-	</Content>
-	<Footer>
-		<div align=right>
-			<ButtonBase @ref="SubmitButton"
-						Label="SUBMIT"
-						OnClick="(async() => await RegisterStudentAsync())" />
-		</div>
-	</Footer>
-</CardBase>
+<FluentDialogBody>
+	<CardBase Title="Student Registration"
+			  SubTitle="Please fill in the below fields">
+		<Content>
+			<ContainerComponent State=State>
+				<Content>
+					<FluentStack Orientation="Orientation.Vertical">
+						<LabelBase @ref="StatusLabel"
+								   Color="Tnosc.Lib.Client.Web.Enums.Color.Error" />
+
+						<TextBoxBase @ref="StudentIdentityTextBox"
+									 @bind-Value="StudentView.IdentityNumber"
+									 Label="Student Identity"
+									 PlaceHolder="Enter Student Identity"
+									 Required=true
+									 ValidationData="@ValidationData"
+									 Key="@nameof(StudentView.IdentityNumber)" />
+
+						<FluentSpacer Width="10" />
+
+						<TextBoxBase @ref="StudentFirstNameTextBox"
+									 @bind-Value="StudentView.FirstName"
+									 Label="First Name"
+									 Placeholder="Enter First Name"
+									 Required=true
+									 ValidationData="@ValidationData"
+									 Key="@nameof(StudentView.FirstName)" />
+						<FluentSpacer Width="10" />
+
+						<TextBoxBase @ref="StudentMiddleNameTextBox"
+									 @bind-Value="StudentView.MiddleName"
+									 Label="Middle Name"
+									 Placeholder="Enter Middle Name" />
+
+						<FluentSpacer Width="10" />
+
+						<TextBoxBase @ref="StudentLastNameTextBox"
+									 @bind-Value="StudentView.LastName"
+									 Label="Last Name"
+									 Required=true
+									 Placeholder="Enter Last Name"
+									 ValidationData="@ValidationData"
+									 Key="@nameof(StudentView.LastName)" />
+
+						<FluentSpacer Width="10" />
+
+						<DropDownBase @ref="StudentGenderDropDown"
+									  @bind-Value="StudentView.Gender"
+									  Required=true
+									  Label="Gender"
+									  TEnum="StudentViewGender"
+									  ValidationData="@ValidationData"
+									  Key="@nameof(StudentView.Gender)" />
+
+						<FluentSpacer Width="10" />
+
+						<DatePickerBase @ref="DateOfBirthPicker"
+										@bind-Value="StudentView.BirthDate"
+										Label="Birth Date"
+										Required=true
+										ValidationData="@ValidationData"
+										Key="@nameof(StudentView.BirthDate)" />
+
+						<FluentSpacer Width="10" />
+					</FluentStack>
+				</Content>
+			</ContainerComponent>
+		</Content>
+		<Footer>
+			<div align=right>
+				<ButtonBase @ref="SubmitButton"
+							Label="SUBMIT"
+							OnClick="(async() => await RegisterStudentAsync())" />
+			</div>
+		</Footer>
+	</CardBase>
+</FluentDialogBody>

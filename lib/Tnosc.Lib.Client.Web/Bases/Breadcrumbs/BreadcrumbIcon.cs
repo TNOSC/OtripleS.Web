@@ -4,11 +4,13 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-namespace Tnosc.Lib.Client.Web.Enums;
+using Microsoft.FluentUI.AspNetCore.Components;
 
-public enum Color
+namespace Tnosc.Lib.Client.Web.Bases.Breadcrumbs;
+
+public class BreadcrumbIcon
 {
-    Info,
-    Error,
-    Success
+    public Icon Value { get; set; } = null!;
+    public Color Color { get; set; } = Color.Neutral;
+    public string Slot { get; set; } = "start";
 }

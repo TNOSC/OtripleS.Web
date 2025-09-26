@@ -15,3 +15,6 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Reliability", "CA2011:Avoid infinite recursion", Justification = "<Pending>", Scope = "member", Target = "~P:Tnosc.Lib.Client.Web.Bases.Forms.ValidationSummaryBase.Errors")]
 [assembly: SuppressMessage("Blocker Bug", "S2190:Loops and recursions should not be infinite", Justification = "<Pending>", Scope = "member", Target = "~P:Tnosc.Lib.Client.Web.Bases.Forms.ValidationSummaryBase.Errors")]
 [assembly: SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>", Scope = "member", Target = "~P:Tnosc.Lib.Client.Web.Bases.Grids.GridBase`1.AdditionalAttributes")]
+[assembly: SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>", Scope = "member", Target = "~P:Tnosc.Lib.Client.Web.Bases.Forms.TextBoxBase.ValidationData")]
+[assembly: SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>", Scope = "member", Target = "~P:Tnosc.Lib.Client.Web.Bases.Forms.DatePickerBase.ValidationData")]
+[assembly: SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>", Scope = "member", Target = "~P:Tnosc.Lib.Client.Web.Bases.Forms.DropDownBase`1.ValidationData")]

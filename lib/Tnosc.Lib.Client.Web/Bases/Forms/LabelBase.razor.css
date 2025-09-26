@@ -1,0 +1,11 @@
+.error {
+    color: var(--error);
+}
+
+.info {
+    color: var(--info);
+}
+
+.success{
+    color: var(--success)
+}

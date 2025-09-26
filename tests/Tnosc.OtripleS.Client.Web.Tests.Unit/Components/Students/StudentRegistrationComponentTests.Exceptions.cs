@@ -45,7 +45,7 @@ public partial class StudentRegistrationComponentTests
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);
         
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-           .ShouldBe(Color.Red);
+           .ShouldBe(Color.Error);
 
         _renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
             .ShouldBeFalse();
@@ -97,7 +97,7 @@ public partial class StudentRegistrationComponentTests
             .ShouldBeEquivalentTo(expected: expectedErrorMessage);
 
         _renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-            .ShouldBe(Color.Red);
+            .ShouldBe(Color.Error);
 
        await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)
             .RegisterStudentViewAsync(studentView: _renderedStudentRegistrationComponent.Instance.StudentView);

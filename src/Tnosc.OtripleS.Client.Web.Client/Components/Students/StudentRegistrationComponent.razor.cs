@@ -4,8 +4,10 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
+using System.Collections;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.FluentUI.AspNetCore.Components;
 using Tnosc.Lib.Client.Web.Bases.Components;
 using Tnosc.Lib.Client.Web.Bases.Forms;
 using Tnosc.Lib.Client.Web.Enums;
@@ -13,6 +15,7 @@ using Tnosc.OtripleS.Client.Application.Exceptions.Views.Students;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
 using Tnosc.OtripleS.Client.Web.Client.Exceptions.Students;
+using Color = Tnosc.Lib.Client.Web.Enums.Color;
 
 namespace Tnosc.OtripleS.Client.Web.Client.Components.Students;
 
@@ -21,8 +24,12 @@ public partial class StudentRegistrationComponent : AppViewComponent
 {
     [Inject]
     public IStudentViewService StudentViewService { get; set; } = null!;
-   
+
     public StudentRegistrationComponentException? Exception { get; set; }
+
+    [CascadingParameter]
+    public FluentDialog DialogRef { get; set; } = default!;
+
     public StudentView StudentView { get; set; } = null!;
     public TextBoxBase StudentIdentityTextBox { get; set; } = null!;
     public TextBoxBase StudentFirstNameTextBox { get; set; } = null!;
@@ -32,6 +39,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
     public DatePickerBase DateOfBirthPicker { get; set; } = null!;
     public ButtonBase SubmitButton { get; set; } = null!;
     public LabelBase StatusLabel { get; set; } = null!;
+    public IDictionary? ValidationData { get; set; }
 
     protected override void OnInitialized()
     {
@@ -45,7 +53,10 @@ public partial class StudentRegistrationComponent : AppViewComponent
         {
             ApplySubmittingStatus();
             await StudentViewService.RegisterStudentViewAsync(studentView: StudentView);
-            NavigateToStudentSubmittedPage();
+            ShowSuccessToast(
+                entityType: "Student",
+                entityName: StudentView!.IdentityNumber);
+            await DialogRef.CloseAsync(StudentView);
         }
         catch (StudentViewValidationException studentViewValidationException)
         {
@@ -58,6 +69,8 @@ public partial class StudentRegistrationComponent : AppViewComponent
         {
             string validationMessage =
                 dependencyValidationException.InnerException!.Message;
+
+            ValidationData = dependencyValidationException.InnerException!.Data;
 
             ApplySubmissionFailed(errorMessage: validationMessage);
         }
@@ -79,7 +92,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
 
     private void ApplySubmittingStatus()
     {
-        StatusLabel.SetColor(Color.Black);
+        StatusLabel.SetColor(Color.Info);
         StatusLabel.SetValue("Submitting ... ");
         StudentIdentityTextBox.Disable();
         StudentFirstNameTextBox.Disable();
@@ -91,12 +104,9 @@ public partial class StudentRegistrationComponent : AppViewComponent
         SubmitButton.SetLoading(true);
     }
 
-    private void NavigateToStudentSubmittedPage() =>
-        NavigateTo("/studentsubmitted");
-
     private void ApplySubmissionFailed(string errorMessage)
     {
-        StatusLabel.SetColor(Color.Red);
+        StatusLabel.SetColor(Color.Error);
         StatusLabel.SetValue(errorMessage);
         StudentIdentityTextBox.Enable();
         StudentFirstNameTextBox.Enable();
@@ -106,6 +116,7 @@ public partial class StudentRegistrationComponent : AppViewComponent
         DateOfBirthPicker.Enable();
         SubmitButton.Enable();
         SubmitButton.SetLoading(false);
+        InvokeAsync(StateHasChanged);
     }
 }
 #pragma warning restore CA1515

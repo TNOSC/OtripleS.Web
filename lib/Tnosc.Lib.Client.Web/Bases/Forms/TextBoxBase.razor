@@ -2,5 +2,11 @@
 
 <FluentTextField @bind-Value="Value"
                  @oninput="OnValueChanged"
+                 Label="@Label"
+                 Required="@Required"
                  Placeholder="@PlaceHolder"
+                 Class="@CssClass"
                  Disabled="IsDisabled" />
+
+<ValidationSummaryBase Key="@Key"
+                       ValidationData="@ValidationData" />

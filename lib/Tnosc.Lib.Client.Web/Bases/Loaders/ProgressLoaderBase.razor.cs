@@ -4,22 +4,15 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Components;
 
-namespace Tnosc.Lib.Client.Web.Bases.Grids;
+namespace Tnosc.Lib.Client.Web.Bases.Loaders;
 
-public partial class GridBase<TItem> : ComponentBase
+public partial class ProgressLoaderBase : ComponentBase
 {
     [Parameter]
-    public IEnumerable<TItem>? DataSource { get; set; }
+    public string ProgressText { get; set; } = "Loading...";
 
     [Parameter]
-    public RenderFragment? Columns { get; set; }
-
-    public void Load(IEnumerable<TItem>? data) 
-        => DataSource = data;
-
-    private bool IsLoading => DataSource == null || !DataSource.Any();
+    public int Columns { get; set; } = 5;
 }

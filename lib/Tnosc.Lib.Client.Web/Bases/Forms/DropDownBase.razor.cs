@@ -5,7 +5,9 @@
 // ----------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
@@ -21,6 +23,24 @@ public partial class DropDownBase<TEnum> : ComponentBase
 
     [Parameter]
     public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public bool Required { get; set; }
+
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter]
+    public IDictionary? ValidationData { get; set; }
+
+    [Parameter]
+    public string? Key { get; set; }
+
+    private string CssClass
+    => !string.IsNullOrEmpty(Key)
+       && (ValidationData?[Key] as IEnumerable<string>)?.Any() == true
+           ? "invalid"
+           : string.Empty;
 
     public void SetValue(TEnum value) =>
         Value = value;

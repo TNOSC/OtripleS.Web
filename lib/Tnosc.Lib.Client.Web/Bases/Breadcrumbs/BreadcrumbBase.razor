@@ -1,0 +1,16 @@
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+
+<FluentBreadcrumb>
+    @foreach (var item in Items)
+    {
+        <FluentBreadcrumbItem Href="@item.Href">
+            @item.Text
+            @if (item.Icon != null)
+            {
+                <FluentIcon Value="@item.Icon.Value"
+                            Color="@item.Icon.Color"
+                            Slot="@item.Icon.Slot" />
+            }
+        </FluentBreadcrumbItem>
+    }
+</FluentBreadcrumb>

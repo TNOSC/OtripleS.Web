@@ -11,7 +11,7 @@ using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using Shouldly;
 using Tnosc.Lib.Client.Web.Enums;
-using Tnosc.OtripleS.Client.Web.Components.Students;
+using Tnosc.OtripleS.Client.Web.Client.Components.Students;
 using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
@@ -51,9 +51,6 @@ public partial class StudentsComponentTests
             .ShouldBe(expectedErrorMessage);
 
         _renderedStudentsComponent.Instance.StudentViews
-            .ShouldBeNull();
-
-        _renderedStudentsComponent.Instance.StudentGrid
             .ShouldBeNull();
 
         await _studentViewServiceMock.Received(requiredNumberOfCalls: 1)

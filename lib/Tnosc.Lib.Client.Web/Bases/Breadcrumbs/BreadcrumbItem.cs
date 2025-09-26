@@ -4,11 +4,11 @@
 // Author: Ahmed HEDFI (ahmed.hedfi@gmail.com)
 // ----------------------------------------------------------------------------------
 
-namespace Tnosc.Lib.Client.Web.Enums;
+namespace Tnosc.Lib.Client.Web.Bases.Breadcrumbs;
 
-public enum Color
+public class BreadcrumbItem
 {
-    Info,
-    Error,
-    Success
+    public string Text { get; set; } = string.Empty;
+    public string? Href { get; set; }
+    public BreadcrumbIcon? Icon { get; set; }
 }
