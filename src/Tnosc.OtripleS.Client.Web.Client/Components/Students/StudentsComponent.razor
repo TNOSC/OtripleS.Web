@@ -1,0 +1,103 @@
+﻿@using PrettyBlazor
+@using Tnosc.Lib.Client.Web.Bases.Breadcrumbs
+@using Tnosc.Lib.Client.Web.Bases.Cards
+@using Tnosc.Lib.Client.Web.Bases.Components
+@using Tnosc.Lib.Client.Web.Bases.Forms
+@using Tnosc.Lib.Client.Web.Bases.Grids
+@using Tnosc.Lib.Client.Web.Containers
+@using Tnosc.Lib.Client.Web.Enums
+@using Tnosc.OtripleS.Client.Application.ViewModels.Students
+@inherits AppViewComponent
+@attribute [StreamRendering]
+@rendermode InteractiveAuto
+
+<div style="margin-top:1em">
+	<BreadcrumbBase Items="BreadcrumbItems" />
+</div>
+<div style="margin-top:1.5em">
+	<h1>Students List</h1>
+</div>
+<div style="border-top:1px solid lightgrey;margin-bottom:3em; display:flex;justify-content:flex-end;">
+	<FluentToolbar Style="margin-top:0;padding-top:0;display:flex;">
+		<ButtonBase Label="Register a student"
+					Appearance="Appearance.Stealth"
+					IconStart="@(new Icons.Regular.Size12.Add())"
+					Title="Register a student"
+					OnClick="(async() => await OnRegisterStudentClick())" />
+	</FluentToolbar>
+</div>
+
+<FluentDataGrid Id="studentsgrid"
+				@ref="@StudentGrid"
+				TGridItem="StudentView"
+				Loading="@IsLoading"
+				Items="@StudentViews?.AsQueryable()">
+
+	<PropertyColumn Title="Identity Number"
+					Sortable="true"
+					Property="@(p => p.IdentityNumber)" />
+
+	<PropertyColumn Title="First Name"
+					Sortable="true"
+					Property="@(p => p.FirstName)" />
+
+	<PropertyColumn Title="Middle Name"
+					Sortable="true"
+					Property="@(p => p.MiddleName)" />
+
+	<PropertyColumn Title="Last Name"
+					Sortable="true"
+					Property="@(p => p.LastName)" />
+
+	<PropertyColumn Property="@(p => p.Gender)"
+					Sortable="true" />
+
+	<PropertyColumn Title="Birth Date"
+					Sortable="true"
+					Property="@(p => p.BirthDate)"
+					Format="yyyy-MM-dd" />
+
+</FluentDataGrid>
+
+@* <Condition Evaluation=@(State == ComponentState.Content)>
+	<Match>
+		<GridBase @ref="@StudentGrid"
+				  TItem="StudentView"
+				  DataSource="@StudentViews">
+			<Columns>
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Title="Identity Number"
+							Property="@(p => p.IdentityNumber)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Property="@(p => p.FirstName)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Property="@(p => p.MiddleName)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="string"
+							Property="@(p => p.LastName)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="StudentViewGender"
+							Property="@(p => p.Gender)" />
+
+				<ColumnBase TItem="StudentView"
+							TProp="DateTimeOffset"
+							Property="@(p => p.BirthDate)"
+							Format="yyyy-MM-dd" />
+			</Columns>
+		</GridBase>
+	</Match>
+</Condition> *@
+
+<Condition Evaluation=@(State == ComponentState.Error)>
+	<Match>
+		<LabelBase @ref=ErrorLabel Value=@ErrorMessage />
+	</Match>
+</Condition>

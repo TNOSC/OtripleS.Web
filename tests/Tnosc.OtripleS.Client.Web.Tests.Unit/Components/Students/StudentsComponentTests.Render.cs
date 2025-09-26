@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.FluentUI.AspNetCore.Components;
 using NSubstitute;
 using Shouldly;
 using Tnosc.Lib.Client.Web.Enums;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
-using Tnosc.OtripleS.Client.Web.Components.Students;
+using Tnosc.OtripleS.Client.Web.Client.Components.Students;
 using Xunit;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;
@@ -19,17 +20,22 @@ public partial class StudentsComponentTests
         ComponentState expectedState =
             ComponentState.Loading;
 
+
         // when
-        var initialTeachersComponent =
-            new StudentsComponent();
+        var initialStudentsComponent =
+            new StudentsComponent
+            {
+                DialogService = Substitute.For<IDialogService>(),
+                ToastService = Substitute.For<IToastService>()
+            };
 
         // then
-        initialTeachersComponent.State.ShouldBe(expectedState);
-        initialTeachersComponent.StudentViewService.ShouldBeNull();
-        initialTeachersComponent.StudentViews.ShouldBeNull();
-        initialTeachersComponent.StudentGrid.ShouldBeNull();
-        initialTeachersComponent.ErrorMessage.ShouldBeNull();
-        initialTeachersComponent.ErrorLabel.ShouldBeNull();
+        initialStudentsComponent.State.ShouldBe(expectedState);
+        initialStudentsComponent.StudentViewService.ShouldBeNull();
+        initialStudentsComponent.StudentViews.ShouldBeNull();
+        initialStudentsComponent.StudentGrid.ShouldBeNull();
+        initialStudentsComponent.ErrorMessage.ShouldBeNull();
+        initialStudentsComponent.ErrorLabel.ShouldBeNull();
     }
 
     [Fact]
@@ -65,8 +71,8 @@ public partial class StudentsComponentTests
         _renderedStudentsComponent.Instance.StudentGrid
             .ShouldNotBeNull();
 
-        _renderedStudentsComponent.Instance.StudentGrid.DataSource
-            .ShouldBeEquivalentTo(expectedStudentViews);
+        _renderedStudentsComponent.Instance.StudentGrid.Items
+            .ShouldBeEquivalentTo(expectedStudentViews.AsQueryable());
 
         _renderedStudentsComponent.Instance.ErrorMessage.
             ShouldBeNull();

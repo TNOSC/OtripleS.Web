@@ -1,5 +1,25 @@
-﻿@page "/"
+﻿@using Tnosc.Lib.Client.Web.Bases.Cards
+@page "/"
 
 <PageTitle>Home</PageTitle>
 
-<h1>Welcome!</h1>
+<h1>OtripleS</h1>
+
+<p>
+	This is an open source schooling system, dedicated to provide a better experience for schools needing a management and communication and tutoring system all in one place.
+</p>
+
+<FluentGrid>
+	<FluentGridItem xs="4">
+		<CardBase>
+			<Content>
+				<p>
+					<FluentAnchor Href="students"
+								  Appearance="Appearance.Hypertext">
+						Manage Student(s)
+					</FluentAnchor>
+				</p>
+			</Content>
+		</CardBase>
+	</FluentGridItem>
+</FluentGrid>

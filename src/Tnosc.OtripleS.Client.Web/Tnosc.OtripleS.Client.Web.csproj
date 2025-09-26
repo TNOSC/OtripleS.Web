@@ -3,6 +3,12 @@
     <GenerateMvcApplicationPartsAssemblyInfo>false</GenerateMvcApplicationPartsAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Components\Students\**" />
+    <Content Remove="Components\Students\**" />
+    <EmbeddedResource Remove="Components\Students\**" />
+    <None Remove="Components\Students\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" />
@@ -12,5 +18,9 @@
     <ProjectReference Include="..\..\lib\Tnosc.Lib.Client.Web\Tnosc.Lib.Client.Web.csproj" />
     <ProjectReference Include="..\Tnosc.OtripleS.Client.Web.Client\Tnosc.OtripleS.Client.Web.Client.csproj" />
     <ProjectReference Include="..\Tnosc.OtripleS.Client.Infrastructure\Tnosc.OtripleS.Client.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\" />
   </ItemGroup>
 </Project>

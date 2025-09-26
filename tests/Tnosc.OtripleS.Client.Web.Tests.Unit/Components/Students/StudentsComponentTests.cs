@@ -9,7 +9,7 @@ using NSubstitute;
 using Tnosc.Lib.Client.Web.Brokers.Navigations;
 using Tnosc.OtripleS.Client.Application.Services.Views.Students;
 using Tnosc.OtripleS.Client.Application.ViewModels.Students;
-using Tnosc.OtripleS.Client.Web.Components.Students;
+using Tnosc.OtripleS.Client.Web.Client.Components.Students;
 using Tynamix.ObjectFiller;
 
 namespace Tnosc.OtripleS.Client.Web.Tests.Unit.Components.Students;

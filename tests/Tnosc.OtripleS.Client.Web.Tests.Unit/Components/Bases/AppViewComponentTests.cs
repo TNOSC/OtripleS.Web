@@ -8,6 +8,7 @@ using Bunit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.FluentUI.AspNetCore.Components;
 using NSubstitute;
 using Tnosc.Lib.Client.Web.Bases.Components;
 using Tnosc.Lib.Client.Web.Brokers.Navigations;
@@ -29,6 +30,7 @@ public partial class AppViewComponentTests : TestContext
         Services.AddSingleton(envMock);
         Services.AddSingleton(configMock);
         Services.AddServerSideBlazor();
+        Services.AddFluentUIComponents();
     }
 
     private static string GetRandomRoute() =>
