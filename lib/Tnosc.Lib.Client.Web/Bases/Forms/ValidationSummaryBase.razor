@@ -1,9 +1,14 @@
-﻿@using PrettyBlazor
+﻿@using Microsoft.FluentUI.AspNetCore.Components
+@using PrettyBlazor
 
 <Condition Evaluation=@(Errors is not null)>
 	<Match>
 		<Iterations Items=Errors Context=Error>
-			<span style="color:red">@Error</span>
+			<div class="validation-message">
+				<FluentIcon Color="Color.Error"
+							Value="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size12.ErrorCircle())" />
+				<span>@Error</span>
+			</div>
 		</Iterations>
 	</Match>
 </Condition>

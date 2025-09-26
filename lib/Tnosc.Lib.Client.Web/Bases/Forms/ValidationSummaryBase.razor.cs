@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Tnosc.Lib.Client.Web.Bases.Forms;
 
-public partial class ValidationSummaryBase
+public partial class ValidationSummaryBase : ComponentBase
 {
     [Parameter]
     public IDictionary? ValidationData { get; set; }

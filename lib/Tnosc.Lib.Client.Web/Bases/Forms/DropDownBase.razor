@@ -2,8 +2,13 @@
 @typeparam TEnum
 
 <FluentSelect Items="EnumValues"
-              OptionText="@(i => i.ToString())"
-              OptionValue="@(i => i.ToString())"
-              @bind-Value:event="ValueChanged"
-              @bind-Value="SelectedValue"
-              Disabled="@IsDisabled" />
+			  Label="@Label"
+			  Required="@Required"
+			  OptionText="@(i => i.ToString())"
+			  OptionValue="@(i => i.ToString())"
+			  @bind-Value:event="ValueChanged"
+			  @bind-Value="SelectedValue"
+			  Class="@CssClass"
+			  Disabled="@IsDisabled" />
+<ValidationSummaryBase Key="@Key"
+					   ValidationData="@ValidationData" />
