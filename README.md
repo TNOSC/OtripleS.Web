@@ -51,3 +51,30 @@ This repository will also serve as a **playground** to experiment and apply:
 🚧 **Work in progress**: currently setting up the base architecture and aligning it with standards.
 
 ---
+
+## 📚 Running the Project
+
+To run the project locally:
+
+```bash
+git clone https://github.com/TNOSC/OtripleS.Web.git
+cd OtripleS.Web/src
+dotnet restore
+dotnet run
+```
+
+Alternatively, you can run the project using Docker Compose:
+
+```bash
+git clone https://github.com/TNOSC/OtripleS.Web.git
+cd OtripleS.Web
+docker-compose -f docker-compose.yml -p tnosc-otriples-web up -d
+```
+After starting the application, it will be available at:
+```bash
+http://localhost:8080
+```
+
+> **Note:**  
+> During development, I faced an issue when trying to display data grids using an abstract `GridBase` component with **Blazor stream rendering** (`@attribute [StreamRendering]`).  
+> Because of rendering inconsistencies, I decided to continue working with **FluentGrid** instead, which provides stable rendering and the required features for my use case.

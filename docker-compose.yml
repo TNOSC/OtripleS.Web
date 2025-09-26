@@ -1,0 +1,11 @@
+services:
+  web:
+    image: tnosc.otriples.client.web
+    build:
+      context: .
+      dockerfile: src/Tnosc.OtripleS.Client.Web/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - OtriplesApiBaseAddress=http://host.docker.internal:5000/
