@@ -68,7 +68,7 @@ Alternatively, you can run the project using Docker Compose:
 ```bash
 git clone https://github.com/TNOSC/OtripleS.Web.git
 cd OtripleS.Web
-docker-compose -f docker-compose.yml -p tnosc-otriples-web up -d
+docker-compose -f docker-compose.yml -p tnosc-otriples up -d
 ```
 After starting the application, it will be available at:
 ```bash

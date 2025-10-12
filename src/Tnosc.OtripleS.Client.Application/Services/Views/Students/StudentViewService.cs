@@ -23,6 +23,7 @@ public partial class StudentViewService : IStudentViewService
     private readonly IDateTimeBroker _dateTimeBroker;
     private readonly IStudentService _studentService;
     private readonly ILoggingBroker _loggingBroker;
+
     public StudentViewService(
         IStudentService studentService,
         IUserService userService,
