@@ -1,6 +1,7 @@
 services:
   web:
     image: tnosc.otriples.client.web
+    container_name: otriples-webfrontend
     build:
       context: .
       dockerfile: src/Tnosc.OtripleS.Client.Web/Dockerfile
@@ -8,4 +9,5 @@ services:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - OtriplesApiBaseAddress=http://host.docker.internal:5000/
+      - OtriplesApiBaseAddress=http://apiservice:8080/
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://aspire-dashboard:18889
